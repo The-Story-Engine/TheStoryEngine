@@ -1,0 +1,7 @@
+# .gitignore
+/node_modules/
+.cache
+# Local Netlify folder
+.netlify
+/.next/
+.env*
