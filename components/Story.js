@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import Header from "@components/Header";
 import { useUserStory } from "utils-client";
 
 const Story = () => {
@@ -9,7 +7,6 @@ const Story = () => {
 
   return (
     <main>
-      <Header title={"The Story Engine"} />
       <div style={{ display: "flex" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <input
