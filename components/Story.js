@@ -7,12 +7,14 @@ const Story = () => {
 
   return (
     <main>
-      <div style={{ display: "flex" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <input
-            value={story.title}
-            onChange={({ target: { value } }) => setStoryTitle(value)}
-          />
+      <div className="flex">
+        <div className="flex flex-col gap-2">
+          <div className="border-b-2 border-gray-400">
+            <input
+              value={story.title}
+              onChange={({ target: { value } }) => setStoryTitle(value)}
+            />
+          </div>
           <textarea
             value={story.text}
             onChange={({ target: { value } }) => setStoryText(value)}

@@ -6,7 +6,7 @@ import Layout from "@components/Layout";
 export default function Home() {
   return (
     <Layout>
-      <main style={{ display: "flex" }}>
+      <main className="flex">
         <Story />
       </main>
     </Layout>

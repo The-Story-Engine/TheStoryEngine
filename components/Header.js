@@ -1,3 +1,13 @@
+import Link from "next/link";
+
 export default function Header({ title }) {
-  return <img src="/TSE_Logo.png" />;
+  return (
+    <div>
+      <Link href="/">
+        <a>
+          <img src="/TSE_Logo.png" />
+        </a>
+      </Link>
+    </div>
+  );
 }

@@ -9,11 +9,13 @@ export default function Layout({ children }) {
         <title>The Story Engine</title>
         <link rel="icon" href="/jellyfish.svg" />
       </Head>
-      <div className="container">
-        <div className="h-screen">
-          <Header />
-          {children}
-          <Footer />
+      <div className="w-screen h-screen bg-gray-100">
+        <div className="container">
+          <div className="flex flex-col w-full h-full">
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </div>
       </div>
     </>
