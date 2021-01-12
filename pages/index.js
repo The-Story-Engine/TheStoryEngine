@@ -5,9 +5,9 @@ import Jellyfish from "public/jellyfish.svg";
 export default function Home() {
   return (
     <Layout>
-      <main className="flex flex-row">
+      <main className="flex flex-row self-center">
         <Jellyfish />
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center justify-center gap-4">
           <h2>Howdy! I'm the Inspirational Jellyfish</h2>
           <h4>
             I've got lots of ideas to help with your writing, tap below to get

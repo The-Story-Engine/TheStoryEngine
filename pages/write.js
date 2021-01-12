@@ -6,7 +6,7 @@ import Layout from "@components/Layout";
 export default function Home() {
   return (
     <Layout>
-      <main className="flex">
+      <main className="flex self-center">
         <Story />
       </main>
     </Layout>
