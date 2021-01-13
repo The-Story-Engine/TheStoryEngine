@@ -4,7 +4,14 @@ module.exports = {
   purge: ["./pages/**/*.js", "./components/**/*.js"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        ink: "url('/ink.jpg')",
+      }),
+      backgroundPosition: {
+        "jf-tl": "40% 17%",
+      },
+    },
     colors: {
       gray: colors.trueGray,
     },

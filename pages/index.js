@@ -1,6 +1,6 @@
 import Layout from "@components/Layout";
+import Jellyfish from "@components/Jellyfish";
 import Link from "next/link";
-import Jellyfish from "public/jellyfish.svg";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
             started!
           </h4>
           <Link href="/write">
-            <a>Write a story!</a>
+            <a className="underline">Write a story!</a>
           </Link>
         </div>
       </main>
