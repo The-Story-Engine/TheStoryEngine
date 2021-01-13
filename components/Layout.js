@@ -12,8 +12,9 @@ export default function Layout({ children }) {
       <div className="w-screen h-screen bg-gray-100">
         <div className="flex flex-col justify-between w-full h-full">
           <Header />
-          {children}
-          <Footer />
+          <main className="flex-grow bg-white rounded-tr-2xl lg:mr-20">
+            {children}
+          </main>
         </div>
       </div>
     </>

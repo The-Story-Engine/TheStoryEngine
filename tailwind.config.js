@@ -11,9 +11,9 @@ module.exports = {
       backgroundPosition: {
         "jf-tl": "40% 17%",
       },
-    },
-    colors: {
-      gray: colors.trueGray,
+      colors: {
+        gray: colors.trueGray,
+      },
     },
   },
   variants: {

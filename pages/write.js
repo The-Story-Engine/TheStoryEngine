@@ -6,9 +6,9 @@ import Layout from "@components/Layout";
 export default function Home() {
   return (
     <Layout>
-      <main className="flex self-center">
+      <div className="flex items-center justify-center w-full h-full">
         <Story />
-      </main>
+      </div>
     </Layout>
   );
 }
