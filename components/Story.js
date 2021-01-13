@@ -13,11 +13,13 @@ const Story = () => {
             <input
               value={story.title}
               onChange={({ target: { value } }) => setStoryTitle(value)}
+              placeholder="Title"
             />
           </div>
           <textarea
             value={story.text}
             onChange={({ target: { value } }) => setStoryText(value)}
+            placeholder="Story"
           />
         </div>
       </div>
