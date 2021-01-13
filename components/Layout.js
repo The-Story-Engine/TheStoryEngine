@@ -13,10 +13,10 @@ export default function Layout({ children }) {
           rel="stylesheet"
         />
       </Head>
-      <div className="w-screen h-screen font-sans bg-gray-100">
-        <div className="flex flex-col justify-between w-full h-full">
+      <div className="flex w-screen h-screen font-sans bg-gray-100">
+        <div className="flex flex-col w-full h-full">
           <Header />
-          <main className="flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
+          <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
             {children}
           </main>
         </div>
