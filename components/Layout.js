@@ -8,11 +8,15 @@ export default function Layout({ children }) {
       <Head>
         <title>The Story Engine</title>
         <link rel="icon" href="/jellyfish.svg" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
       </Head>
-      <div className="w-screen h-screen bg-gray-100">
+      <div className="w-screen h-screen font-sans bg-gray-100">
         <div className="flex flex-col justify-between w-full h-full">
           <Header />
-          <main className="flex-grow bg-white rounded-tr-2xl lg:mr-20">
+          <main className="flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
             {children}
           </main>
         </div>

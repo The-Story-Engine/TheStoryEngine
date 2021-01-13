@@ -1,4 +1,6 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   purge: ["./pages/**/*.js", "./components/**/*.js"],
@@ -13,11 +15,31 @@ module.exports = {
       },
       colors: {
         gray: colors.trueGray,
+        grey: {
+          500: "#676767",
+          600: "#525252",
+          700: "#484848",
+        },
+        bloo: {
+          500: "#d3edfc",
+        },
+      },
+      borderWidth: {
+        6: "6px",
+      },
+      fontFamily: {
+        sans: ["Dosis", ...defaultTheme.fontFamily.sans],
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        html: { color: theme("textColor.grey.600") },
+      });
+    }),
+  ],
 };
