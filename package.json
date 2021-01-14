@@ -24,5 +24,8 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "dependencies": {
+    "react-aria": "^3.3.0"
   }
 }
