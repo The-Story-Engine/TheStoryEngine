@@ -32,14 +32,14 @@ const Story = () => {
       <div className="pb-6 mb-6 border-b-2 border-gray-400">
         <Title
           value={story.title}
-          onChange={({ target: { value } }) => setStoryTitle(value)}
+          onChange={setStoryTitle}
           placeholder="Title..."
           className="w-full text-2xl font-semibold"
         />
       </div>
       <Text
         value={story.text}
-        onChange={({ target: { value } }) => setStoryText(value)}
+        onChange={setStoryText}
         placeholder="Story..."
         className="flex-grow w-full text-xl"
       />
