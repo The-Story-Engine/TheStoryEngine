@@ -15,7 +15,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
     <button
       {...buttonProps}
       ref={ref}
-      className="h-14 disabled:text-gray-400 disabled:cursor-default"
+      className="h-14 disabled:text-gray-400 disabled:cursor-default focus:outline-none focus:ring-2 focus:ring-offset-2"
     >
       <WriterSVG />
       <p className="pt-1 text-sm leading-none">Reset</p>
@@ -34,7 +34,7 @@ const CopyButton = ({ story, isDisabled = false }) => {
     <button
       {...buttonProps}
       ref={ref}
-      className="h-14 disabled:text-gray-400 disabled:cursor-default"
+      className="h-14 disabled:text-gray-400 disabled:cursor-default focus:outline-none focus:ring-2 focus:ring-offset-2"
     >
       <CopySVG />
       <p className="pt-1 text-sm leading-none">Copy</p>

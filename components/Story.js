@@ -39,14 +39,14 @@ const Story = ({ story, saveStory }) => {
           value={story.title}
           onChange={setStoryTitle}
           placeholder="Title..."
-          className="w-full text-2xl font-semibold"
+          className="w-full text-2xl font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2"
         />
       </div>
       <Text
         value={story.text}
         onChange={setStoryText}
         placeholder="Story..."
-        className="flex-grow w-full text-xl"
+        className="flex-grow w-full text-xl focus:outline-none focus:ring-2 focus:ring-offset-2"
       />
     </div>
   );
