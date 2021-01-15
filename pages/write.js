@@ -1,10 +1,12 @@
 import Story from "@components/Story";
 import Layout from "@components/Layout";
-import Writer from "public/writer.svg";
+import WriterSVG from "public/writer.svg";
+import CopySVG from "public/copy.svg";
 import { useUserStory } from "utils-client";
 import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
 import { useRef } from "react";
+import copy from "clipboard-copy";
 
 const ResetButton = ({ reset, isDisabled = false }) => {
   const ref = useRef();
@@ -15,8 +17,27 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       ref={ref}
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
     >
-      <Writer />
+      <WriterSVG />
       <p className="pt-0 leading-none">Reset</p>
+    </button>
+  );
+};
+
+const CopyButton = ({ story, isDisabled = false }) => {
+  const ref = useRef();
+  const copyStory = () => {
+    console.log("copying!");
+    copy(story.title + "\n\n\n" + story.text);
+  };
+  const { buttonProps } = useButton({ onPress: copyStory, isDisabled }, ref);
+  return (
+    <button
+      {...buttonProps}
+      ref={ref}
+      className="h-14 disabled:text-gray-400 disabled:cursor-default"
+    >
+      <CopySVG />
+      <p className="pt-0 leading-none">Copy</p>
     </button>
   );
 };
@@ -33,10 +54,13 @@ export default function Home() {
   return (
     <Layout
       headerButtons={
-        <ResetButton
-          reset={resetStory}
-          isDisabled={!(story.title || story.text)}
-        />
+        <div className="space-x-2">
+          <CopyButton story={story} isDisabled={!(story.title || story.text)} />
+          <ResetButton
+            reset={resetStory}
+            isDisabled={!(story.title || story.text)}
+          />
+        </div>
       }
     >
       <div className="flex flex-col items-center justify-center flex-grow w-full">

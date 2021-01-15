@@ -18,14 +18,14 @@
     "@netlify/plugin-nextjs": "^1.0.5",
     "husky": "^4.3.6",
     "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0"
+    "pretty-quick": "^3.1.0",
+    "clipboard-copy": "^4.0.1",
+    "react-aria": "^3.3.0",
+    "react-expanding-textarea": "^2.3.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "dependencies": {
-    "react-aria": "^3.3.0"
   }
 }

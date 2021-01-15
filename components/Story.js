@@ -1,5 +1,6 @@
-import { useTextField } from "@react-aria/textfield";
 import { useRef } from "react";
+import { useTextField } from "@react-aria/textfield";
+import Textarea from "react-expanding-textarea";
 
 const Title = ({ onChange, value, placeholder, className }) => {
   const ref = useRef();
@@ -12,7 +13,7 @@ const Title = ({ onChange, value, placeholder, className }) => {
     },
     ref
   );
-  return <input {...inputProps} className={className} ref={ref} />;
+  return <Textarea {...inputProps} className={className} ref={ref} />;
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
