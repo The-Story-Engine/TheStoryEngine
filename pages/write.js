@@ -26,8 +26,8 @@ const ResetButton = ({ reset, isDisabled = false }) => {
 const CopyButton = ({ story, isDisabled = false }) => {
   const ref = useRef();
   const copyStory = () => {
-    console.log("copying!");
     copy(story.title + "\n\n\n" + story.text);
+    alert("Story copied! Get pasting.");
   };
   const { buttonProps } = useButton({ onPress: copyStory, isDisabled }, ref);
   return (
