@@ -13,7 +13,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
     <button
       {...buttonProps}
       ref={ref}
-      className="h-14 disabled:text-lightgray disabled:cursor-default"
+      className="h-14 disabled:text-gray-400 disabled:cursor-default"
     >
       <Writer />
       <p className="pt-0 leading-none">Reset</p>

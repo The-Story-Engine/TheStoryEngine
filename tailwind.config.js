@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         gray: colors.trueGray,
         grey: {
+          400: "lightGray",
           500: "#676767",
           600: "#525252",
           700: "#484848",
@@ -33,7 +34,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      cursor: ["disabled"],
+      textColor: ["disabled"],
+    },
   },
   plugins: [
     plugin(function ({ addBase, theme }) {
