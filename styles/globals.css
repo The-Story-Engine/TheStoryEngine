@@ -5,3 +5,7 @@
 textarea {
   resize: none;
 }
+
+button:disabled svg path {
+  fill: lightgray;
+}

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 
-export default function Layout({ children }) {
+export default function Layout({ children, headerButtons }) {
   return (
     <>
       <Head>
@@ -13,13 +13,11 @@ export default function Layout({ children }) {
           rel="stylesheet"
         />
       </Head>
-      <div className="flex w-screen h-screen font-sans bg-gray-100">
-        <div className="flex flex-col w-full h-full">
-          <Header />
-          <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
-            {children}
-          </main>
-        </div>
+      <div className="flex flex-col min-h-screen font-sans bg-gray-100 min-w-screen">
+        <Header buttons={headerButtons} />
+        <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
+          {children}
+        </main>
       </div>
     </>
   );

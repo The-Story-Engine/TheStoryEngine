@@ -5,7 +5,7 @@ import LinkButton from "@components/LinkButton";
 export default function Home() {
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center flex-grow lg:flex-row">
+      <div className="flex flex-col items-center justify-center flex-grow p-4 lg:flex-row">
         <Jellyfish className="lg:mr-16 w-96" />
         <div className="flex flex-col items-center max-w-sm mt-16 text-center lg:mt-0">
           <h2 className="text-4xl font-bold text-grey-500">

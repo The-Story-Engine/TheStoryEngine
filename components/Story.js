@@ -1,17 +1,22 @@
-import { useUserStory } from "utils-client";
 import { useTextField } from "@react-aria/textfield";
+import { useRef } from "react";
 
 const Title = ({ onChange, value, placeholder, className }) => {
-  const { inputProps } = useTextField({
-    onChange,
-    value,
-    placeholder,
-    "aria-label": "Story Title",
-  });
-  return <input {...inputProps} className={className} />;
+  const ref = useRef();
+  const { inputProps } = useTextField(
+    {
+      onChange,
+      value,
+      placeholder,
+      "aria-label": "Story Title",
+    },
+    ref
+  );
+  return <input {...inputProps} className={className} ref={ref} />;
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
+  const ref = useRef();
   const { inputProps } = useTextField({
     onChange,
     value,
@@ -19,11 +24,10 @@ const Text = ({ onChange, value, placeholder, className }) => {
     className,
     "aria-label": "Story Text",
   });
-  return <textarea {...inputProps} className={className} />;
+  return <textarea {...inputProps} className={className} ref={ref} />;
 };
 
-const Story = () => {
-  const [story, saveStory] = useUserStory();
+const Story = ({ story, saveStory }) => {
   const setStoryTitle = (newTitle) => saveStory({ title: newTitle });
   const setStoryText = (newText) => saveStory({ text: newText });
 
