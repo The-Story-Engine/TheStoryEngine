@@ -18,7 +18,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
     >
       <WriterSVG />
-      <p className="pt-0 leading-none">Reset</p>
+      <p className="pt-1 text-sm leading-none">Reset</p>
     </button>
   );
 };
@@ -37,7 +37,7 @@ const CopyButton = ({ story, isDisabled = false }) => {
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
     >
       <CopySVG />
-      <p className="pt-0 leading-none">Copy</p>
+      <p className="pt-1 text-sm leading-none">Copy</p>
     </button>
   );
 };
@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <Layout
       headerButtons={
-        <div className="space-x-2">
+        <div className="space-x-3">
           <CopyButton story={story} isDisabled={!(story.title || story.text)} />
           <ResetButton
             reset={resetStory}
