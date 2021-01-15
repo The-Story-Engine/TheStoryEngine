@@ -1,6 +1,6 @@
 import Story from "@components/Story";
 import Layout from "@components/Layout";
-import WriterSVG from "public/writer.svg";
+import WritingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
 import { useUserStory } from "utils-client";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       ref={ref}
       className="h-14 disabled:text-gray-400 disabled:cursor-default focus:outline-none focus:ring-2 focus:ring-offset-2"
     >
-      <WriterSVG />
+      <WritingSVG />
       <p className="pt-1 text-sm leading-none">Reset</p>
     </button>
   );
