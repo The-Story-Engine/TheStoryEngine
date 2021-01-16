@@ -31,12 +31,19 @@ module.exports = {
       fontFamily: {
         sans: ["Dosis", ...defaultTheme.fontFamily.sans],
       },
+      backgroundSize: {
+        "50%": "50%",
+      },
+      width: {
+        page: "40rem",
+      },
     },
   },
   variants: {
     extend: {
       cursor: ["disabled"],
       textColor: ["disabled"],
+      position: ["group-hover", "group-focus"],
     },
   },
   plugins: [

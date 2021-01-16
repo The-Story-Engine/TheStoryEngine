@@ -1,5 +1,5 @@
 import Layout from "@components/Layout";
-import Jellyfish from "@components/Jellyfish";
+import Jellyfish from "@components/InkJellyfish";
 import LinkButton from "@components/LinkButton";
 
 export default function Home() {

@@ -6,6 +6,7 @@ textarea {
   resize: none;
 }
 
-button:disabled svg path {
-  fill: lightgray;
+button:disabled svg path,
+button:disabled svg circle {
+  fill: lightgray !important;
 }

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 
-export default function Layout({ children, headerButtons }) {
+export default function Layout({ children, headerButtons, rightBar }) {
   return (
     <>
       <Head>
@@ -15,9 +15,20 @@ export default function Layout({ children, headerButtons }) {
       </Head>
       <div className="flex flex-col min-h-screen font-sans bg-gray-100 min-w-screen">
         <Header buttons={headerButtons} />
-        <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
-          {children}
-        </main>
+        {rightBar ? (
+          <div className="flex justify-between flex-grow">
+            <main className="flex flex-grow bg-white md:flex-grow-0 md:rounded-tr-2xl">
+              {children}
+            </main>
+            <aside className="flex-col justify-end hidden p-4 bg-white md:flex rounded-tl-2xl">
+              {rightBar}
+            </aside>
+          </div>
+        ) : (
+          <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
+            {children}
+          </main>
+        )}
       </div>
     </>
   );
