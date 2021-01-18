@@ -23,6 +23,7 @@ const Text = ({ onChange, value, placeholder, className }) => {
     value,
     placeholder,
     className,
+    id: "story-text",
     "aria-label": "Story Text",
   });
   return <textarea {...inputProps} className={className} ref={ref} />;

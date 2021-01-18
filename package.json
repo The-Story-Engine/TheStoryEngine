@@ -8,20 +8,19 @@
     "start": "next start"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^1.0.5",
     "@svgr/webpack": "^5.5.0",
     "autoprefixer": "^10.2.1",
+    "husky": "^4.3.6",
     "next": "10.0.1",
     "postcss": "^8.2.4",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "tailwindcss": "^2.0.2",
-    "@netlify/plugin-nextjs": "^1.0.5",
-    "husky": "^4.3.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
-    "clipboard-copy": "^4.0.1",
+    "react": "17.0.1",
     "react-aria": "^3.3.0",
-    "react-expanding-textarea": "^2.3.1"
+    "react-dom": "17.0.1",
+    "react-expanding-textarea": "^2.3.1",
+    "tailwindcss": "^2.0.2"
   },
   "husky": {
     "hooks": {

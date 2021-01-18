@@ -7,7 +7,6 @@ import { useUserStory } from "utils-client";
 import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
 import { useRef } from "react";
-import copy from "clipboard-copy";
 
 const ResetButton = ({ reset, isDisabled = false }) => {
   const ref = useRef();
@@ -24,11 +23,37 @@ const ResetButton = ({ reset, isDisabled = false }) => {
   );
 };
 
+const modernCopy = ({ text = "", title = "" }) => {
+  return navigator.clipboard.writeText(
+    `${title}${title && "\n\n\n"}${text && text}`
+  );
+};
+
+const legacyCopy = () => {
+  console.log("legacyCopy!");
+  var copyText = document.querySelector("#story-text");
+  copyText.select();
+  document.execCommand("copy");
+};
+
+const copy = async (story) => {
+  if (navigator.clipboard) {
+    await modernCopy(story);
+  } else {
+    legacyCopy();
+  }
+};
+
 const CopyButton = ({ story, isDisabled = false }) => {
   const ref = useRef();
-  const copyStory = () => {
-    copy(story.title + "\n\n\n" + story.text);
-    alert("Story copied! Get pasting.");
+  const copyStory = async () => {
+    try {
+      await copy(story);
+      alert("Story copied! Get pasting.");
+    } catch (error) {
+      console.error(error);
+      alert("Copy failed, please select and copy your story manually!");
+    }
   };
   const { buttonProps } = useButton({ onPress: copyStory, isDisabled }, ref);
   return (
