@@ -52,7 +52,7 @@ const Story = ({ story, saveStory }) => {
         className="flex-grow w-full text-xl focus:outline-none focus:ring-2 focus:ring-offset-2"
       />
       {story.title || story.text ? (
-        <p className="absolute self-end text-grey-400 bottom-8 right-13">
+        <p className="absolute self-end text-grey-500 bottom-8 right-13">
           {isTyping ? "Saving" : "Saved Locally"}
         </p>
       ) : null}
