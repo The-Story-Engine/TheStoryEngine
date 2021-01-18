@@ -59,3 +59,42 @@ function uuidv4() {
     ).toString(16)
   );
 }
+
+export function useIsTyping({ title, text }) {
+  const testText = title + text;
+  const debouncedText = useDebounce(testText, 500);
+  console.log({ testText, debouncedText });
+  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(
+    () => {
+      if (debouncedText != testText) {
+        if (!isTyping) {
+          setIsTyping(true);
+        }
+      } else {
+        if (isTyping) {
+          setIsTyping(false);
+        }
+      }
+    },
+    [testText, debouncedText] // Only call effect if debounced story changes
+  );
+  return isTyping;
+}
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}

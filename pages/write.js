@@ -96,7 +96,7 @@ export default function Home() {
       }
     >
       <div className="flex flex-col items-center justify-center flex-grow md:flex-grow-0 md:w-page">
-        <Story story={story} saveStory={saveStory} />
+        {story.id ? <Story story={story} saveStory={saveStory} /> : null}
       </div>
     </Layout>
   );
