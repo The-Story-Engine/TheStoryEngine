@@ -13,7 +13,7 @@ const Title = ({ onChange, value, placeholder, className }) => {
     },
     ref
   );
-  return <Textarea {...inputProps} className={className} ref={ref} />;
+  return <Textarea {...inputProps} className={`${className} h-12`} ref={ref} />;
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
@@ -34,8 +34,8 @@ const Story = ({ story, saveStory }) => {
   const setStoryText = (newText) => saveStory({ text: newText });
 
   return (
-    <div className="flex flex-col flex-grow w-full h-full max-w-2xl px-12 py-16">
-      <div className="pb-6 mb-6 border-b-2 border-gray-400">
+    <div className="flex flex-col flex-grow w-full h-full max-w-2xl px-8 py-10 sm:px-12 sm:py-16">
+      <div className="pb-4 mb-4 border-b-2 border-gray-400 sm:pb-6 sm:mb-6">
         <Title
           value={story.title}
           onChange={setStoryTitle}
