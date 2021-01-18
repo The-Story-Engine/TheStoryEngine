@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center flex-grow p-4 lg:flex-row">
-        <Jellyfish className="lg:mr-16 w-96" />
-        <div className="flex flex-col items-center mt-16 text-center w-96 lg:mt-0">
+        <Jellyfish className="lg:mr-16 w-72 sm:w-96" />
+        <div className="flex flex-col items-center mt-16 text-center w-72 sm:w-96 lg:mt-0">
           {isStoryInitialized ? (
             <>
               <h2 className="text-4xl font-bold text-grey-500">
