@@ -22,15 +22,14 @@ export default function Layout({ children, headerButtons, rightBar }) {
             </main>
           </div>
           <footer className="p-6 text-center bg-white md:mb-5 md:rounded-b-2xl">
-            Copyright © 2021{" "}
+            © 2021,{" "}
             <a
               target="_blank"
               className="text-blue-600 underline hover:text-blue-800 visited:text-purple-600"
               href="https://tse.fish"
             >
               TSE Ventures Ltd
-            </a>{" "}
-            All rights reserved.
+            </a>
           </footer>
         </div>
         {rightBar ? (
