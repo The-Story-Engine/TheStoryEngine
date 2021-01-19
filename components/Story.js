@@ -36,7 +36,7 @@ const Story = ({ story, saveStory }) => {
   const isTyping = useIsTyping(story);
 
   return (
-    <div className="relative flex flex-col flex-grow w-full h-full max-w-2xl px-8 py-10 sm:px-12 sm:py-16">
+    <div className="relative flex flex-col flex-grow w-full h-full max-w-3xl px-8 pt-10 pb-4 sm:px-12 sm:pt-14">
       <div className="pb-4 mb-4 border-b-2 border-gray-400 sm:pb-6 sm:mb-6">
         <Title
           value={story.title}
@@ -52,7 +52,7 @@ const Story = ({ story, saveStory }) => {
         className="flex-grow w-full text-xl focus:outline-none focus:ring-2 focus:ring-offset-2"
       />
       {story.title || story.text ? (
-        <p className="absolute self-end text-grey-500 bottom-8 right-13">
+        <p className="m-2 mt-3 text-right text-grey-500">
           {isTyping ? "Saving" : "Saved Locally"}
         </p>
       ) : null}

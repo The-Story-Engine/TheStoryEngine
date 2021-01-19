@@ -34,9 +34,6 @@ module.exports = {
       backgroundSize: {
         "50%": "50%",
       },
-      width: {
-        page: "40rem",
-      },
     },
   },
   variants: {

@@ -89,13 +89,19 @@ export default function Home() {
         </div>
       }
       rightBar={
-        <div className="w-24 space-y-2">
-          <p className="text-center">Hi! I'll be ready to chat early 2021</p>
-          <InkJellyfish />
+        <div className="relative w-32 h-screen">
+          <div className="fixed bottom-0 right-0 w-32 h-full py-5">
+            <div className="flex flex-col justify-end h-full px-4 py-6 space-y-2 bg-white rounded-l-2xl">
+              <p className="text-center">
+                Hi! I'll be ready to chat early 2021
+              </p>
+              <InkJellyfish />
+            </div>
+          </div>
         </div>
       }
     >
-      <div className="flex flex-col items-center justify-center flex-grow md:flex-grow-0 md:w-page">
+      <div className="flex flex-col items-center justify-center flex-grow">
         {story.id ? <Story story={story} saveStory={saveStory} /> : null}
       </div>
     </Layout>

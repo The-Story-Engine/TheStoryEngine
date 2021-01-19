@@ -13,22 +13,31 @@ export default function Layout({ children, headerButtons, rightBar }) {
           rel="stylesheet"
         />
       </Head>
-      <div className="flex flex-col min-h-screen font-sans bg-gray-100 min-w-screen">
-        <Header buttons={headerButtons} />
-        {rightBar ? (
-          <div className="flex justify-between flex-grow">
-            <main className="flex flex-grow bg-white md:flex-grow-0 md:rounded-tr-2xl">
+      <div className="flex font-sans bg-gray-100 min-w-screen">
+        <div className="flex-grow md:px-20">
+          <div className="flex flex-col min-h-screen">
+            <Header buttons={headerButtons} />
+            <main className="flex flex-grow bg-white md:rounded-t-2xl">
               {children}
             </main>
-            <aside className="flex-col justify-end hidden p-4 bg-white md:flex rounded-tl-2xl">
-              {rightBar}
-            </aside>
           </div>
-        ) : (
-          <main className="flex flex-grow bg-white lg:rounded-tr-2xl lg:mr-20">
-            {children}
-          </main>
-        )}
+          <footer className="p-6 text-center bg-white md:mb-5 md:rounded-b-2xl">
+            Copyright © 2021{" "}
+            <a
+              target="_blank"
+              className="text-blue-600 underline hover:text-blue-800 visited:text-purple-600"
+              href="https://tse.fish"
+            >
+              TSE Ventures Ltd
+            </a>{" "}
+            All rights reserved.
+          </footer>
+        </div>
+        {rightBar ? (
+          <aside className="flex-col self-stretch hidden lg:flex">
+            <div className="h-screen">{rightBar}</div>
+          </aside>
+        ) : null}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import LogoSVG from "public/logo_banner.svg";
 
 export default function Header({ buttons = null }) {
   return (
-    <div className="flex items-center justify-between px-5 pt-5 pb-5 space-x-3 md:w-page">
+    <div className="flex items-center justify-between px-5 pt-5 pb-5 space-x-3">
       <Link href="/">
         <a aria-label="Home" className="flex-shrink max-h-14">
           <LogoSVG
