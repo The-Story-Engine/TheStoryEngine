@@ -11,7 +11,13 @@ export default function Home() {
   const isStoryInitialized = !!story.id;
   const hasStoryContent = !!(story.text || story.title);
   return (
-    <Layout>
+    <Layout
+      belowFold={
+        <div className="max-w-3xl px-8 py-5 space-y-2 font-bold text-center sm:px-12">
+          <p>The Story Engine is a space for inspired creative writing.</p>
+        </div>
+      }
+    >
       <div className="flex flex-col items-center justify-center flex-grow p-4 lg:flex-row">
         <Jellyfish className="lg:mr-16 w-72 sm:w-96" />
         <div className="flex flex-col items-center mt-16 text-center w-72 sm:w-96 lg:mt-0">

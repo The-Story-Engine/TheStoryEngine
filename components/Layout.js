@@ -2,7 +2,12 @@ import Head from "next/head";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 
-export default function Layout({ children, headerButtons, rightBar }) {
+export default function Layout({
+  children,
+  headerButtons,
+  rightBar,
+  belowFold,
+}) {
   return (
     <>
       <Head>
@@ -21,6 +26,11 @@ export default function Layout({ children, headerButtons, rightBar }) {
               {children}
             </main>
           </div>
+          {belowFold ? (
+            <div className="flex flex-col items-center bg-white ">
+              {belowFold}
+            </div>
+          ) : null}
           <footer className="p-6 text-center bg-white md:mb-5 md:rounded-b-2xl">
             © 2021,{" "}
             <a

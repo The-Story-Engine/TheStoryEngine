@@ -100,6 +100,18 @@ export default function Home() {
           </div>
         </div>
       }
+      belowFold={
+        <div className="max-w-3xl px-8 py-5 space-y-2 font-bold text-center sm:px-12">
+          <p>
+            Your story is currently stored in your web browser and not on our
+            servers.
+          </p>
+          <p>
+            While we'll be adding features through 2021 we'll always be 100%
+            transparent in how we store your data.
+          </p>
+        </div>
+      }
     >
       <div className="flex flex-col items-center justify-center flex-grow">
         {story.id ? <Story story={story} saveStory={saveStory} /> : null}
