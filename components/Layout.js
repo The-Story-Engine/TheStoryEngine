@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
+import "focus-visible";
 
 export default function Layout({
   children,

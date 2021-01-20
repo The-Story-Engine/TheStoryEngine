@@ -14,13 +14,15 @@
     "husky": "^4.3.6",
     "next": "10.0.1",
     "postcss": "^8.2.4",
+    "postcss-focus-visible": "^5.0.0",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "react": "17.0.1",
     "react-aria": "^3.3.0",
     "react-dom": "17.0.1",
     "react-expanding-textarea": "^2.3.1",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.2",
+    "focus-visible": "^5.2.0"
   },
   "husky": {
     "hooks": {

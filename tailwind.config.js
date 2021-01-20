@@ -41,6 +41,11 @@ module.exports = {
       cursor: ["disabled"],
       textColor: ["disabled"],
       position: ["group-hover", "group-focus"],
+      outline: ["focus-visible"],
+      ringWidth: ["focus-visible"],
+      ringColor: ["focus-visible"],
+      ringOffsetWidth: ["focus-visible"],
+      ringOpacity: ["focus-visible"],
     },
   },
   plugins: [

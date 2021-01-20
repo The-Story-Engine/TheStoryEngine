@@ -2,8 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ****************** */
+/* Special tailwind only syntax */
+
+a,
+button,
+input,
+textarea {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 focus-visible:ring-opacity-70;
+}
+
+/* ****************** */
+
 textarea {
   resize: none;
+}
+
+*:focus {
+  outline: none !important;
 }
 
 button:disabled svg path,
