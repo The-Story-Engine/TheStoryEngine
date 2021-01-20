@@ -89,9 +89,9 @@ export default function Home() {
         </div>
       }
       rightBar={
-        <div className="relative w-32 h-screen">
-          <div className="fixed bottom-0 right-0 w-32 h-full py-5">
-            <div className="flex flex-col justify-end h-full px-4 py-6 space-y-2 bg-white rounded-l-2xl">
+        <div className="relative w-32 h-full mt-24 bg-white rounded-tl-2xl">
+          <div className="fixed bottom-0 right-0 w-32 h-screen">
+            <div className="flex flex-col justify-end h-full px-4 py-6 space-y-2">
               <p className="text-center">
                 Hi! I'll be ready to chat early 2021
               </p>
@@ -112,10 +112,11 @@ export default function Home() {
           </p>
         </div>
       }
-    >
-      <div className="flex flex-col items-center justify-center flex-grow">
-        {story.id ? <Story story={story} saveStory={saveStory} /> : null}
-      </div>
-    </Layout>
+      mainContent={
+        <div className="flex flex-col items-center justify-center flex-grow">
+          {story.id ? <Story story={story} saveStory={saveStory} /> : null}
+        </div>
+      }
+    />
   );
 }
