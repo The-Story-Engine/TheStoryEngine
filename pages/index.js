@@ -15,7 +15,11 @@ export default function Home() {
       growMainWidth={true}
       belowFold={
         <div className="max-w-3xl px-8 py-5 space-y-2 font-bold text-center sm:px-12">
-          <p>The Story Engine is a space for inspired creative writing.</p>
+          <p>
+            The Story Engine is a space for inspired creative writing. Write
+            stories and copy them to paste anywhere. We're excited to add
+            features through 2021 as the jellyfish grows, to help inspire you!
+          </p>
         </div>
       }
       mainContent={
@@ -32,7 +36,7 @@ export default function Home() {
                 <p className="mt-4 text-xl md:mt-6 md:text-2xl">
                   {hasStoryContent
                     ? "Welcome back, tap below to continue your story!"
-                    : "I've got lots of ideas to help with your writing, tap below to get started!"}
+                    : "Welcome to the Story Engine, tap below to get started!"}
                 </p>
                 <LinkButton href="/write">Write a story!</LinkButton>
               </>
