@@ -21,7 +21,6 @@ export const useUserStory = () => {
   useEffect(() => {
     const existingStory = localStorage.getItem("tseStory");
     if (!existingStory) {
-      console.log("new story!");
       // new story in local storage
       const newStory = {
         id: uuidv4(),
@@ -32,8 +31,6 @@ export const useUserStory = () => {
       localStorage.setItem("tseStory", JSON.stringify(newStory));
       setStory(newStory);
     } else {
-      console.log("existing story!");
-      console.log(JSON.parse(existingStory));
       setStory(JSON.parse(existingStory));
     }
   }, []);
@@ -63,7 +60,6 @@ function uuidv4() {
 export function useIsTyping({ title, text }) {
   const testText = title + text;
   const debouncedText = useDebounce(testText, 500);
-  console.log({ testText, debouncedText });
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(

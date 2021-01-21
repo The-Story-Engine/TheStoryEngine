@@ -6,6 +6,7 @@ import "focus-visible";
 export default function Layout({
   headerButtons,
   rightBar,
+  leftBar,
   belowFold,
   mainContent,
   growMainWidth = false,
@@ -23,14 +24,23 @@ export default function Layout({
       <div className="min-w-screen">
         <Header buttons={headerButtons} />
         <div className="flex font-sans">
-          <div className="flex justify-around flex-grow md:px-20">
+          {leftBar ? (
+            <aside className="flex-col self-stretch hidden lg:flex">
+              {rightBar}
+            </aside>
+          ) : null}
+          <div
+            className={`flex lg:justify-around flex-grow ${
+              leftBar ? "md:pr-20 lg:pl-20" : "md:pr-20"
+            }`}
+          >
             <div
               className={`flex flex-col ${
                 growMainWidth ? "flex-grow" : "max-w-3xl"
               }`}
             >
               <div className="flex flex-col min-h-screen pt-24">
-                <main className="flex flex-grow bg-white md:rounded-t-2xl">
+                <main className="flex flex-grow bg-white md:rounded-tr-2xl lg:rounded-tl-2xl">
                   {mainContent}
                 </main>
               </div>
@@ -52,7 +62,7 @@ export default function Layout({
             </div>
           </div>
           {rightBar ? (
-            <aside className="flex-col self-stretch hidden lg:flex">
+            <aside className="flex-col self-stretch hidden md:flex">
               {rightBar}
             </aside>
           ) : null}

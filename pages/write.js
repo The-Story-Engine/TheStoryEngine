@@ -30,7 +30,6 @@ const modernCopy = ({ text = "", title = "" }) => {
 };
 
 const legacyCopy = () => {
-  console.log("legacyCopy!");
   var copyText = document.querySelector("#story-text");
   copyText.select();
   document.execCommand("copy");
@@ -99,6 +98,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+      }
+      leftBar={
+        <div className="relative w-20 h-full mt-24 bg-white rounded-tr-2xl"></div>
       }
       belowFold={
         <div className="max-w-3xl px-8 py-5 space-y-2 font-bold text-center sm:px-12">
