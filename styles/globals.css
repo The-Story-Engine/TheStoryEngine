@@ -18,6 +18,10 @@ body {
 
 /* ****************** */
 
+:root {
+  --vh: 1vh;
+}
+
 textarea {
   resize: none;
 }

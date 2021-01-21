@@ -2,6 +2,12 @@ import Head from "next/head";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 import "focus-visible";
+import { useEffect } from "react";
+
+const setViewHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
 
 export default function Layout({
   headerButtons,
@@ -11,6 +17,13 @@ export default function Layout({
   mainContent,
   growMainWidth = false,
 }) {
+  useEffect(() => {
+    setViewHeight();
+    window.addEventListener("resize", setViewHeight);
+    return () => {
+      window.removeEventListener("resize", setViewHeight);
+    };
+  }, []);
   return (
     <>
       <Head>
@@ -26,7 +39,7 @@ export default function Layout({
         <div className="flex font-sans">
           {leftBar ? (
             <aside className="flex-col self-stretch hidden lg:flex">
-              {rightBar}
+              {leftBar}
             </aside>
           ) : null}
           <div

@@ -34,6 +34,12 @@ module.exports = {
       backgroundSize: {
         "50%": "50%",
       },
+      height: {
+        screen: "calc(var(--vh) * 100)",
+      },
+      minHeight: {
+        screen: "calc(var(--vh) * 100)",
+      },
     },
   },
   variants: {
