@@ -104,9 +104,7 @@ export default function Home() {
       }
       belowFold={
         <div className="max-w-3xl px-8 py-5 space-y-2 italic font-semibold text-center sm:px-12">
-          <p>
-            Your story is stored in your web browser and not on our servers.
-          </p>
+          <p>Your story is stored in your web browser only.</p>
           <p>
             As the jellyfish grows up, we'll always be 100% transparent about
             what we store and how we store it.
