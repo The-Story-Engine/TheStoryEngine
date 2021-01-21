@@ -28,6 +28,10 @@ export default function Layout({
     <>
       <Head>
         <title>The Story Engine</title>
+        <meta
+          name="Description"
+          content="A space for inspired creative writing, home of the inspirational jellyfish."
+        ></meta>
         <link rel="icon" href="/jellyfish.svg" />
         <link
           href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
