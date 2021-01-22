@@ -53,7 +53,7 @@ export default function Layout({
           >
             <div
               className={`flex flex-col ${
-                growMainWidth ? "flex-grow" : "max-w-3xl"
+                growMainWidth ? "flex-grow" : "max-w-4xl"
               }`}
             >
               <div className="flex flex-col min-h-screen pt-24">

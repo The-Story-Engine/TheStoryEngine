@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import jellyInspirations from "jelly-inspirations.json";
 
 /**
  *
@@ -27,7 +28,6 @@ export const useUserStory = () => {
         title: "",
         text: "",
       };
-      console.dir(story);
       localStorage.setItem("tseStory", JSON.stringify(newStory));
       setStory(newStory);
     } else {
@@ -36,11 +36,12 @@ export const useUserStory = () => {
   }, []);
   return [
     story,
-    ({ title = story.title, text = story.text }) => {
+    ({ title = story.title, text = story.text, inspiration = "" }) => {
       const updatedStory = {
         id: story.id,
         title,
         text,
+        inspiration,
       };
       localStorage.setItem("tseStory", JSON.stringify(updatedStory));
       setStory(updatedStory);
@@ -93,4 +94,11 @@ function useDebounce(value, delay) {
   }, [value, delay]);
 
   return debouncedValue;
+}
+
+export function getInspiration() {
+  const inspirationIndex = Math.round(
+    Math.random() * jellyInspirations.length - 1
+  );
+  return jellyInspirations[inspirationIndex];
 }

@@ -1,6 +1,6 @@
 import Story from "@components/Story";
 import Layout from "@components/Layout";
-import InkJellyfish from "@components/InkJellyfish";
+import Inspiration from "@components/Inspiration";
 import WritingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
 import { useUserStory } from "utils-client";
@@ -76,6 +76,9 @@ export default function Home() {
       router.push("/");
     }
   };
+  const setInspiration = (inspiration) => {
+    saveStory({ ...story, inspiration });
+  };
   return (
     <Layout
       headerButtons={
@@ -88,14 +91,12 @@ export default function Home() {
         </div>
       }
       rightBar={
-        <div className="relative w-32 h-full mt-24 bg-white rounded-tl-2xl">
-          <div className="fixed bottom-0 right-0 w-32 h-screen">
-            <div className="flex flex-col justify-end h-full px-4 py-6 space-y-2">
-              <p className="text-center">
-                Hi! I'll be ready to chat early 2021
-              </p>
-              <InkJellyfish />
-            </div>
+        <div className="relative h-full mt-24 bg-white w-72 rounded-tl-2xl">
+          <div className="fixed bottom-0 right-0 h-screen pt-24 w-72">
+            <Inspiration
+              setInspiration={setInspiration}
+              inspiration={story?.inspiration}
+            />
           </div>
         </div>
       }
@@ -103,7 +104,7 @@ export default function Home() {
         <div className="relative w-20 h-full mt-24 bg-white rounded-tr-2xl"></div>
       }
       belowFold={
-        <div className="max-w-3xl px-8 py-5 space-y-2 italic font-semibold text-center sm:px-12">
+        <div className="max-w-4xl px-8 py-5 space-y-2 italic font-semibold text-center sm:px-12">
           <p>Your story is stored in your web browser only.</p>
           <p>
             As the jellyfish grows up, we'll always be 100% transparent about

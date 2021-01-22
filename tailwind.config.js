@@ -12,6 +12,7 @@ module.exports = {
       }),
       backgroundPosition: {
         "jf-tl": "40% 17%",
+        "speech-tl": "50% 50%",
       },
       colors: {
         gray: colors.trueGray,
@@ -33,6 +34,7 @@ module.exports = {
       },
       backgroundSize: {
         "50%": "50%",
+        "110%": "110%",
       },
       height: {
         screen: "calc(var(--vh) * 100)",
