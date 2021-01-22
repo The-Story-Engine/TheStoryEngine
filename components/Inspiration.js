@@ -25,10 +25,8 @@ export default function Inspiration({ setInspiration, inspiration }) {
           </p>
           <div />
         </div>
-        <div className="flex flex-col items-center justify-end min-h-0 space-y-8">
-          <div className="flex-grow mt-8 overflow-y-auto">
-            <Speech>{inspiration || initInspiration}</Speech>
-          </div>
+        <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-8">
+          <Speech>{inspiration || initInspiration}</Speech>
           <InkJellyfish className="flex-shrink" />
           <Button onPress={() => changeInspiration()}>Inspire Me!</Button>
         </div>

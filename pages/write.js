@@ -108,7 +108,7 @@ export default function Home() {
         <div className="relative w-20 h-full mt-24 bg-white rounded-tr-2xl"></div>
       }
       belowFold={
-        <div className="max-w-4xl px-8 py-5 space-y-2 italic font-semibold text-center sm:px-12">
+        <div className="px-8 py-5 space-y-2 italic font-semibold text-center max-w-52rem sm:px-12">
           <p>Your story is stored in your web browser only.</p>
           <p>
             As the jellyfish grows up, we'll always be 100% transparent about

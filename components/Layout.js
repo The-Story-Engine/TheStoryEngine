@@ -42,24 +42,24 @@ export default function Layout({
         <Header buttons={headerButtons} />
         <div className="flex font-sans">
           {leftBar ? (
-            <aside className="flex-col self-stretch hidden lg:flex">
+            <aside className="flex-col self-stretch hidden xl:flex">
               {leftBar}
             </aside>
           ) : null}
           <div
-            className={`flex lg:justify-around flex-grow ${
-              leftBar ? "md:pr-20 lg:pl-20" : "md:pr-20"
+            className={`flex xl:justify-around flex-grow ${
+              leftBar ? "md:pr-20 xl:pl-20" : "md:pr-20"
             }`}
           >
             <div
-              className={`flex flex-col ${
-                growMainWidth ? "flex-grow" : "max-w-4xl"
+              className={`flex flex-col flex-grow ${
+                growMainWidth ? "" : "max-w-52rem"
               }`}
             >
               <div className="flex flex-col min-h-screen pt-24">
                 <main
                   className={`flex flex-grow bg-white md:rounded-tr-2xl ${
-                    leftBar ? "lg:rounded-tl-2xl" : ""
+                    leftBar ? "xl:rounded-tl-2xl" : ""
                   }`}
                 >
                   {mainContent}

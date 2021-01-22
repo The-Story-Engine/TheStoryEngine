@@ -42,6 +42,9 @@ module.exports = {
       minHeight: {
         screen: "calc(var(--vh) * 100)",
       },
+      maxWidth: {
+        "52rem": "52rem",
+      },
     },
   },
   variants: {

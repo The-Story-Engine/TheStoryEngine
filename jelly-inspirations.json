@@ -1,7 +1,10 @@
 [
+  {
+    "text": "Write me a recipe for how your parents/guardians keep you safe. "
+  },
   { "text": "Write me a story about the day the world turned upside down." },
   {
-    "text": "Write me a review of your favourite film, from the point of view of the main villain."
+    "text": "Write me a review of your favourite film, from the point of view of the main character."
   },
   {
     "text": "Write me a short story about what it might be like if you woke up one morning with a mermaid tail."
@@ -9,6 +12,7 @@
   {
     "text": "Write about a large box that has just been delivered to your door with your name on it. What’s inside the box and what happens when you open it?"
   },
+  { "text": "Write me a poem about an emotion." },
   {
     "text": "Write me a story about what it would be like if you had an elephant as a pet."
   },
@@ -16,7 +20,7 @@
     "text": "Write a story about 1,000 gold coins suddenly appearing on your bed, what would you buy and why?"
   },
   {
-    "text": "Write me a story using these 5 words: peach, buffalo, tractor, calm, harmonica"
+    "text": "Write me a story using these 5 words: peach, buffalo, tractor, calm, harmonica."
   },
   {
     "text": "Write a letter from your future self to your present self. What would you want to tell yourself?"
@@ -31,7 +35,7 @@
     "text": "Write me three short poems about places you would like to visit someday. How do they differ and what do they have in common?"
   },
   {
-    "text": "Write me a set of instructions for how to make you happy. What do we need to do in what order to get there?"
+    "text": "Write me a set of instructions for how to make you happy. What do I need to do, in what order, to get there?"
   },
   {
     "text": "Write me a story about the day you woke up and you were only an inch tall. How would your life change?"
@@ -52,7 +56,7 @@
     "text": "You're the first human to step foot on Mars! Write me a story about your first few days and what it feels like to be on a new planet."
   },
   {
-    "text": "You're a mad scientist and have invented a new vegetable. What is it called? What does it look like? What does it taste like? How can you use it in a recipe? Most importantly: Is it safe to eat?"
+    "text": "You're a brilliant scientist and have invented a new vegetable. What is it called? What does it look like? What does it taste like? How can you use it in a recipe? Most importantly: Is it safe to eat?"
   },
   {
     "text": "On your walk to school one morning you notice a particularly friendly squirrel. On further investigation it's your best friend who has been turned into a squirrel! How did this happen? How can you help them?"
@@ -61,7 +65,7 @@
     "text": "Write me a story from the point of view of a tree, losing all its leaves in autumn. Use the five senses to help describe it!"
   },
   {
-    "text": "Write me a story about a sport game, from the point of view of your favorite athletes equipment. Is it Lionel Messi's football boot, Serena Williams' tennis racket, Lewis Hamilton's Steering Wheel, or someone else?"
+    "text": "Write me a story about a game of sport, from the point of view of your favorite athletes equipment. Is it Lionel Messi's football boot, Serena Williams' tennis racket, Lewis Hamilton's steering wheel, or someone else?"
   },
   {
     "text": "Write me a story about your house becoming a boat. What changes, and do you like the change?"
@@ -76,7 +80,7 @@
     "text": "Write me a story about a walk you're taking through the forest when one of the trees starts talking to you. What does it say? What do you do?"
   },
   {
-    "text": "It's the year 3241, write me a story about your commute to school or work and the kind of transport you're using!"
+    "text": "It's the year 2112, write me a story about your commute to school or work and the kind of transport you're using!"
   },
   {
     "text": "Write me a story from the point of view of your favourite toys when you were little. What do they think of you, what do they do when you're not around?"
@@ -104,7 +108,7 @@
     "text": "You've woken up and discovered that electricity no longer exists, and no one remembers it ever existing except you! How does your daily life change?"
   },
   {
-    "text": "You are the mayor of a brand new city of your own creation! Take me on a tour down the main street, pointing out what there is to see and do in your town!"
+    "text": "You are the mayor of a brand new city of your own creation! Take me on a tour down the main street, pointing out what there is to see and do here."
   },
   {
     "text": "Write me a review of your favourite movie and why you think people should watch it."
@@ -113,7 +117,7 @@
     "text": "You've been given a pair of magic shoes for your birthday, from a mysterious great uncle. What happens when you first put on the shoes? What do you do with these new found magical shoes?"
   },
   {
-    "text": "You are the security guard at the zoo and someone has stolen the main exhibit, the rhinoceros! Write me a story about how you would track down the thief?"
+    "text": "You are the security guard at the zoo and someone has stolen the main exhibit, the Giraffe! Write me a story about how you would track down the thief?"
   },
   {
     "text": "You have been awarded a knighthood from the queen to become a Sir or a Dame. Write me a story about what you did to get this."
@@ -137,7 +141,7 @@
     "text": "You hear the weatherman say that it's raining cats and dogs, only to look out of the window and see that it is literally raining cats and dogs. Write me a story about what happens next!"
   },
   {
-    "text": "A mad scientist is going to change you into an animal, but has given you the choice of what to pick. Write me a story about how you decide, and what happens next."
+    "text": "A scientist is going to change you into an animal, but has given you the choice of what to pick. Write me a story about how you decide, and what happens next."
   },
   {
     "text": "Do you have any pets at home? Write a set of instructions, from the point of view of your pet, about how to take care of them and what they would like. If you do not have a pet, what type of pet might you like?"
@@ -190,5 +194,95 @@
   {
     "text": "Write me a poem about an everyday normal weekend. Except, it's 800 years ago!"
   },
-  { "text": "Write me a recipe for how your parents/guardians keep you safe. " }
+  {
+    "text": "Write me a recipe for how your parents/guardians keep you safe. "
+  },
+  {
+    "text": "Think of the scariest animal you know. Write me a story about how they are misunderstood, and are actually really quite nice."
+  },
+  {
+    "text": "Make a top ten list of things you would like to discover in your lifetime. These might be brand new things to everyone or they might be things that you would like to discover how to do!"
+  },
+  {
+    "text": "Your best friend has told you that you've got 30 minutes to pack your bags to go on a jungle expedition with them. What do you pack in your bag and why?"
+  },
+  {
+    "text": "You're sitting in class and all of a sudden feel a pull at the top of your head. The next moment you are being pulled out of a hat by a giant magician. Write me a story about what happens next."
+  },
+  {
+    "text": "Sit in silence for a minute and listen to the sounds around you. Could the sounds you hear be anything different than what you know? For example, maybe its a spaceship taking off, not the sound of a car going past. Maybe it's a tiny human whistling, not the sound of a bird. Write about and describe these sounds, what they are, and what they could be."
+  },
+  {
+    "text": "You've woken up one day and have hands on your feet! What do you do with these new appendages? Do you keep it a secret? Write me a story about your first day."
+  },
+  {
+    "text": "You've been invited to a dinner party with your favourite celebrities. Write me a dialog between you and them. What would you talk about? Would they get on with one another?"
+  },
+  {
+    "text": "Find the nearest book or magazine close to hand. Open up a random page and write a story starting with a sentence from that page."
+  },
+  {
+    "text": "A newspaper has arrived and the headline on the front page is \"Why did it stop moving?\". Write me the article to go with that headline."
+  },
+  {
+    "text": "You've been able to build your dream home. Write about all the different rooms in that house."
+  },
+  { "text": "Write me a list of 10 ways that we can be kinder to our planet." },
+  {
+    "text": "Write a set of instructions on how to build a parent. What do they need to work properly?"
+  },
+  {
+    "text": "Write a list of things you're grateful for this month and why? How can you share these with people?"
+  },
+  {
+    "text": "Write a story about the time you jumped into a puddle which was actually a magic portal. What happened?"
+  },
+  {
+    "text": "Think about a movie you watched recently. If you could rewrite the ending what would you change? How would you make it end instead?"
+  },
+  {
+    "text": "Imagine you are the captain of a space ship on a secret mission. Write a diary entry for what your day was like."
+  },
+  {
+    "text": "Write a sequel to one of your favorite films that doesnt have one. For example, what did E.T. do after he left earth?"
+  },
+  {
+    "text": "Write a recipe about how someone would overcome a fear that they have. What do they need to do to feel braver?"
+  },
+  {
+    "text": "You've been washed up on a desert island and you're not sure when rescue will arrive. What one item that washed up with you are you glad to have, and how does it make your life easier on the island?"
+  },
+  {
+    "text": "Your science teacher has created a robot that they are letting you program. Write me a story about what you will program the robot to do."
+  },
+  {
+    "text": "Write a story about someone with superpowers. Why are the superpowers important to that character? How do they use it? Is it for good or bad? Do they save (or ruin) the day with it?"
+  },
+  {
+    "text": "Can you think of a feature that a monster might have and try to describe it in your story? Does the monster have any positive features, as well as the scary ones? Can any of these features make life easier for the monster? For example sharp claws could help to open a can of baked beans, hairy legs means they will always be warm!"
+  },
+  { "text": "Write me a story about a time you were surprised" },
+  { "text": "Write me a story about a time you were happy" },
+  { "text": "Write me a story about a time you were lost or confused" },
+  { "text": "Write me a story about a time you felt free" },
+  { "text": "Write me a story about a time you got hurt" },
+  {
+    "text": "Write me a story about a time that you achieved something you thought you wouldn't?"
+  },
+  { "text": "Write me a story about a time that you helped someone." },
+  {
+    "text": "Can you write a short list of things that describe who you are? This could be anything that makes you you. For example what you like to do, what you look like, the way you behave. Now take that list and write a letter starting with \"Dear me\". In the letter try to describe the things that you like the most about yourself and why, and maybe some advice that you would give yourself."
+  },
+  {
+    "text": "Think about one of your most treasured memories. It could be a holiday you went on with family, a game you play with your friends, or a competition that you won and we're really proud of yourself for. What is that memory?"
+  },
+  {
+    "text": "Make a list of weird and wonderful adjectives such as ‘Jocular’, ‘Parsimonious’ and ‘Serpentine’. Pick three to describe your story’s hero (they don't all have to be positive!). See if you can write a descriptive paragraph about your character using those three words. Then, why not do the same thing with the villain of the story?"
+  },
+  {
+    "text": "Look around you and make a note of the first thing you see that is red. Can you include this object into your story? Perhaps it is an item that a character needs to solve a mystery, perhaps it can inspire the world that the character lives in, or perhaps it has come to life and is the character itself!"
+  },
+  {
+    "text": "Everyday when you open the door to go school you find yourself in a new strange and unfamiliar place. Write me a story about your week. "
+  }
 ]

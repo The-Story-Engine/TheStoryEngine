@@ -36,8 +36,8 @@ const Story = ({ story, saveStory }) => {
   const isTyping = useIsTyping(story);
 
   return (
-    <div className="relative flex flex-col flex-grow w-full h-full max-w-4xl px-8 pt-10 pb-4 sm:px-12 sm:pt-14">
-      <div className="pb-4 mb-4 border-b-2 border-gray-400 sm:pb-6 sm:mb-6">
+    <div className="relative flex flex-col flex-grow w-full h-full px-8 pt-10 pb-4 max-w-52rem lg:px-16 lg:pt-14">
+      <div className="pb-4 mb-4 border-b-2 border-gray-400 lg:pb-6 lg:mb-6">
         <Title
           value={story.title}
           onChange={setStoryTitle}
