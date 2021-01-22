@@ -16,6 +16,7 @@ export const useUserStory = () => {
   const [story, setStory] = useState({
     title: "",
     text: "",
+    inspiration: "",
   });
 
   // get story from localStorage, get new if none found
@@ -27,6 +28,7 @@ export const useUserStory = () => {
         id: uuidv4(),
         title: "",
         text: "",
+        inspiration: "",
       };
       localStorage.setItem("tseStory", JSON.stringify(newStory));
       setStory(newStory);
@@ -36,7 +38,11 @@ export const useUserStory = () => {
   }, []);
   return [
     story,
-    ({ title = story.title, text = story.text, inspiration = "" }) => {
+    ({
+      title = story.title,
+      text = story.text,
+      inspiration = story.inspiration,
+    }) => {
       const updatedStory = {
         id: story.id,
         title,
@@ -96,9 +102,9 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export function getInspiration() {
+export function getRandomInspiration() {
   const inspirationIndex = Math.round(
-    Math.random() * jellyInspirations.length - 1
+    Math.random() * (jellyInspirations.length - 1)
   );
   return jellyInspirations[inspirationIndex];
 }

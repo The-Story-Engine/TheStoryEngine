@@ -34,7 +34,6 @@ module.exports = {
       },
       backgroundSize: {
         "50%": "50%",
-        "110%": "110%",
       },
       height: {
         screen: "calc(var(--vh) * 100)",

@@ -68,7 +68,7 @@ const CopyButton = ({ story, isDisabled = false }) => {
 };
 
 export default function Home() {
-  const [story, saveStory] = useUserStory();
+  const [story, updateStory] = useUserStory();
   const router = useRouter();
   const resetStory = () => {
     if (window.confirm("Do you really want to reset your story?")) {
@@ -77,7 +77,7 @@ export default function Home() {
     }
   };
   const setInspiration = (inspiration) => {
-    saveStory({ ...story, inspiration });
+    updateStory({ inspiration });
   };
   return (
     <Layout
@@ -86,13 +86,13 @@ export default function Home() {
           <CopyButton story={story} isDisabled={!(story.title || story.text)} />
           <ResetButton
             reset={resetStory}
-            isDisabled={!(story.title || story.text)}
+            isDisabled={!(story.title || story.text || story.inspiration)}
           />
         </div>
       }
       rightBar={
         <div className="relative h-full mt-24 bg-white w-72 rounded-tl-2xl">
-          <div className="fixed bottom-0 right-0 h-screen pt-24 w-72">
+          <div className="absolute top-0 right-0 h-screen pb-24 w-72">
             <Inspiration
               setInspiration={setInspiration}
               inspiration={story?.inspiration}
@@ -114,7 +114,7 @@ export default function Home() {
       }
       mainContent={
         <div className="flex flex-col items-center justify-center flex-grow">
-          {story.id ? <Story story={story} saveStory={saveStory} /> : null}
+          {story.id ? <Story story={story} saveStory={updateStory} /> : null}
         </div>
       }
     />
