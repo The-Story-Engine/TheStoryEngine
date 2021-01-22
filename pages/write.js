@@ -71,9 +71,13 @@ export default function Home() {
   const [story, updateStory] = useUserStory();
   const router = useRouter();
   const resetStory = () => {
-    if (window.confirm("Do you really want to reset your story?")) {
-      localStorage.removeItem("tseStory");
-      router.push("/");
+    if (story.title || story.text) {
+      if (window.confirm("Do you really want to reset your story?")) {
+        localStorage.removeItem("tseStory");
+        router.push("/");
+      }
+    } else {
+      updateStory({ inspiration: "" });
     }
   };
   const setInspiration = (inspiration) => {
