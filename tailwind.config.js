@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         ink: "url('/ink.jpg')",
+        "ink-large": "url('/ink_large.jpg')",
       }),
       backgroundPosition: {
         "jf-tl": "40% 17%",

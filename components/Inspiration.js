@@ -3,6 +3,9 @@ import Button from "@components/Button";
 import Speech from "@components/Speech";
 import { getRandomInspiration } from "utils-client";
 
+const initInspiration =
+  "I've got lots of ideas to help with your writing, tap inspire me to get one!";
+
 export default function Inspiration({ setInspiration, inspiration }) {
   const changeInspiration = (attemptCount = 0) => {
     const newInspiration = getRandomInspiration();
@@ -20,18 +23,12 @@ export default function Inspiration({ setInspiration, inspiration }) {
           <p className="pb-4 text-2xl font-semibold text-center">
             I'm the Inspirational Jellyfish
           </p>
-          <p className="py-4 text-xl text-center">
-            I've got lots of ideas to help with your writing, tap inspire me to
-            get one!
-          </p>
           <div />
         </div>
         <div className="flex flex-col items-center justify-end min-h-0 space-y-8">
-          {inspiration ? (
-            <div className="flex-grow mt-8 overflow-y-auto">
-              <Speech>{inspiration}</Speech>
-            </div>
-          ) : null}
+          <div className="flex-grow mt-8 overflow-y-auto">
+            <Speech>{inspiration || initInspiration}</Speech>
+          </div>
           <InkJellyfish className="flex-shrink" />
           <Button onPress={() => changeInspiration()}>Inspire Me!</Button>
         </div>
