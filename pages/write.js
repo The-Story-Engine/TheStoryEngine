@@ -92,7 +92,7 @@ export default function Home() {
       }
       rightBar={
         <div className="relative h-full mt-24 bg-white w-72 rounded-tl-2xl">
-          <div className="absolute top-0 right-0 h-screen pb-24 w-72">
+          <div className="fixed bottom-0 right-0 h-screen pt-24 w-72">
             <Inspiration
               setInspiration={setInspiration}
               inspiration={story?.inspiration}
