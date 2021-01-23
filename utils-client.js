@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import jellyInspirations from "jelly-inspirations.json";
 
 /**
  *
@@ -102,9 +101,24 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-export function getRandomInspiration() {
-  const inspirationIndex = Math.round(
-    Math.random() * (jellyInspirations.length - 1)
-  );
-  return jellyInspirations[inspirationIndex];
+function useInspirations() {
+  const [inspirations, setInspirations] = useState(null);
+  useEffect(() => {
+    fetch("/jelly-inspirations.json")
+      .then((response) => response.json())
+      .then(setInspirations);
+  }, []);
+  return inspirations;
+}
+
+export function useGetInspiration() {
+  const jellyInspirations = useInspirations();
+  return jellyInspirations
+    ? () => {
+        const inspirationIndex = Math.round(
+          Math.random() * (jellyInspirations.length - 1)
+        );
+        return jellyInspirations[inspirationIndex];
+      }
+    : null;
 }
