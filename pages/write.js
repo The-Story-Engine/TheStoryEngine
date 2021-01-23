@@ -100,6 +100,7 @@ export default function Home() {
             <Inspiration
               setInspiration={setInspiration}
               inspiration={story?.inspiration}
+              isInit={!!story?.id}
             />
           </div>
         </div>

@@ -11,6 +11,8 @@
     "@netlify/plugin-nextjs": "^1.0.5",
     "@svgr/webpack": "^5.5.0",
     "autoprefixer": "^10.2.1",
+    "focus-visible": "^5.2.0",
+    "framer-motion": "^3.2.2-rc.1",
     "husky": "^4.3.6",
     "next": "10.0.1",
     "postcss": "^8.2.4",
@@ -21,8 +23,7 @@
     "react-aria": "^3.3.0",
     "react-dom": "17.0.1",
     "react-expanding-textarea": "^2.3.1",
-    "tailwindcss": "^2.0.2",
-    "focus-visible": "^5.2.0"
+    "tailwindcss": "^2.0.2"
   },
   "husky": {
     "hooks": {

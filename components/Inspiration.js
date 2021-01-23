@@ -5,15 +5,13 @@ import { useGetInspiration } from "utils-client";
 
 const initInspiration = (
   <>
-    Hi! I'm the Inspirational Jellyfish."
-    <br />
-    <br />
-    I've got lots of ideas to help with your writing, tap Inspire Me to get
-    one!"
+    Hi! I'm the Inspirational Jellyfish. <br />
+    <br /> I've got lots of ideas to help with your writing, tap Inspire Me to
+    get one!
   </>
 );
 
-export default function Inspiration({ setInspiration, inspiration }) {
+export default function Inspiration({ setInspiration, inspiration, isInit }) {
   const getInspiration = useGetInspiration();
   const changeInspiration = (attemptCount = 0) => {
     const newInspiration = getInspiration();
@@ -28,10 +26,10 @@ export default function Inspiration({ setInspiration, inspiration }) {
     <div className="h-full py-8 px-9">
       <div className="flex flex-col justify-end h-full">
         <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-8">
-          <Speech>{inspiration || initInspiration}</Speech>
+          {isInit ? <Speech>{inspiration || initInspiration}</Speech> : null}
           <InkJellyfish className="flex-shrink" />
           <Button
-            disabled={!getInspiration}
+            isDisabled={!getInspiration}
             onPress={() => changeInspiration()}
           >
             Inspire Me!
