@@ -12,7 +12,7 @@ export default function Home() {
   const hasStoryContent = !!(story.text || story.title);
   return (
     <Layout
-      pageName="Welcome"
+      pageName="Home"
       growMainWidth={true}
       belowFold={
         <div className="max-w-3xl px-8 py-5 space-y-2 font-bold text-center sm:px-12">
