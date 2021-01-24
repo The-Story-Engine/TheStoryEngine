@@ -111,14 +111,25 @@ function useInspirations() {
   return inspirations;
 }
 
+let shuffledJellyInspirations = [];
+
 export function useGetInspiration() {
   const jellyInspirations = useInspirations();
   return jellyInspirations
     ? () => {
-        const inspirationIndex = Math.round(
-          Math.random() * (jellyInspirations.length - 1)
-        );
-        return jellyInspirations[inspirationIndex];
+        if (!shuffledJellyInspirations.length) {
+          shuffledJellyInspirations = shuffleArray([...jellyInspirations]);
+        }
+
+        return shuffledJellyInspirations.pop();
       }
     : null;
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
