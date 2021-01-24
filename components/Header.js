@@ -7,6 +7,7 @@ export default function Header({ buttons = null }) {
       <Link href="/">
         <a aria-label="Home" className="flex-shrink max-h-14">
           <LogoSVG
+            title="The Story Engine"
             className="h-12 sm:h-14"
             style={{ transform: "translateY(-0.3rem)" }}
           />

@@ -19,7 +19,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <WritingSVG />
+      <WritingSVG title="Illustration of pencil & notepad" />
       <p className="pt-1 text-sm leading-none">Reset</p>
     </motion.button>
   );
@@ -67,7 +67,7 @@ const CopyButton = ({ story, isDisabled = false }) => {
       }
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <CopySVG />
+      <CopySVG title="Illustration of person reading book" />
       <p className="pt-1 text-sm leading-none">Copy</p>
     </motion.button>
   );
@@ -91,6 +91,7 @@ export default function Home() {
   };
   return (
     <Layout
+      pageName="Writing Space"
       headerButtons={
         <div className="space-x-3">
           <CopyButton story={story} isDisabled={!(story.title || story.text)} />

@@ -33,9 +33,12 @@ textarea {
 button:disabled svg path,
 button:disabled svg circle {
   fill: lightgray !important;
+  color: lightgray !important;
 }
 
 button:hover:enabled svg path,
-button:hover:enabled svg circle {
+button:hover:enabled svg circle,
+button:hover:enabled p {
   fill: black !important;
+  color: black !important;
 }

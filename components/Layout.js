@@ -16,6 +16,7 @@ export default function Layout({
   belowFold,
   mainContent,
   growMainWidth = false,
+  pageName,
 }) {
   useEffect(() => {
     setViewHeight();
@@ -27,7 +28,7 @@ export default function Layout({
   return (
     <>
       <Head>
-        <title>The Story Engine</title>
+        <title>{pageName} - The Story Engine</title>
         <meta
           name="Description"
           content="A space for inspired creative writing, home of the inspirational jellyfish."
