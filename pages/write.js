@@ -7,19 +7,21 @@ import { useUserStory } from "utils-client";
 import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const ResetButton = ({ reset, isDisabled = false }) => {
   const ref = useRef();
   const { buttonProps } = useButton({ onPress: reset, isDisabled }, ref);
   return (
-    <button
+    <motion.button
       {...buttonProps}
       ref={ref}
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
+      whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
       <WritingSVG />
       <p className="pt-1 text-sm leading-none">Reset</p>
-    </button>
+    </motion.button>
   );
 };
 
@@ -56,14 +58,18 @@ const CopyButton = ({ story, isDisabled = false }) => {
   };
   const { buttonProps } = useButton({ onPress: copyStory, isDisabled }, ref);
   return (
-    <button
+    <motion.button
       {...buttonProps}
       ref={ref}
-      className="h-14 disabled:text-gray-400 disabled:cursor-default"
+      className={
+        "h-14 disabled:text-gray-400 disabled:cursor-default" +
+        (isDisabled ? "" : "hover:text-black")
+      }
+      whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
       <CopySVG />
       <p className="pt-1 text-sm leading-none">Copy</p>
-    </button>
+    </motion.button>
   );
 };
 

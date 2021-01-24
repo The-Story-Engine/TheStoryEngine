@@ -34,3 +34,8 @@ button:disabled svg path,
 button:disabled svg circle {
   fill: lightgray !important;
 }
+
+button:hover:enabled svg path,
+button:hover:enabled svg circle {
+  fill: black !important;
+}

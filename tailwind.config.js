@@ -24,7 +24,9 @@ module.exports = {
           700: "#484848",
         },
         bloo: {
+          400: "#DBF0FC",
           500: "#d3edfc",
+          600: "#BDD5E2",
         },
       },
       borderWidth: {
