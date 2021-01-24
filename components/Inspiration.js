@@ -3,6 +3,7 @@ import Button from "@components/Button";
 import Speech from "@components/Speech";
 import Fade from "@components/Fade";
 import { useGetInspiration } from "utils-client";
+import { useMemo } from "react";
 
 const initInspiration = [
   "Hi! I'm the Inspirational Jellyfish.",
@@ -13,19 +14,17 @@ export default function Inspiration({ setInspiration, inspiration, isInit }) {
   const getInspiration = useGetInspiration();
   const changeInspiration = (attemptCount = 0) => {
     const newInspiration = getInspiration();
-    // retry up to 10 times if new one is same as existing
-    if (newInspiration.text === inspiration && attemptCount < 10) {
-      changeInspiration(attemptCount + 1);
-    } else {
-      setInspiration(newInspiration.text);
-    }
+    setInspiration(newInspiration.text);
   };
-  const inspirationElements = (
-    <div className="space-y-2">
-      {(inspiration ? [inspiration] : initInspiration).map((inspiration) => (
-        <Speech key={inspiration}>{inspiration}</Speech>
-      ))}
-    </div>
+  const inspirationElements = useMemo(
+    () => (
+      <div className="space-y-2">
+        {(inspiration ? [inspiration] : initInspiration).map((inspiration) => (
+          <Speech key={inspiration}>{inspiration}</Speech>
+        ))}
+      </div>
+    ),
+    [inspiration]
   );
   return (
     <div className="h-full py-8 px-9">

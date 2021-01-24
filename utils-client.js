@@ -20,8 +20,8 @@ export const useUserStory = () => {
 
   // get story from localStorage, get new if none found
   useEffect(() => {
-    const existingStory = localStorage.getItem("tseStory");
-    if (!existingStory) {
+    const existingStory = JSON.parse(localStorage.getItem("tseStory"));
+    if (!existingStory || !existingStory.id) {
       // new story in local storage
       const newStory = {
         id: uuidv4(),
@@ -32,7 +32,7 @@ export const useUserStory = () => {
       localStorage.setItem("tseStory", JSON.stringify(newStory));
       setStory(newStory);
     } else {
-      setStory(JSON.parse(existingStory));
+      setStory(existingStory);
     }
   }, []);
   return [
