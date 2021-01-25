@@ -14,13 +14,7 @@ const Title = ({ onChange, value, placeholder, className }) => {
     },
     ref
   );
-  return (
-    <TextareaAutosize
-      {...inputProps}
-      className={`${className} h-12`}
-      ref={ref}
-    />
-  );
+  return <TextareaAutosize {...inputProps} className={className} ref={ref} />;
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
