@@ -22,7 +22,7 @@
     "react": "17.0.1",
     "react-aria": "^3.3.0",
     "react-dom": "17.0.1",
-    "react-expanding-textarea": "^2.3.1",
+    "react-autosize-textarea": "^7.1.0",
     "tailwindcss": "^2.0.2"
   },
   "husky": {

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useTextField } from "@react-aria/textfield";
-import Textarea from "react-expanding-textarea";
+import TextareaAutosize from "react-autosize-textarea";
 import { useIsTyping } from "utils-client";
 
 const Title = ({ onChange, value, placeholder, className }) => {
@@ -14,7 +14,13 @@ const Title = ({ onChange, value, placeholder, className }) => {
     },
     ref
   );
-  return <Textarea {...inputProps} className={`${className} h-12`} ref={ref} />;
+  return (
+    <TextareaAutosize
+      {...inputProps}
+      className={`${className} h-12`}
+      ref={ref}
+    />
+  );
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
@@ -37,7 +43,7 @@ const Story = ({ story, saveStory }) => {
 
   return (
     <div className="relative flex flex-col flex-grow w-full h-full px-8 pt-10 pb-4 max-w-52rem lg:px-16 lg:pt-14">
-      <div className="pb-4 mb-4 border-b-2 border-gray-400 lg:pb-6 lg:mb-6">
+      <div className="pb-2 mb-4 border-b-2 border-gray-400 lg:mb-6">
         <Title
           value={story.title}
           onChange={setStoryTitle}
