@@ -3,7 +3,7 @@ import Jellyfish from "@components/InkJellyfish";
 import LinkButton from "@components/LinkButton";
 import { useUserStory } from "utils-client";
 
-const Placeholder = () => <div className="w-full mt-16 h-60" />;
+const Placeholder = () => <div className="w-0 mt-16 h-36 lg:w-md md:h-52" />;
 
 export default function Home() {
   const [story] = useUserStory();
