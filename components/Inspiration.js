@@ -48,8 +48,9 @@ export default function Inspiration({ setInspiration, inspiration, isInit }) {
             animate={wiggleControls}
             initial="still"
             variants={wiggleVariants}
+            className="flex-shrink"
           >
-            <InkJellyfish className="flex-shrink" />
+            <InkJellyfish className="w-full h-full" />
           </motion.div>
           <Button
             isDisabled={!getInspiration}
