@@ -3,7 +3,8 @@ import Button from "@components/Button";
 import Speech from "@components/Speech";
 import Fade from "@components/Fade";
 import { useGetInspiration } from "utils-client";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { motion, useAnimation } from "framer-motion";
 
 const initInspiration = [
   "Hi! I'm the Inspirational Jellyfish.",
@@ -11,8 +12,13 @@ const initInspiration = [
 ];
 
 export default function Inspiration({ setInspiration, inspiration, isInit }) {
+  const wiggleControls = useAnimation();
+  const wiggleVariants = {
+    still: { rotate: 0 },
+    wiggle: { rotate: [0, -5, 5, 0] },
+  };
   const getInspiration = useGetInspiration();
-  const changeInspiration = (attemptCount = 0) => {
+  const changeInspiration = () => {
     const newInspiration = getInspiration();
     setInspiration(newInspiration.text);
   };
@@ -26,6 +32,9 @@ export default function Inspiration({ setInspiration, inspiration, isInit }) {
     ),
     [inspiration]
   );
+  useEffect(() => {
+    wiggleControls.start("wiggle");
+  }, []);
   return (
     <div className="h-full py-8 px-9">
       <div className="flex flex-col justify-end h-full">
@@ -35,10 +44,19 @@ export default function Inspiration({ setInspiration, inspiration, isInit }) {
               {isInit ? inspirationElements : null}
             </Fade>
           </div>
-          <InkJellyfish className="flex-shrink" />
+          <motion.div
+            animate={wiggleControls}
+            initial="still"
+            variants={wiggleVariants}
+          >
+            <InkJellyfish className="flex-shrink" />
+          </motion.div>
           <Button
             isDisabled={!getInspiration}
-            onPress={() => changeInspiration()}
+            onPress={() => {
+              wiggleControls.start("wiggle");
+              changeInspiration();
+            }}
           >
             Inspire Me!
           </Button>

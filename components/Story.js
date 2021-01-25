@@ -52,7 +52,10 @@ const Story = ({ story, saveStory }) => {
         className="flex-grow w-full text-xl"
       />
       {story.title || story.text ? (
-        <p className="m-2 mt-3 text-right text-grey-500">
+        <p
+          aria-label="Save Status"
+          className="m-2 mt-3 text-right text-grey-500"
+        >
           {isTyping ? "Saving" : "Saved Locally"}
         </p>
       ) : null}
