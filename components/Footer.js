@@ -53,7 +53,6 @@ export default function Footer() {
     { href: "https://tse.fish", target: "_blank", rel: "noopener" },
     linkRef
   );
-  console.log({ linkProps });
   return (
     <footer className="bg-white">
       <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-gray-400 lg:mx-16">

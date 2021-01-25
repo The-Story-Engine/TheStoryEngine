@@ -14,7 +14,7 @@ const Title = ({ onChange, value, placeholder, className }) => {
     },
     ref
   );
-  return <TextareaAutosize {...inputProps} className={className} ref={ref} />;
+  return <textarea {...inputProps} className={className} ref={ref} />;
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
@@ -42,7 +42,7 @@ const Story = ({ story, saveStory }) => {
           value={story.title}
           onChange={setStoryTitle}
           placeholder="Title..."
-          className="w-full text-2xl font-semibold"
+          className="w-full h-12 text-2xl font-semibold"
         />
       </div>
       <Text
