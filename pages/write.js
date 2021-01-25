@@ -27,7 +27,9 @@ const ResetButton = ({ reset, isDisabled = false }) => {
 
 const modernCopy = ({ text = "", title = "" }) => {
   return navigator.clipboard.writeText(
-    `${title}${title && "\n\n\n"}${text && text}`
+    `${title}${title && "\n\n\n"}${
+      text && text
+    }\n\n\nWritten on thestoryengine.co.uk`
   );
 };
 
@@ -116,7 +118,7 @@ export default function Home() {
         <div className="relative w-20 h-full mt-24 bg-white rounded-tr-2xl"></div>
       }
       belowFold={
-        <div className="px-8 py-5 space-y-2 italic font-semibold text-center max-w-52rem sm:px-12">
+        <div className="px-8 py-12 space-y-2 italic font-semibold text-center max-w-52rem lg:px-16">
           <p>Your story is stored in your web browser only.</p>
           <p>
             As the jellyfish grows up, we'll always be 100% transparent about
