@@ -84,8 +84,8 @@ export default function Footer() {
           </div>
           <p className="max-w-sm text-sm">
             The Story Engine is a space for inspired creative writing. Write
-            stories and copy them to paste anywhere. We're excited to add
-            features to help inspire you through 2021 as the jellyfish grows.
+            stories and copy them to paste anywhere. We’ll be adding features to
+            help inspire you through 2021. To follow us use the links here.
           </p>
         </div>
         <div className="font-semibold text-center">

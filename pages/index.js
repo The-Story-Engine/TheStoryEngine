@@ -28,9 +28,9 @@ export default function Home() {
                 <p className="mt-4 text-xl md:mt-6 md:text-2xl">
                   {hasStoryContent
                     ? "Welcome back, tap below to continue your story!"
-                    : "I’ve got lots of ideas to help with your writing, tap below to get started!"}
+                    : "Welcome to the Story Engine. I’ve got lots of ideas to help with your writing, tap below to get started!"}
                 </p>
-                <LinkButton href="/write">Write a story!</LinkButton>
+                <LinkButton href="/write">Write a story</LinkButton>
               </>
             ) : (
               <Placeholder />
