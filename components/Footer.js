@@ -47,6 +47,26 @@ const Facebook = ({
     </a>
   );
 };
+const Twitter = ({
+  href = "https://twitter.com/InspirationalJF/",
+  target = "blank",
+  rel = "noopener",
+}) => {
+  const ref = useRef();
+  const { linkProps } = useLink({ href, target, rel }, ref);
+  return (
+    <a
+      {...linkProps}
+      ref={ref}
+      href={href}
+      target={target}
+      rel={rel}
+      className="flex items-center justify-center w-12"
+    >
+      <img alt="Twitter Logo" src="/twitter.png" className="relative" />
+    </a>
+  );
+};
 export default function Footer() {
   const linkRef = useRef();
   const { linkProps } = useLink(
@@ -60,6 +80,7 @@ export default function Footer() {
           <div className="flex space-x-2">
             <Instagram />
             <Facebook />
+            <Twitter />
           </div>
           <p className="max-w-sm text-sm">
             The Story Engine is a space for inspired creative writing. Write
