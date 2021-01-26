@@ -11,7 +11,13 @@ const initInspiration = [
   "I've got lots of ideas to help with your writing, tap Inspire Me to get one!",
 ];
 
-export default function Inspiration({ setInspiration, inspiration, isInit }) {
+export default function Inspiration({
+  setInspiration,
+  inspiration,
+  isInit,
+  isOpen,
+  toggleIsOpen,
+}) {
   const wiggleControls = useAnimation();
   const wiggleVariants = {
     still: { rotate: 0 },
@@ -35,33 +41,54 @@ export default function Inspiration({ setInspiration, inspiration, isInit }) {
   useEffect(() => {
     wiggleControls.start("wiggle");
   }, []);
+  const jellyfish = (
+    <motion.div
+      animate={wiggleControls}
+      initial="still"
+      variants={wiggleVariants}
+      className="flex-shrink"
+    >
+      <InkJellyfish className="w-full h-full" />
+    </motion.div>
+  );
   return (
-    <div className="h-full py-8 px-9">
+    <div className={`h-full ${isOpen ? "py-8 px-9" : "py-6 px-4"}`}>
       <div className="flex flex-col justify-end h-full">
-        <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-8">
-          <div className="min-h-0 overflow-y-auto">
-            <Fade className="space-y-4">
-              {isInit ? inspirationElements : null}
-            </Fade>
+        {isOpen ? (
+          <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-8">
+            <div className="min-h-0 overflow-y-auto">
+              <Fade className="space-y-4">
+                {isInit ? inspirationElements : null}
+              </Fade>
+            </div>
+            <motion.div
+              animate={wiggleControls}
+              initial="still"
+              variants={wiggleVariants}
+              className="flex-shrink w-full"
+            >
+              <InkJellyfish className="w-full h-full" />
+            </motion.div>
+            <Button
+              isDisabled={!getInspiration}
+              onPress={() => {
+                wiggleControls.start("wiggle");
+                changeInspiration();
+              }}
+            >
+              Inspire Me!
+            </Button>
           </div>
-          <motion.div
-            animate={wiggleControls}
-            initial="still"
-            variants={wiggleVariants}
-            className="flex-shrink"
-          >
-            <InkJellyfish className="w-full h-full" />
-          </motion.div>
+        ) : (
           <Button
-            isDisabled={!getInspiration}
-            onPress={() => {
-              wiggleControls.start("wiggle");
-              changeInspiration();
-            }}
+            aria-label="Show Inspiration Sidebar"
+            className="w-full"
+            noStyle={true}
+            onPress={toggleIsOpen}
           >
-            Inspire Me!
+            {jellyfish}
           </Button>
-        </div>
+        )}
       </div>
     </div>
   );
