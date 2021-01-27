@@ -3,7 +3,18 @@ import Jellyfish from "@components/InkJellyfish";
 import LinkButton from "@components/LinkButton";
 import { useUserStory } from "utils-client";
 
-const Placeholder = () => <div className="w-0 mt-16 h-36 lg:w-md md:h-52" />;
+const Placeholder = () => <div className="w-0 h-48 mt-16 lg:w-sm md:h-64" />;
+
+const returnMessage = "Welcome back, tap below to continue your story!";
+const welcomeMessage = (
+  <>
+    {"Welcome to the Story Engine. I’ve got"}
+    <br />
+    {"lots of ideas to help with your writing,"}
+    <br />
+    {"tap below to get started!"}
+  </>
+);
 
 export default function Home() {
   const [story] = useUserStory();
@@ -20,15 +31,13 @@ export default function Home() {
           <div className="flex flex-col items-center mt-10 text-center md:mt-16 max-w-96 lg:mt-0">
             {isStoryInitialized ? (
               <>
-                <h2 className="text-2xl font-bold md:text-4xl text-grey-500">
-                  Howdy! I'm
+                <h2 className="text-2xl font-bold md:text-4xl text-grey-500 w-sm">
+                  Howdy, I'm
                   <br />
                   the Inspirational Jellyfish
                 </h2>
-                <p className="mt-4 text-xl md:mt-6 md:text-2xl">
-                  {hasStoryContent
-                    ? "Welcome back, tap below to continue your story!"
-                    : "Welcome to the Story Engine. I’ve got lots of ideas to help with your writing, tap below to get started!"}
+                <p className="mt-4 text-xl md:mt-6 md:text-2xl w-sm">
+                  {hasStoryContent ? returnMessage : welcomeMessage}
                 </p>
                 <LinkButton href="/write">Write a story</LinkButton>
               </>
