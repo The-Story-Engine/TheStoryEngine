@@ -54,7 +54,7 @@ const Story = ({ story, saveStory }) => {
       {story.title || story.text ? (
         <p
           aria-label="Save Status"
-          className="m-2 mt-3 text-right text-grey-500"
+          className="m-2 mt-3 text-center text-grey-500"
         >
           {isTyping ? "Saving" : "Saved Locally"}
         </p>

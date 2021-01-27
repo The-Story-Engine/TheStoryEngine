@@ -21,7 +21,7 @@ export default function Button({
       {...buttonProps}
       className={className}
       ref={ref}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
       variants={variants}
       animate={direction}

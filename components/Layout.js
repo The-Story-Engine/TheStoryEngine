@@ -4,6 +4,8 @@ import Footer from "@components/Footer";
 import "focus-visible";
 import { useEffect, useState } from "react";
 import NavButton from "@components/NavButton";
+import InkJellyfish from "@components/InkJellyfish";
+import Button from "@components/Button";
 
 const setViewHeight = () => {
   const vh = window.innerHeight * 0.01;
@@ -83,40 +85,78 @@ export default function Layout({
             </div>
           </div>
           {renderRightBar ? (
-            <aside className="flex-col self-stretch hidden md:flex">
-              <div
-                className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
-                  isRightOpen ? "w-72" : "w-32"
-                }`}
-              >
-                <NavButton
-                  aria-label={
-                    isRightOpen
-                      ? "Hide Inspiration Sidebar"
-                      : "Show Inspiration Sidebar"
-                  }
-                  noStyle={true}
-                  direction={isRightOpen ? "right" : "left"}
-                  className="sticky top-0 z-10 p-6 left-8"
-                  onPress={toggleIsRightOpen}
-                />
-                <div
-                  className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
-                    isRightOpen ? "w-72" : "w-32"
-                  }`}
-                  onAnimationEnd={() => {
-                    setIsPendingRightAnimation(false);
-                  }}
-                >
-                  {isPendingRightAnimation
-                    ? null
-                    : renderRightBar({
-                        isOpen: isRightOpen,
+            <>
+              {isRightOpen ? (
+                <>
+                  <div class="fixed md:hidden inset-0 z-10">
+                    <div
+                      class="absolute inset-0 bg-gray-600 opacity-75"
+                      aria-hidden="true"
+                    ></div>
+                  </div>
+                  <aside className="fixed top-0 right-0 z-20 self-stretch h-screen pt-24 md:hidden w-72">
+                    <div
+                      className={`relative h-full w-full bg-white rounded-tl-2xl transition-all duration-500`}
+                    >
+                      <NavButton
+                        aria-label={"Hide Inspiration Sidebar"}
+                        noStyle={true}
+                        direction={"right"}
+                        className="absolute top-0 left-0 z-10 p-6"
+                        onPress={toggleIsRightOpen}
+                      />
+                      {renderRightBar({
+                        isOpen: true,
                         toggleIsOpen: toggleIsRightOpen,
                       })}
+                    </div>
+                  </aside>
+                </>
+              ) : (
+                <Button
+                  aria-label="Show Inspiration Sidebar"
+                  className="absolute w-24 h-24 bottom-10 right-10 md:hidden"
+                  noStyle={true}
+                  onPress={toggleIsRightOpen}
+                >
+                  <InkJellyfish className="w-full h-full" />
+                </Button>
+              )}
+              <aside className="flex-col self-stretch hidden md:flex">
+                <div
+                  className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
+                    isRightOpen ? "w-72" : "w-32"
+                  }`}
+                >
+                  <NavButton
+                    aria-label={
+                      isRightOpen
+                        ? "Hide Inspiration Sidebar"
+                        : "Show Inspiration Sidebar"
+                    }
+                    noStyle={true}
+                    direction={isRightOpen ? "right" : "left"}
+                    className="sticky top-0 z-10 p-6 left-8"
+                    onPress={toggleIsRightOpen}
+                  />
+                  <div
+                    className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
+                      isRightOpen ? "w-72" : "w-32"
+                    }`}
+                    onAnimationEnd={() => {
+                      setIsPendingRightAnimation(false);
+                    }}
+                  >
+                    {isPendingRightAnimation
+                      ? null
+                      : renderRightBar({
+                          isOpen: isRightOpen,
+                          toggleIsOpen: toggleIsRightOpen,
+                        })}
+                  </div>
                 </div>
-              </div>
-            </aside>
+              </aside>
+            </>
           ) : null}
         </div>
       </div>
