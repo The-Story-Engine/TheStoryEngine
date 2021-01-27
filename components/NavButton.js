@@ -19,7 +19,7 @@ export default function Button({
   return (
     <motion.button
       {...buttonProps}
-      className={`w-8 h-8 ${className}`}
+      className={className}
       ref={ref}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 1 }}
@@ -27,7 +27,7 @@ export default function Button({
       animate={direction}
       transition={{ duration: 0.5 }}
     >
-      <ArrowSVG className="w-full h-full" title="Arrow" />
+      <ArrowSVG className="w-8 h-8" title="Arrow" />
     </motion.button>
   );
 }

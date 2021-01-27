@@ -2,7 +2,8 @@ import Head from "next/head";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import "focus-visible";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import NavButton from "@components/NavButton";
 
 const setViewHeight = () => {
   const vh = window.innerHeight * 0.01;
@@ -11,13 +12,20 @@ const setViewHeight = () => {
 
 export default function Layout({
   headerButtons,
-  rightBar,
+  renderRightBar,
   leftBar,
   belowFold,
   mainContent,
   growMainWidth = false,
   pageName,
 }) {
+  const [isRightOpen, setIsRightOpen] = useState(true);
+  const [isPendingRightAnimation, setIsPendingRightAnimation] = useState(false);
+  const toggleIsRightOpen = () => {
+    setIsRightOpen(!isRightOpen);
+    setIsPendingRightAnimation(true);
+    setTimeout(() => setIsPendingRightAnimation(false), 500);
+  };
   useEffect(() => {
     setViewHeight();
     window.addEventListener("resize", setViewHeight);
@@ -74,9 +82,40 @@ export default function Layout({
               <Footer />
             </div>
           </div>
-          {rightBar ? (
+          {renderRightBar ? (
             <aside className="flex-col self-stretch hidden md:flex">
-              {rightBar}
+              <div
+                className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
+                  isRightOpen ? "w-72" : "w-32"
+                }`}
+              >
+                <NavButton
+                  aria-label={
+                    isRightOpen
+                      ? "Hide Inspiration Sidebar"
+                      : "Show Inspiration Sidebar"
+                  }
+                  noStyle={true}
+                  direction={isRightOpen ? "right" : "left"}
+                  className="sticky top-0 z-10 p-6 left-8"
+                  onPress={toggleIsRightOpen}
+                />
+                <div
+                  className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
+                    isRightOpen ? "w-72" : "w-32"
+                  }`}
+                  onAnimationEnd={() => {
+                    setIsPendingRightAnimation(false);
+                  }}
+                >
+                  {isPendingRightAnimation
+                    ? null
+                    : renderRightBar({
+                        isOpen: isRightOpen,
+                        toggleIsOpen: toggleIsRightOpen,
+                      })}
+                </div>
+              </div>
             </aside>
           ) : null}
         </div>

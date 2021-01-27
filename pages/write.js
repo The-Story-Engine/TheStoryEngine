@@ -6,10 +6,8 @@ import CopySVG from "public/copy.svg";
 import { useUserStory } from "utils-client";
 import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import NavButton from "@components/NavButton";
-import InkJellyfish from "@components/InkJellyfish";
 
 const ResetButton = ({ reset, isDisabled = false }) => {
   const ref = useRef();
@@ -79,8 +77,6 @@ const CopyButton = ({ story, isDisabled = false }) => {
 
 export default function Home() {
   const [story, updateStory] = useUserStory();
-  const [isRightOpen, setIsRightOpen] = useState(true);
-  const [isPendingAnimation, setPendingAnimation] = useState(false);
   const router = useRouter();
   const resetStory = () => {
     if (story.title || story.text) {
@@ -95,11 +91,6 @@ export default function Home() {
   const setInspiration = (inspiration) => {
     updateStory({ inspiration });
   };
-  const toggleIsRightOpen = () => {
-    setIsRightOpen(!isRightOpen);
-    setPendingAnimation(true);
-    setTimeout(() => setPendingAnimation(false), 500);
-  };
 
   return (
     <Layout
@@ -113,44 +104,15 @@ export default function Home() {
           />
         </div>
       }
-      rightBar={
-        <div
-          className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
-            isRightOpen ? "w-72" : "w-32"
-          }`}
-        >
-          <div
-            className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
-              isRightOpen ? "w-72" : "w-32"
-            }`}
-            onAnimationEnd={() => {
-              console.log("yay");
-              setPendingAnimation(false);
-            }}
-          >
-            <NavButton
-              aria-label={
-                isRightOpen
-                  ? "Hide Inspiration Sidebar"
-                  : "Show Inspiration Sidebar"
-              }
-              noStyle={true}
-              direction={isRightOpen ? "right" : "left"}
-              className="absolute top-32 left-8"
-              onPress={toggleIsRightOpen}
-            />
-            {isPendingAnimation ? null : (
-              <Inspiration
-                setInspiration={setInspiration}
-                inspiration={story?.inspiration}
-                isInit={!!story?.id}
-                isOpen={isRightOpen}
-                toggleIsOpen={toggleIsRightOpen}
-              />
-            )}
-          </div>
-        </div>
-      }
+      renderRightBar={({ isOpen, toggleIsOpen }) => (
+        <Inspiration
+          setInspiration={setInspiration}
+          inspiration={story?.inspiration}
+          isInit={!!story?.id}
+          isOpen={isOpen}
+          toggleIsOpen={toggleIsOpen}
+        />
+      )}
       leftBar={
         <div className="relative w-20 h-full mt-24 bg-white rounded-tr-2xl"></div>
       }
