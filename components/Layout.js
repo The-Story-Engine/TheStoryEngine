@@ -21,7 +21,12 @@ export default function Layout({
   growMainWidth = false,
   pageName,
 }) {
-  const [isRightOpen, setIsRightOpen] = useState(true);
+  useEffect(() => {
+    if (window.innerWidth > 767) {
+      setIsRightOpen(true);
+    }
+  }, []);
+  const [isRightOpen, setIsRightOpen] = useState(false);
   const [isPendingRightAnimation, setIsPendingRightAnimation] = useState(false);
   const toggleIsRightOpen = () => {
     setIsRightOpen(!isRightOpen);
@@ -106,7 +111,7 @@ export default function Layout({
                         aria-label={"Hide Inspiration Sidebar"}
                         noStyle={true}
                         direction={"right"}
-                        className="absolute top-0 left-0 z-10 p-6"
+                        className="absolute top-0 left-0 z-10 p-4"
                         onPress={toggleIsRightOpen}
                       />
                       {renderRightBar({
@@ -119,7 +124,7 @@ export default function Layout({
               ) : (
                 <Button
                   aria-label="Show Inspiration Sidebar"
-                  className="absolute w-24 h-24 bottom-10 right-10 md:hidden"
+                  className="absolute w-16 h-16 bottom-10 right-10 md:hidden"
                   noStyle={true}
                   onPress={toggleIsRightOpen}
                 >

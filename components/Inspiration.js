@@ -52,10 +52,12 @@ export default function Inspiration({
     </motion.div>
   );
   return (
-    <div className={`h-full ${isOpen ? "py-8 px-9" : "py-6 px-4"}`}>
+    <div
+      className={`h-full ${isOpen ? "py-4 px-6 md:py-8 md:px-9" : "py-6 px-4"}`}
+    >
       <div className="flex flex-col justify-end h-full">
         {isOpen ? (
-          <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-8">
+          <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-4 md:space-y-8">
             <div className="min-h-0 overflow-y-auto">
               <Fade className="space-y-4">
                 {isInit ? inspirationElements : null}
@@ -65,7 +67,7 @@ export default function Inspiration({
               animate={wiggleControls}
               initial="still"
               variants={wiggleVariants}
-              className="flex-shrink w-full"
+              className="flex-shrink w-24 md:w-full"
             >
               <InkJellyfish className="w-full h-full" />
             </motion.div>
