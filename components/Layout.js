@@ -49,7 +49,11 @@ export default function Layout({
           rel="stylesheet"
         />
       </Head>
-      <div className="min-w-screen">
+      <div
+        className={`h-screen min-w-screen ${
+          isRightOpen ? "overflow-y-hidden md:overflow-y-auto" : ""
+        }`}
+      >
         <Header buttons={headerButtons} />
         <div className="flex font-sans">
           {leftBar ? (
@@ -88,9 +92,9 @@ export default function Layout({
             <>
               {isRightOpen ? (
                 <>
-                  <div class="fixed md:hidden inset-0 z-10">
+                  <div className="fixed inset-0 z-10 md:hidden">
                     <div
-                      class="absolute inset-0 bg-gray-600 opacity-75"
+                      className="absolute inset-0 bg-gray-600 opacity-75"
                       aria-hidden="true"
                     ></div>
                   </div>
