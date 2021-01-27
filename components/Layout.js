@@ -101,6 +101,7 @@ export default function Layout({
                     <div
                       className="absolute inset-0 bg-gray-600 opacity-75"
                       aria-hidden="true"
+                      onClick={toggleIsRightOpen}
                     ></div>
                   </div>
                   <aside className="fixed top-0 right-0 z-20 self-stretch h-screen pt-24 md:hidden w-72">
