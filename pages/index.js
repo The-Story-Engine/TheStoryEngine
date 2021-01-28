@@ -8,11 +8,9 @@ const Placeholder = () => <div className="w-0 h-48 mt-16 lg:w-sm md:h-64" />;
 const returnMessage = "Welcome back, tap below to continue your story!";
 const welcomeMessage = (
   <>
-    {"Welcome to the Story Engine. I’ve got"}
+    {"I’ve got lots of ideas to help with your"}
     <br />
-    {"lots of ideas to help with your writing,"}
-    <br />
-    {"tap below to get started!"}
+    {"writing, tap below to get started!"}
   </>
 );
 

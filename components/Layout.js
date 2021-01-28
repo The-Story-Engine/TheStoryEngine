@@ -76,123 +76,124 @@ export default function Layout({
           isRightOpen ? "overflow-y-hidden md:overflow-y-auto" : ""
         }`}
       >
-        <Header buttons={headerButtons} />
-        <div className="flex font-sans">
-          {leftBar ? (
-            <aside className="flex-col self-stretch hidden xl:flex">
-              {leftBar}
-            </aside>
-          ) : null}
-          <div
-            className={`flex xl:justify-around flex-grow ${
-              leftBar ? "md:pr-20 xl:pl-20" : "md:pr-20"
-            }`}
+        {renderRightBar && !isRightOpen ? (
+          <Button
+            aria-label="Show Inspiration Sidebar"
+            className="fixed z-10 w-16 h-16 bottom-10 right-10 md:hidden"
+            noStyle={true}
+            onPress={toggleIsRightOpen}
           >
+            <InkJellyfish className="w-full h-full" />
+          </Button>
+        ) : null}
+        <div className="relative">
+          <Header buttons={headerButtons} />
+          <div className="flex font-sans">
+            {leftBar ? (
+              <aside className="flex-col self-stretch hidden xl:flex">
+                {leftBar}
+              </aside>
+            ) : null}
             <div
-              className={`flex flex-col flex-grow ${
-                growMainWidth ? "" : "max-w-52rem"
+              className={`flex xl:justify-around flex-grow ${
+                leftBar ? "md:pr-20 xl:pl-20" : "md:pr-20"
               }`}
             >
               <div
-                className={`flex flex-col pt-24 ${
-                  mobileFitMainToScreen
-                    ? "min-h-screen"
-                    : "min-h-2xl md:min-h-screen"
+                className={`flex flex-col flex-grow ${
+                  growMainWidth ? "" : "max-w-52rem"
                 }`}
               >
-                <main
-                  className={`flex flex-grow bg-white md:rounded-tr-2xl ${
-                    leftBar ? "xl:rounded-tl-2xl" : ""
-                  }`}
-                >
-                  {mainContent}
-                </main>
-              </div>
-              {belowFold ? (
-                <div className="flex flex-col items-center bg-white ">
-                  {belowFold}
-                </div>
-              ) : null}
-              <Footer isWide={growMainWidth} />
-            </div>
-          </div>
-          {renderRightBar ? (
-            <>
-              {isRightOpen ? (
-                <>
-                  <div className="fixed inset-0 z-10 md:hidden">
-                    <div
-                      className="absolute inset-0 bg-gray-600 opacity-75"
-                      aria-hidden="true"
-                      onClick={toggleIsRightOpen}
-                    ></div>
-                  </div>
-                  <aside className="fixed top-0 right-0 z-20 self-stretch w-full h-screen pt-24 md:hidden">
-                    <div
-                      className={`relative h-full w-full bg-white rounded-tl-2xl transition-all duration-500`}
-                    >
-                      <NavButton
-                        aria-label={"Hide Inspiration Sidebar"}
-                        noStyle={true}
-                        direction={"right"}
-                        className="absolute top-0 left-0 z-10 p-4"
-                        onPress={toggleIsRightOpen}
-                      />
-                      {renderRightBar({
-                        isOpen: true,
-                        toggleIsOpen: toggleIsRightOpen,
-                      })}
-                    </div>
-                  </aside>
-                </>
-              ) : (
-                <motion.div className="absolute w-16 h-16 bottom-10 right-10 md:hidden">
-                  <Button
-                    aria-label="Show Inspiration Sidebar"
-                    className="w-full h-full"
-                    noStyle={true}
-                    onPress={toggleIsRightOpen}
-                  >
-                    <InkJellyfish className="w-full h-full" />
-                  </Button>
-                </motion.div>
-              )}
-              <aside className="flex-col self-stretch hidden md:flex">
                 <div
-                  className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
-                    isRightOpen ? "w-72" : "w-32"
+                  className={`flex flex-col pt-24 ${
+                    mobileFitMainToScreen
+                      ? "min-h-screen"
+                      : "min-h-2xl md:min-h-screen"
                   }`}
                 >
-                  <NavButton
-                    aria-label={
-                      isRightOpen
-                        ? "Hide Inspiration Sidebar"
-                        : "Show Inspiration Sidebar"
-                    }
-                    noStyle={true}
-                    direction={isRightOpen ? "right" : "left"}
-                    className="sticky top-0 z-10 p-6 left-8"
-                    onPress={toggleIsRightOpen}
-                  />
-                  <div
-                    className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
-                      isRightOpen ? "w-72" : "w-32"
+                  <main
+                    className={`flex flex-grow bg-white md:rounded-tr-2xl ${
+                      leftBar ? "xl:rounded-tl-2xl" : ""
                     }`}
-                    onAnimationEnd={() => {
-                      setIsPendingRightAnimation(false);
-                    }}
                   >
-                    {isPendingRightAnimation
-                      ? null
-                      : renderRightBar({
-                          isOpen: isRightOpen,
+                    {mainContent}
+                  </main>
+                </div>
+                {belowFold ? (
+                  <div className="flex flex-col items-center bg-white ">
+                    {belowFold}
+                  </div>
+                ) : null}
+                <Footer isWide={growMainWidth} />
+              </div>
+            </div>
+            {renderRightBar ? (
+              <>
+                {isRightOpen ? (
+                  <>
+                    <div className="fixed inset-0 z-10 md:hidden">
+                      <div
+                        className="absolute inset-0 bg-gray-600 opacity-75"
+                        aria-hidden="true"
+                        onClick={toggleIsRightOpen}
+                      ></div>
+                    </div>
+                    <aside className="fixed top-0 right-0 z-20 self-stretch w-full h-screen pt-24 md:hidden">
+                      <div
+                        className={`relative h-full w-full bg-white rounded-tl-2xl transition-all duration-500`}
+                      >
+                        <NavButton
+                          aria-label={"Hide Inspiration Sidebar"}
+                          noStyle={true}
+                          direction={"right"}
+                          className="absolute top-0 left-0 z-10 p-4"
+                          onPress={toggleIsRightOpen}
+                        />
+                        {renderRightBar({
+                          isOpen: true,
                           toggleIsOpen: toggleIsRightOpen,
                         })}
+                      </div>
+                    </aside>
+                  </>
+                ) : null}
+                <aside className="flex-col self-stretch hidden md:flex">
+                  <div
+                    className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
+                      isRightOpen ? "w-72" : "w-32"
+                    }`}
+                  >
+                    <NavButton
+                      aria-label={
+                        isRightOpen
+                          ? "Hide Inspiration Sidebar"
+                          : "Show Inspiration Sidebar"
+                      }
+                      noStyle={true}
+                      direction={isRightOpen ? "right" : "left"}
+                      className="sticky top-0 z-10 p-6 left-8"
+                      onPress={toggleIsRightOpen}
+                    />
+                    <div
+                      className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
+                        isRightOpen ? "w-72" : "w-32"
+                      }`}
+                      onAnimationEnd={() => {
+                        setIsPendingRightAnimation(false);
+                      }}
+                    >
+                      {isPendingRightAnimation
+                        ? null
+                        : renderRightBar({
+                            isOpen: isRightOpen,
+                            toggleIsOpen: toggleIsRightOpen,
+                          })}
+                    </div>
                   </div>
-                </div>
-              </aside>
-            </>
-          ) : null}
+                </aside>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </>
