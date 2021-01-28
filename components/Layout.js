@@ -113,7 +113,7 @@ export default function Layout({
                   {belowFold}
                 </div>
               ) : null}
-              <Footer />
+              <Footer isWide={growMainWidth} />
             </div>
           </div>
           {renderRightBar ? (
