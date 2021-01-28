@@ -48,6 +48,21 @@ export default function Layout({
           name="Description"
           content="A space for inspired creative writing, home of the inspirational jellyfish."
         ></meta>
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@InspirationalJF" />
+        <meta name="twitter:title" content="The Story Engine" />
+        <meta
+          name="twitter:description"
+          content="A space for inspired creative writing, home of the inspirational jellyfish."
+        />
+        <meta
+          name="twitter:image"
+          content="https://thestoryengine.co.uk/inkinspirationaljellyfish-1.jpg"
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Illustrated Jellyfish waving at you"
+        />
         <link rel="icon" href="/jellyfish.svg" />
         <link
           href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
