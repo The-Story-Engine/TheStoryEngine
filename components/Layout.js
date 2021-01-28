@@ -146,10 +146,7 @@ export default function Layout({
                   </aside>
                 </>
               ) : (
-                <motion.div
-                  className="absolute w-16 h-16 bottom-10 right-10 md:hidden"
-                  drag
-                >
+                <motion.div className="absolute w-16 h-16 bottom-10 right-10 md:hidden">
                   <Button
                     aria-label="Show Inspiration Sidebar"
                     className="w-full h-full"
