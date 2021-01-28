@@ -76,7 +76,7 @@ export default function Layout({
                 growMainWidth ? "" : "max-w-52rem"
               }`}
             >
-              <div className="flex flex-col min-h-screen pt-24">
+              <div className="flex flex-col pt-24 min-h-2xl md:min-h-screen">
                 <main
                   className={`flex flex-grow bg-white md:rounded-tr-2xl ${
                     leftBar ? "xl:rounded-tl-2xl" : ""
