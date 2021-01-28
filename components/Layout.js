@@ -77,11 +77,16 @@ export default function Layout({
         {renderRightBar && !isRightOpen ? (
           <Button
             aria-label="Show Inspiration Sidebar"
-            className="fixed z-10 w-16 h-16 bottom-10 right-10 md:hidden"
+            className="fixed z-10 w-16 h-16 top-28 right-4 md:hidden"
             noStyle={true}
             onPress={toggleIsRightOpen}
           >
-            <InkJellyfish className="w-full h-full" />
+            <motion.div
+              animate={{ rotate: [0, -5, 5, 0] }}
+              className="w-full h-full"
+            >
+              <InkJellyfish className="w-full h-full" />
+            </motion.div>
           </Button>
         ) : null}
         <div className="relative">
