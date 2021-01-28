@@ -95,6 +95,7 @@ export default function Home() {
   return (
     <Layout
       pageName="Writing Space"
+      mobileFitMainToScreen={false}
       headerButtons={
         <div className="space-x-3">
           <CopyButton story={story} isDisabled={!(story.title || story.text)} />

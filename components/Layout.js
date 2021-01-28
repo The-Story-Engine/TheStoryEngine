@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import NavButton from "@components/NavButton";
 import InkJellyfish from "@components/InkJellyfish";
 import Button from "@components/Button";
+import { motion } from "framer-motion";
 
 const setViewHeight = () => {
   const vh = window.innerHeight * 0.01;
@@ -19,6 +20,7 @@ export default function Layout({
   belowFold,
   mainContent,
   growMainWidth = false,
+  mobileFitMainToScreen = true,
   pageName,
 }) {
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Layout({
           content="A space for inspired creative writing, home of the inspirational jellyfish."
         ></meta>
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@InspirationalJF" />
+        <meta name="twitter:site" content="@TSEjellyfish" />
         <meta name="twitter:title" content="The Story Engine" />
         <meta
           name="twitter:description"
@@ -91,7 +93,13 @@ export default function Layout({
                 growMainWidth ? "" : "max-w-52rem"
               }`}
             >
-              <div className="flex flex-col pt-24 min-h-2xl md:min-h-screen">
+              <div
+                className={`flex flex-col pt-24 ${
+                  mobileFitMainToScreen
+                    ? "min-h-screen"
+                    : "min-h-2xl md:min-h-screen"
+                }`}
+              >
                 <main
                   className={`flex flex-grow bg-white md:rounded-tr-2xl ${
                     leftBar ? "xl:rounded-tl-2xl" : ""
@@ -138,14 +146,19 @@ export default function Layout({
                   </aside>
                 </>
               ) : (
-                <Button
-                  aria-label="Show Inspiration Sidebar"
+                <motion.div
                   className="absolute w-16 h-16 bottom-10 right-10 md:hidden"
-                  noStyle={true}
-                  onPress={toggleIsRightOpen}
+                  drag
                 >
-                  <InkJellyfish className="w-full h-full" />
-                </Button>
+                  <Button
+                    aria-label="Show Inspiration Sidebar"
+                    className="w-full h-full"
+                    noStyle={true}
+                    onPress={toggleIsRightOpen}
+                  >
+                    <InkJellyfish className="w-full h-full" />
+                  </Button>
+                </motion.div>
               )}
               <aside className="flex-col self-stretch hidden md:flex">
                 <div
