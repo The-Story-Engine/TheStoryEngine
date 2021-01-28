@@ -61,15 +61,13 @@ export default function Layout({
           name="twitter:image"
           content="https://thestoryengine.co.uk/inkinspirationaljellyfish-1.jpg"
         />
-        <meta
-          name="twitter:image:alt"
-          content="Illustrated Jellyfish waving at you"
-        />
-        <link rel="icon" href="/jellyfish.svg" />
+        <meta name="twitter:image:alt" content="Illustrated Jellyfish" />
+        <link rel="icon" href="/inkinspirationaljellyfish-1.jpg" />
         <link
           href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
+        <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
       <div
         className={`h-screen min-w-screen ${

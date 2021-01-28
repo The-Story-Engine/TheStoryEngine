@@ -1,0 +1,22 @@
+{
+  "short_name": "TSE",
+  "name": "The Story Engine",
+  "icons": [
+    {
+      "src": "/icon-192.jpeg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.jpeg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/write",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#d3edfc",
+  "description": "A space for inspired creative writing."
+}
