@@ -48,7 +48,7 @@ const Facebook = ({
   );
 };
 const Twitter = ({
-  href = "https://twitter.com/InspirationalJF/",
+  href = "https://twitter.com/TSEjellyfish/",
   target = "blank",
   rel = "noopener",
 }) => {
@@ -70,7 +70,7 @@ const Twitter = ({
 export default function Footer() {
   const linkRef = useRef();
   const { linkProps } = useLink(
-    { href: "https://tse.fish", target: "_blank", rel: "noopener" },
+    { href: "https://tseventures.com", target: "_blank", rel: "noopener" },
     linkRef
   );
   return (
@@ -95,7 +95,7 @@ export default function Footer() {
             {...linkProps}
             target="_blank"
             rel="noopener"
-            href="https://tse.fish"
+            href="https://tseventures.com"
           >
             TSE Ventures Limited
           </a>
