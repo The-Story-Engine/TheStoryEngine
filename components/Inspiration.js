@@ -7,8 +7,8 @@ import { useEffect, useMemo } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 const initInspiration = [
-  "Hi! I'm the Inspirational Jellyfish.",
-  "I've got lots of ideas to help with your writing, tap Inspire Me to get one!",
+  "Hi, I'm the Inspirational Jellyfish.",
+  "I've got lots of ideas to help with your writing, tap Inspire Me to get one.",
 ];
 
 export default function Inspiration({
@@ -80,7 +80,7 @@ export default function Inspiration({
                   changeInspiration();
                 }}
               >
-                Inspire Me!
+                Inspire me!
               </Button>
             </div>
           </div>

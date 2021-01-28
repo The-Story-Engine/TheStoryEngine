@@ -3,7 +3,7 @@ import Layout from "@components/Layout";
 import Inspiration from "@components/Inspiration";
 import WritingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
-import { useUserStory } from "utils-client";
+import { useUserStory, copy } from "utils-client";
 import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
 import { useRef } from "react";
@@ -23,28 +23,6 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       <p className="pt-1 text-sm leading-none">Reset</p>
     </motion.button>
   );
-};
-
-const modernCopy = ({ text = "", title = "" }) => {
-  return navigator.clipboard.writeText(
-    `${title}${title && "\n\n\n"}${
-      text && text
-    }\n\n\nWritten on thestoryengine.co.uk`
-  );
-};
-
-const legacyCopy = () => {
-  var copyText = document.querySelector("#story-text");
-  copyText.select();
-  document.execCommand("copy");
-};
-
-const copy = async (story) => {
-  if (navigator.clipboard) {
-    await modernCopy(story);
-  } else {
-    legacyCopy();
-  }
 };
 
 const CopyButton = ({ story, isDisabled = false }) => {

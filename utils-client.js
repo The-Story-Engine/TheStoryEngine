@@ -133,3 +133,25 @@ function shuffleArray(array) {
   }
   return array;
 }
+
+export const modernCopy = ({ text = "", title = "" }) => {
+  return navigator.clipboard.writeText(
+    `${title}${title && "\n\n\n"}${
+      text && text
+    }\n\n\nWritten on thestoryengine.co.uk`
+  );
+};
+
+export const legacyCopy = () => {
+  var copyText = document.querySelector("#story-text");
+  copyText.select();
+  document.execCommand("copy");
+};
+
+export const copy = async (story) => {
+  if (navigator.clipboard) {
+    await modernCopy(story);
+  } else {
+    legacyCopy();
+  }
+};
