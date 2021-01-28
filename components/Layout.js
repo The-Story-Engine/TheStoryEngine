@@ -104,7 +104,7 @@ export default function Layout({
                       onClick={toggleIsRightOpen}
                     ></div>
                   </div>
-                  <aside className="fixed top-0 right-0 z-20 self-stretch h-screen pt-24 md:hidden w-72">
+                  <aside className="fixed top-0 right-0 z-20 self-stretch w-full h-screen pt-24 md:hidden">
                     <div
                       className={`relative h-full w-full bg-white rounded-tl-2xl transition-all duration-500`}
                     >

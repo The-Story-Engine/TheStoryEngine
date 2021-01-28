@@ -63,23 +63,26 @@ export default function Inspiration({
                 {isInit ? inspirationElements : null}
               </Fade>
             </div>
-            <motion.div
-              animate={wiggleControls}
-              initial="still"
-              variants={wiggleVariants}
-              className="flex-shrink w-24 md:w-full"
-            >
-              <InkJellyfish className="w-full h-full" />
-            </motion.div>
-            <Button
-              isDisabled={!getInspiration}
-              onPress={() => {
-                wiggleControls.start("wiggle");
-                changeInspiration();
-              }}
-            >
-              Inspire Me!
-            </Button>
+            <div className="flex items-center self-stretch justify-end md:flex-col">
+              <motion.div
+                animate={wiggleControls}
+                initial="still"
+                variants={wiggleVariants}
+                className="flex-shrink w-16 mr-4 md:mr-0 md:w-full"
+              >
+                <InkJellyfish className="w-full h-full" />
+              </motion.div>
+              <Button
+                isDisabled={!getInspiration}
+                className="md:mt-8"
+                onPress={() => {
+                  wiggleControls.start("wiggle");
+                  changeInspiration();
+                }}
+              >
+                Inspire Me!
+              </Button>
+            </div>
           </div>
         ) : (
           <Button

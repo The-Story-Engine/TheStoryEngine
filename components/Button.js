@@ -16,7 +16,7 @@ export default function Button({
       className={`${
         noStyle
           ? ""
-          : "inline-flex items-center px-8 py-2 mt-8 text-lg font-semibold text-center border-2 border-solid shadow-sm rounded-3xl text-l bg-bloo-500 hover:bg-bloo-400 border-grey-700 hover:text-gray-700"
+          : "inline-flex items-center px-8 py-2 text-lg font-semibold text-center border-2 border-solid shadow-sm rounded-3xl text-l bg-bloo-500 hover:bg-bloo-400 border-grey-700 hover:text-gray-700"
       } ${className}`}
       ref={ref}
       whileHover={{ scale: 1.05 }}
