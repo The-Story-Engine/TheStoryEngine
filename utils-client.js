@@ -285,7 +285,9 @@ export const migrate = () => {
       typeof existingStory?.inspiration === "string" &&
       existingStory?.inspiration?.length
     ) {
-      const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
+      const chatMessages = v1InspirationToV2ChatMessages(
+        existingStory.inspiration
+      );
       sessionStorage.setItem("tseChat", JSON.stringify(chatMessages));
     } else {
       if (localStorage.getItem("tseChat")) {
