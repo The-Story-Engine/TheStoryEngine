@@ -80,6 +80,7 @@ export const useChatMessages = () => {
     }, callback);
   };
   useEffect(() => {
+    migrate();
     let existingMessages = JSON.parse(
       localStorage.getItem("tseChat") || "false"
     );
@@ -240,4 +241,47 @@ export const useJellyfish = (pushJellyMessage, wiggleControls) => {
     isPendingInspiration,
     inspireMe: () => setIsPendingInspiration(true),
   };
+};
+
+const v1InspirationToV2ChatMessages = (inspiration) => {
+  const existingMessages = initInspiration.map((text, index) => ({
+    message: { text },
+    from: { name: "Jellyfish", id: "jellyfish" },
+    sentMs: Date.now() + index,
+  }));
+  existingMessages.push({
+    message: { text: "Inspire me!" },
+    from: { name: "Writer", id: "writer" },
+    sentMs: Date.now() + 10,
+  });
+  existingMessages.push({
+    message: { text: inspiration },
+    from: { name: "Jellyfish", id: "jellyfish" },
+    sentMs: Date.now() + 20,
+  });
+  return existingMessages;
+};
+
+const checkForV1Storage = () => {
+  const story = JSON.parse(localStorage.getItem("tseStory"));
+  return !!(
+    typeof story?.inspiration === "string" && story?.inspiration?.length
+  );
+};
+
+const popV1StorageInspiration = () => {
+  const story = JSON.parse(localStorage.getItem("tseStory"));
+  const inspiration = story.inspiration;
+  delete story.inspiration;
+  localStorage.setItem("tseStory", JSON.stringify(story));
+  return inspiration || "";
+};
+
+export const migrate = () => {
+  const hasV1Storage = checkForV1Storage();
+  if (hasV1Storage) {
+    const existingInspiration = popV1StorageInspiration();
+    const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
+    localStorage.setItem("tseChat", JSON.stringify(chatMessages));
+  }
 };
