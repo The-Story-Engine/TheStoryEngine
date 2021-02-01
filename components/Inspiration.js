@@ -1,42 +1,81 @@
 import InkJellyfish from "@components/InkJellyfish";
 import Button from "@components/Button";
 import Speech from "@components/Speech";
-import Fade from "@components/Fade";
-import { useGetInspiration } from "utils-client";
-import { useEffect, useMemo } from "react";
+import JellyfishSVG from "public/jellyfish.svg";
+import WriterSVG from "public/writer.svg";
+import { useChatMessages, useJellyfish } from "utils-client";
+import { useEffect, useMemo, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 
-const initInspiration = [
-  "Hi, I'm the Inspirational Jellyfish.",
-  "I've got lots of ideas to help with your writing, tap Inspire Me to get one.",
-];
-
-export default function Inspiration({
-  setInspiration,
-  inspiration,
-  isInit,
-  isOpen,
-  toggleIsOpen,
-}) {
+export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
   const wiggleControls = useAnimation();
   const wiggleVariants = {
     still: { rotate: 0 },
     wiggle: { rotate: [0, -5, 5, 0] },
   };
-  const getInspiration = useGetInspiration();
+  const { messages, pushJellyMessage, pushWriterMessage } = useChatMessages();
+
+  const { isPendingInspiration, inspireMe } = useJellyfish(
+    pushJellyMessage,
+    wiggleControls
+  );
+
   const changeInspiration = () => {
-    const newInspiration = getInspiration();
-    setInspiration(newInspiration.text);
+    if (!isPendingInspiration) {
+      pushWriterMessage("Inspire me!");
+      inspireMe();
+    }
   };
-  const inspirationElements = useMemo(
-    () => (
-      <div className="space-y-2">
-        {(inspiration ? [inspiration] : initInspiration).map((inspiration) => (
-          <Speech key={inspiration}>{inspiration}</Speech>
-        ))}
-      </div>
-    ),
-    [inspiration]
+  const containerRef = useRef();
+  useEffect(() => {
+    if (containerRef.current) {
+      const rafId = requestAnimationFrame(() => {
+        containerRef.current.scrollTo(
+          0,
+          containerRef.current.scrollHeight - containerRef.current.clientHeight
+        );
+
+        containerRef.current.scrollTo(
+          0,
+          containerRef.current.scrollHeight - containerRef.current.clientHeight
+        );
+      });
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, [containerRef.current, messages]);
+  const inspirationElements = useMemo(() =>
+    messages.map(
+      (message) => {
+        const isJellyfish = message.from.id === "jellyfish";
+        return (
+          <div
+            className={`flex items-end ${
+              isJellyfish ? "justify-start pr-16" : "justify-end pl-16"
+            }`}
+            key={message.message.text + message.sentMs}
+          >
+            <div
+              className={`w-12 flex-shrink-0 ${
+                isJellyfish ? "mr-4" : "ml-4 order-1"
+              }`}
+            >
+              {isJellyfish ? <JellyfishSVG /> : <WriterSVG />}
+            </div>
+            <div className="relative">
+              {isJellyfish ? (
+                <p className="absolute left-0.5 text-xs text-grey-500 -top-4.5">
+                  {message.from.name}
+                </p>
+              ) : null}
+              <Speech isFromWriter={!isJellyfish}>
+                {message.message.text}
+              </Speech>
+            </div>
+          </div>
+        );
+      },
+      [messages]
+    )
   );
   useEffect(() => {
     wiggleControls.start("wiggle");
@@ -53,30 +92,32 @@ export default function Inspiration({
   );
   return (
     <div
-      className={`h-full ${isOpen ? "py-4 px-6 md:py-8 md:px-9" : "py-6 px-4"}`}
+      className={`h-full ${
+        isOpen ? "py-4 mx-4 md:pb-4 md:pt-6 md:mx-4" : "py-6 px-4"
+      }`}
     >
       <div className="flex flex-col justify-end h-full">
         {isOpen ? (
-          <div className="flex flex-col items-center justify-end min-h-0 pt-8 space-y-4 md:space-y-8">
-            <div className="min-h-0 overflow-y-auto">
-              <Fade className="space-y-4">
-                {isInit ? inspirationElements : null}
-              </Fade>
+          <div className="flex flex-col items-center justify-end flex-grow min-h-0 fade-out-top">
+            <div
+              className="min-h-0 pt-12 space-y-6 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-transparent pt-auto"
+              ref={containerRef}
+            >
+              {isInit ? inspirationElements : null}
             </div>
-            <div className="flex items-center self-stretch justify-end md:flex-col">
+            <div className="w-full mt-6 border-b-2 border-gray-400" />
+            <div className="flex items-center self-stretch justify-between flex-shrink-0 mx-4 mt-4">
               <motion.div
                 animate={wiggleControls}
                 initial="still"
                 variants={wiggleVariants}
-                className="flex-shrink w-16 mr-4 md:mr-0 md:w-full"
+                className="flex-shrink w-16"
               >
                 <InkJellyfish className="w-full h-full" />
               </motion.div>
               <Button
-                isDisabled={!getInspiration}
-                className="md:mt-8"
+                isDisabled={isPendingInspiration}
                 onPress={() => {
-                  wiggleControls.start("wiggle");
                   changeInspiration();
                 }}
               >

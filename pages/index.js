@@ -15,7 +15,7 @@ const welcomeMessage = (
 );
 
 export default function Home() {
-  const [story] = useUserStory();
+  const { story } = useUserStory();
 
   const isStoryInitialized = !!story.id;
   const hasStoryContent = !!(story.text || story.title);

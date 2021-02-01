@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Ulid } from "id128";
 
 /**
  *
@@ -15,53 +16,112 @@ export const useUserStory = () => {
   const [story, setStory] = useState({
     title: "",
     text: "",
-    inspiration: "",
   });
+
+  const setNewStory = () => {
+    const newStory = {
+      id: Ulid.generate(),
+      title: "",
+      text: "",
+    };
+    localStorage.setItem("tseStory", JSON.stringify(newStory));
+    setStory(newStory);
+  };
 
   // get story from localStorage, get new if none found
   useEffect(() => {
     const existingStory = JSON.parse(localStorage.getItem("tseStory"));
     if (!existingStory || !existingStory.id) {
-      // new story in local storage
-      const newStory = {
-        id: uuidv4(),
-        title: "",
-        text: "",
-        inspiration: "",
-      };
-      localStorage.setItem("tseStory", JSON.stringify(newStory));
-      setStory(newStory);
+      setNewStory();
     } else {
       setStory(existingStory);
     }
   }, []);
-  return [
+  return {
     story,
-    ({
-      title = story.title,
-      text = story.text,
-      inspiration = story.inspiration,
-    }) => {
+    updateStory: ({ title = story.title, text = story.text }) => {
       const updatedStory = {
         id: story.id,
         title,
         text,
-        inspiration,
       };
       localStorage.setItem("tseStory", JSON.stringify(updatedStory));
       setStory(updatedStory);
     },
-  ];
+    resetStory: () => {
+      localStorage.removeItem("tseStory");
+      setNewStory();
+    },
+  };
 };
 
-function uuidv4() {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  );
-}
+const initInspiration = [
+  "Hi, I'm the Inspirational Jellyfish.",
+  "I've got lots of ideas to help with your writing, tap Inspire me to get one.",
+];
+
+const MAX_MESSAGES = 20;
+
+export const useChatMessages = () => {
+  const [messages, setStateMessages] = useState([]);
+  const pushNewMessage = (newMessage, callback) => {
+    setStateMessages((messages = []) => {
+      let updatedMessages = [...messages, newMessage];
+      updatedMessages = updatedMessages.slice(
+        Math.max(updatedMessages.length - MAX_MESSAGES, 0)
+      );
+      updatedMessages = updatedMessages.sort((message1, message2) => {
+        return message1.sentMs - message2.sentMs;
+      });
+      requestAnimationFrame(() =>
+        localStorage.setItem("tseChat", JSON.stringify(updatedMessages))
+      );
+      return updatedMessages;
+    }, callback);
+  };
+  useEffect(() => {
+    migrate();
+    let existingMessages = JSON.parse(
+      localStorage.getItem("tseChat") || "false"
+    );
+    if (!existingMessages) {
+      existingMessages = initInspiration.map((text, index) => ({
+        message: { text },
+        from: { name: "Jellyfish", id: "jellyfish" },
+        sentMs: index,
+      }));
+    }
+    existingMessages = existingMessages.slice(
+      Math.max(existingMessages.length - MAX_MESSAGES, 0)
+    );
+    existingMessages = existingMessages.sort((message1, message2) => {
+      return message1.sentMs - message2.sentMs;
+    });
+    localStorage.setItem("tseChat", JSON.stringify(existingMessages));
+    setStateMessages(existingMessages);
+  }, []);
+  const pushWriterMessage = (messageText, callback) => {
+    pushNewMessage(
+      {
+        message: { text: messageText },
+        from: { name: "Writer", id: "writer" },
+        sentMs: Date.now(),
+      },
+      callback
+    );
+  };
+  const pushJellyMessage = (messageText, callback) => {
+    pushNewMessage(
+      {
+        message: { text: messageText },
+        from: { name: "Jellyfish", id: "jellyfish" },
+        sentMs: Date.now(),
+      },
+      callback
+    );
+  };
+  return { messages, pushJellyMessage, pushWriterMessage };
+};
 
 export function useIsTyping({ title, text }) {
   const testText = title + text;
@@ -153,5 +213,75 @@ export const copy = async (story) => {
     await modernCopy(story);
   } else {
     legacyCopy();
+  }
+};
+
+export const useJellyfish = (pushJellyMessage, wiggleControls) => {
+  const [isPendingInspiration, setIsPendingInspiration] = useState(false);
+  const getInspiration = useGetInspiration();
+
+  useEffect(() => {
+    if (isPendingInspiration) {
+      const wiggleTimeout = setTimeout(() => {
+        wiggleControls.start("wiggle");
+      }, 550);
+      const timeout = setTimeout(() => {
+        const newInspiration = getInspiration();
+        pushJellyMessage(newInspiration.text);
+        setIsPendingInspiration(false);
+      }, 1000);
+      return () => {
+        clearTimeout(timeout);
+        clearTimeout(wiggleTimeout);
+      };
+    }
+  }, [isPendingInspiration]);
+
+  return {
+    isPendingInspiration,
+    inspireMe: () => setIsPendingInspiration(true),
+  };
+};
+
+const v1InspirationToV2ChatMessages = (inspiration) => {
+  const existingMessages = initInspiration.map((text, index) => ({
+    message: { text },
+    from: { name: "Jellyfish", id: "jellyfish" },
+    sentMs: Date.now() + index,
+  }));
+  existingMessages.push({
+    message: { text: "Inspire me!" },
+    from: { name: "Writer", id: "writer" },
+    sentMs: Date.now() + 10,
+  });
+  existingMessages.push({
+    message: { text: inspiration },
+    from: { name: "Jellyfish", id: "jellyfish" },
+    sentMs: Date.now() + 20,
+  });
+  return existingMessages;
+};
+
+const checkForV1Storage = () => {
+  const story = JSON.parse(localStorage.getItem("tseStory"));
+  return !!(
+    typeof story?.inspiration === "string" && story?.inspiration?.length
+  );
+};
+
+const popV1StorageInspiration = () => {
+  const story = JSON.parse(localStorage.getItem("tseStory"));
+  const inspiration = story.inspiration;
+  delete story.inspiration;
+  localStorage.setItem("tseStory", JSON.stringify(story));
+  return inspiration || "";
+};
+
+export const migrate = () => {
+  const hasV1Storage = checkForV1Storage();
+  if (hasV1Storage) {
+    const existingInspiration = popV1StorageInspiration();
+    const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
+    localStorage.setItem("tseChat", JSON.stringify(chatMessages));
   }
 };

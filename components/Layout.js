@@ -163,7 +163,7 @@ export default function Layout({
                 <aside className="flex-col self-stretch hidden md:flex">
                   <div
                     className={`relative h-full mt-24 bg-white rounded-tl-2xl transition-all duration-500 ${
-                      isRightOpen ? "w-72" : "w-32"
+                      isRightOpen ? "w-96" : "w-32"
                     }`}
                   >
                     <NavButton
@@ -179,7 +179,7 @@ export default function Layout({
                     />
                     <div
                       className={`fixed bottom-0 right-0 h-screen pt-24 transition-all duration-500 ${
-                        isRightOpen ? "w-72" : "w-32"
+                        isRightOpen ? "w-96" : "w-32"
                       }`}
                       onAnimationEnd={() => {
                         setIsPendingRightAnimation(false);

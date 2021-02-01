@@ -7,9 +7,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        4.5: "1.125rem",
+      },
       backgroundImage: (theme) => ({
         ink: "url('/ink.jpg')",
         "ink-large": "url('/ink_large.jpg')",
+        "ink-pink": "url('/ink_pink.jpg')",
       }),
       backgroundPosition: {
         "jf-tl": "40% 17%",
@@ -77,6 +81,7 @@ module.exports = {
     extend: {
       cursor: ["disabled"],
       textColor: ["disabled"],
+      backgroundColor: ["disabled"],
       position: ["group-hover", "group-focus"],
       outline: ["focus-visible"],
       ringWidth: ["focus-visible"],
@@ -91,5 +96,6 @@ module.exports = {
         html: { color: theme("textColor.grey.600") },
       });
     }),
+    require("tailwind-scrollbar"),
   ],
 };
