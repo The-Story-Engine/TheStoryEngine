@@ -273,7 +273,7 @@ const checkForV1Storage = () => {
 
 const popV1Story = () => {
   const story = JSON.parse(localStorage.getItem("tseStory"));
-  sessionStorage.removeItem("tseStory");
+  localStorage.removeItem("tseStory");
   return story;
 };
 
@@ -287,6 +287,11 @@ export const migrate = () => {
     ) {
       const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
       sessionStorage.setItem("tseChat", JSON.stringify(chatMessages));
+    } else {
+      if (localStorage.getItem("tseChat")) {
+        sessionStorage.setItem("tseChat", localStorage.getItem("tseChat"));
+        localStorage.removeItem("tseChat");
+      }
     }
     if (
       (typeof existingStory?.title === "string" &&

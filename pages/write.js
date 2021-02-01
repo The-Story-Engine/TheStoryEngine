@@ -4,9 +4,8 @@ import Inspiration from "@components/Inspiration";
 import WritingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
 import { useUserStory, copy } from "utils-client";
-import { useRouter } from "next/router";
 import { useButton } from "@react-aria/button";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 const ResetButton = ({ reset, isDisabled = false }) => {
@@ -25,9 +24,10 @@ const ResetButton = ({ reset, isDisabled = false }) => {
   );
 };
 
-const CopyButton = ({ story, isDisabled = false }) => {
+const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
   const ref = useRef();
   const copyStory = async () => {
+    copyCallback();
     try {
       await copy(story);
       alert("Story copied! Get pasting.");
@@ -55,7 +55,6 @@ const CopyButton = ({ story, isDisabled = false }) => {
 
 export default function Home() {
   const { story, updateStory, resetStory } = useUserStory();
-  const router = useRouter();
   const reset = () => {
     if (story.title || story.text) {
       if (window.confirm("Do you really want to reset your story?")) {
@@ -63,6 +62,28 @@ export default function Home() {
       }
     }
   };
+  const [lastCopiedText, setLastCopiedText] = useState("");
+
+  const copyCallback = () => {
+    setLastCopiedText(story.title + story.text);
+    console.log({ lastCopiedText: story.title + story.text });
+  };
+
+  useEffect(() => {
+    const unloadHandler = function (event) {
+      if (
+        (story.text.length > 10 || story.title.length > 10) &&
+        story.title + story.text !== lastCopiedText
+      ) {
+        console.log({ lastCopiedText, checked: story.title + story.text });
+        event.preventDefault();
+        event.returnValue = "";
+        return "";
+      }
+    };
+    window.addEventListener("beforeunload", unloadHandler);
+    return () => window.removeEventListener("beforeunload", unloadHandler);
+  }, [story, lastCopiedText]);
 
   return (
     <Layout
@@ -70,7 +91,11 @@ export default function Home() {
       mobileFitMainToScreen={false}
       headerButtons={
         <div className="space-x-3">
-          <CopyButton story={story} isDisabled={!(story.title || story.text)} />
+          <CopyButton
+            story={story}
+            isDisabled={!(story.title || story.text)}
+            copyCallback={copyCallback}
+          />
           <ResetButton
             reset={reset}
             isDisabled={!(story.title || story.text || story.inspiration)}
