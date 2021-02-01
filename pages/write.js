@@ -89,7 +89,20 @@ export default function Home() {
       }
       belowFold={
         <div className="px-8 py-12 space-y-2 italic font-semibold text-center max-w-52rem lg:px-16">
-          <p>Your story is stored in your web browser only.</p>
+          <p>Your story is temporarily stored in your web browser only.</p>
+          <p>
+            You can safely{" "}
+            <a
+              onClick={() => {
+                window.location.reload();
+              }}
+              href="/write"
+              className="font-extrabold cursor-pointer hover:underline focus-visible:underline"
+            >
+              reload
+            </a>{" "}
+            and keep writing, closing the tab will reset your story.
+          </p>
           <p>
             As the jellyfish grows up, we'll always be 100% transparent about
             what we store and how we store it.

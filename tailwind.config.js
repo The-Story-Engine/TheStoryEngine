@@ -88,6 +88,7 @@ module.exports = {
       ringColor: ["focus-visible"],
       ringOffsetWidth: ["focus-visible"],
       ringOpacity: ["focus-visible"],
+      textDecoration: ["focus-visible"],
     },
   },
   plugins: [
