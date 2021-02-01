@@ -1,7 +1,7 @@
 import Story from "@components/Story";
 import Layout from "@components/Layout";
 import Inspiration from "@components/Inspiration";
-import WritingSVG from "public/writing.svg";
+import ReadingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
 import { useUserStory, copy } from "utils-client";
 import { useButton } from "@react-aria/button";
@@ -18,7 +18,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       className="h-14 disabled:text-gray-400 disabled:cursor-default"
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <WritingSVG title="Illustration of pencil & notepad" />
+      <ReadingSVG title="Illustration of person reading book" />
       <p className="pt-1 text-sm leading-none">Reset</p>
     </motion.button>
   );
@@ -47,7 +47,7 @@ const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
       }
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <CopySVG title="Illustration of person reading book" />
+      <CopySVG title="Illustration of pencil & notepad" />
       <p className="pt-1 text-sm leading-none">Copy</p>
     </motion.button>
   );
