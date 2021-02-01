@@ -54,20 +54,14 @@ const CopyButton = ({ story, isDisabled = false }) => {
 };
 
 export default function Home() {
-  const [story, updateStory] = useUserStory();
+  const { story, updateStory, resetStory } = useUserStory();
   const router = useRouter();
-  const resetStory = () => {
+  const reset = () => {
     if (story.title || story.text) {
       if (window.confirm("Do you really want to reset your story?")) {
-        localStorage.removeItem("tseStory");
-        router.push("/");
+        resetStory();
       }
-    } else {
-      updateStory({ inspiration: "" });
     }
-  };
-  const setInspiration = (inspiration) => {
-    updateStory({ inspiration });
   };
 
   return (
@@ -78,15 +72,13 @@ export default function Home() {
         <div className="space-x-3">
           <CopyButton story={story} isDisabled={!(story.title || story.text)} />
           <ResetButton
-            reset={resetStory}
+            reset={reset}
             isDisabled={!(story.title || story.text || story.inspiration)}
           />
         </div>
       }
       renderRightBar={({ isOpen, toggleIsOpen }) => (
         <Inspiration
-          setInspiration={setInspiration}
-          inspiration={story?.inspiration}
           isInit={!!story?.id}
           isOpen={isOpen}
           toggleIsOpen={toggleIsOpen}

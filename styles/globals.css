@@ -42,3 +42,7 @@ button:hover:enabled p {
   fill: black !important;
   color: black !important;
 }
+
+.fade-out-top {
+  mask-image: linear-gradient(to top, black 90%, transparent 100%);
+}

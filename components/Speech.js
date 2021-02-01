@@ -1,9 +1,14 @@
-export default function Speech({ children }) {
+export default function Speech({ children, className, isFromWriter }) {
+  const dynamicClasses = isFromWriter
+    ? "rounded-br-none bg-ink-pink"
+    : "rounded-bl-none bg-ink-large";
   return (
     <div
-      className="items-center w-full min-h-0 px-4 py-3 overflow-y-auto text-lg text-center bg-center bg-no-repeat bg-cover border-2 border-solid shadow-sm inline-foverflow-y-autolex rounded-3xl text-l bg-ink-large border-grey-700 text-grey-700"
-      aria-label="Message from the Inspirational Jellyfish"
-      status="alert"
+      className={`items-center w-full min-h-0 px-2 py-1 overflow-y-auto text-center bg-center bg-no-repeat bg-cover border-2 border-solid shadow-sm rounded-3xl text-l border-grey-700 text-grey- ${dynamicClasses} ${className}`}
+      aria-label={
+        isFromWriter ? "Your Message" : "Inspirational Jellyfish Message"
+      }
+      status={isFromWriter ? "" : "alert"}
     >
       {children}
     </div>
