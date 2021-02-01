@@ -22,7 +22,7 @@ Second, go to https://localhost:3000
 
 ## Pages
 
-- `/` - writers can write a story here, if it's the first time they've arrived, a blank story is automatically created and it's ID saved in browser localstorage. If an existing story is found in localstorage, the browser connects to that story as the writer.
+- `/` - writers can write a story here, if it's the first time they've arrived, a blank story is automatically created and it's ID saved in browser sessionStorage. If an existing story is found in localstorage, the browser connects to that story as the writer.
 
 ## API Routes
 

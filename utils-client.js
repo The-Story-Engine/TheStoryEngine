@@ -24,13 +24,13 @@ export const useUserStory = () => {
       title: "",
       text: "",
     };
-    localStorage.setItem("tseStory", JSON.stringify(newStory));
+    sessionStorage.setItem("tseStory", JSON.stringify(newStory));
     setStory(newStory);
   };
 
   // get story from localStorage, get new if none found
   useEffect(() => {
-    const existingStory = JSON.parse(localStorage.getItem("tseStory"));
+    const existingStory = JSON.parse(sessionStorage.getItem("tseStory"));
     if (!existingStory || !existingStory.id) {
       setNewStory();
     } else {
@@ -45,11 +45,11 @@ export const useUserStory = () => {
         title,
         text,
       };
-      localStorage.setItem("tseStory", JSON.stringify(updatedStory));
+      sessionStorage.setItem("tseStory", JSON.stringify(updatedStory));
       setStory(updatedStory);
     },
     resetStory: () => {
-      localStorage.removeItem("tseStory");
+      sessionStorage.removeItem("tseStory");
       setNewStory();
     },
   };
@@ -74,7 +74,7 @@ export const useChatMessages = () => {
         return message1.sentMs - message2.sentMs;
       });
       requestAnimationFrame(() =>
-        localStorage.setItem("tseChat", JSON.stringify(updatedMessages))
+        sessionStorage.setItem("tseChat", JSON.stringify(updatedMessages))
       );
       return updatedMessages;
     }, callback);
@@ -82,7 +82,7 @@ export const useChatMessages = () => {
   useEffect(() => {
     migrate();
     let existingMessages = JSON.parse(
-      localStorage.getItem("tseChat") || "false"
+      sessionStorage.getItem("tseChat") || "false"
     );
     if (!existingMessages) {
       existingMessages = initInspiration.map((text, index) => ({
@@ -97,7 +97,7 @@ export const useChatMessages = () => {
     existingMessages = existingMessages.sort((message1, message2) => {
       return message1.sentMs - message2.sentMs;
     });
-    localStorage.setItem("tseChat", JSON.stringify(existingMessages));
+    sessionStorage.setItem("tseChat", JSON.stringify(existingMessages));
     setStateMessages(existingMessages);
   }, []);
   const pushWriterMessage = (messageText, callback) => {
@@ -265,23 +265,41 @@ const v1InspirationToV2ChatMessages = (inspiration) => {
 const checkForV1Storage = () => {
   const story = JSON.parse(localStorage.getItem("tseStory"));
   return !!(
-    typeof story?.inspiration === "string" && story?.inspiration?.length
+    (typeof story?.title === "string" && story?.title?.length) ||
+    (typeof story?.text === "string" && story?.text?.length) ||
+    (typeof story?.inspiration === "string" && story?.inspiration?.length)
   );
 };
 
-const popV1StorageInspiration = () => {
+const popV1Story = () => {
   const story = JSON.parse(localStorage.getItem("tseStory"));
-  const inspiration = story.inspiration;
-  delete story.inspiration;
-  localStorage.setItem("tseStory", JSON.stringify(story));
-  return inspiration || "";
+  localStorage.removeItem("tseStory");
+  return story;
 };
 
 export const migrate = () => {
   const hasV1Storage = checkForV1Storage();
   if (hasV1Storage) {
-    const existingInspiration = popV1StorageInspiration();
-    const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
-    localStorage.setItem("tseChat", JSON.stringify(chatMessages));
+    const existingStory = popV1Story();
+    if (
+      typeof existingStory?.inspiration === "string" &&
+      existingStory?.inspiration?.length
+    ) {
+      const chatMessages = v1InspirationToV2ChatMessages(existingInspiration);
+      sessionStorage.setItem("tseChat", JSON.stringify(chatMessages));
+    } else {
+      if (localStorage.getItem("tseChat")) {
+        sessionStorage.setItem("tseChat", localStorage.getItem("tseChat"));
+        localStorage.removeItem("tseChat");
+      }
+    }
+    if (
+      (typeof existingStory?.title === "string" &&
+        existingStory?.title?.length) ||
+      (typeof existingStory?.text === "string" && existingStory?.text?.length)
+    ) {
+      delete existingStory.inspiration;
+      sessionStorage.setItem("tseStory", JSON.stringify(existingStory));
+    }
   }
 };
