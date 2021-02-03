@@ -5,3 +5,7 @@
 .netlify
 /.next/
 .env*
+
+/out/
+/out_publish/
+/out_functions/ 
