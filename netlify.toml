@@ -1,6 +1,5 @@
 [build]
   command   = "npm run build"
-  command   = "npm run build"
   publish = "out"
   functions = "out_functions"
 [[plugins]]
