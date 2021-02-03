@@ -40,6 +40,7 @@ export const useUserStory = () => {
   return {
     story,
     updateStory: ({ title = story.title, text = story.text }) => {
+      window.tseSafeUnload = false;
       const updatedStory = {
         id: story.id,
         title,

@@ -8,6 +8,10 @@ import { useButton } from "@react-aria/button";
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
+if (typeof window !== "undefined") {
+  window.tseSafeUnload = true;
+}
+
 const ResetButton = ({ reset, isDisabled = false }) => {
   const ref = useRef();
   const { buttonProps } = useButton({ onPress: reset, isDisabled }, ref);
@@ -62,20 +66,17 @@ export default function Home() {
       }
     }
   };
-  const [lastCopiedText, setLastCopiedText] = useState("");
 
   const copyCallback = () => {
-    setLastCopiedText(story.title + story.text);
-    console.log({ lastCopiedText: story.title + story.text });
+    window.tseSafeUnload = true;
   };
 
   useEffect(() => {
     const unloadHandler = function (event) {
       if (
-        (story.text.length > 10 || story.title.length > 10) &&
-        story.title + story.text !== lastCopiedText
+        !window.tseSafeUnload &&
+        (story.text.length > 10 || story.title.length > 10)
       ) {
-        console.log({ lastCopiedText, checked: story.title + story.text });
         event.preventDefault();
         event.returnValue = "";
         return "";
@@ -83,7 +84,7 @@ export default function Home() {
     };
     window.addEventListener("beforeunload", unloadHandler);
     return () => window.removeEventListener("beforeunload", unloadHandler);
-  }, [story, lastCopiedText]);
+  }, [story]);
 
   return (
     <Layout
@@ -119,6 +120,7 @@ export default function Home() {
             You can safely{" "}
             <a
               onClick={() => {
+                window.tseSafeUnload = true;
                 window.location.reload();
               }}
               href="/write"
