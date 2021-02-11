@@ -16,7 +16,7 @@ export default function Button({
       className={`${
         noStyle
           ? ""
-          : "inline-flex items-center px-8 py-2 text-lg font-semibold text-center border-2 border-solid shadow-sm rounded-3xl text-l bg-bloo-500 disabled:bg-grey-400 disabled:cursor-default disabled:text-grey-600 hover:bg-bloo-400 border-grey-700 hover:text-gray-700"
+          : "inline-flex items-center px-8 py-2 text-lg font-semibold text-center border-2 border-solid shadow-sm rounded-3xl text-l bg-foam disabled:bg-wild-sand disabled:cursor-default disabled:text-emperor hover:bg-foam-400 border-emperor hover:text-emperor-600"
       } ${className}`}
       ref={ref}
       whileHover={props.isDisabled ? null : { scale: 1.05 }}

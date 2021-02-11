@@ -19,7 +19,7 @@ const ResetButton = ({ reset, isDisabled = false }) => {
     <motion.button
       {...buttonProps}
       ref={ref}
-      className="h-14 disabled:text-gray-400 disabled:cursor-default"
+      className="h-14 disabled:text-silver-chalice disabled:cursor-default"
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
       <ReadingSVG title="Illustration of person reading book" />
@@ -46,7 +46,7 @@ const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
       {...buttonProps}
       ref={ref}
       className={
-        "h-14 disabled:text-gray-400 disabled:cursor-default" +
+        "h-14 disabled:text-silver-chalice disabled:cursor-default" +
         (isDisabled ? "" : "hover:text-black")
       }
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}

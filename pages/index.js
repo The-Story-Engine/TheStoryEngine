@@ -29,7 +29,7 @@ export default function Home() {
           <div className="flex flex-col items-center mt-10 text-center md:mt-16 max-w-96 lg:mt-0">
             {isStoryInitialized ? (
               <>
-                <h2 className="text-2xl font-bold md:text-4xl text-grey-500 w-sm">
+                <h2 className="text-2xl font-bold md:text-4xl text-emperor w-sm">
                   Howdy, I'm
                   <br />
                   the Inspirational Jellyfish

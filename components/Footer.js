@@ -123,7 +123,7 @@ export default function Footer({ isWide }) {
   );
   return (
     <footer className="bg-white">
-      <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-gray-400 lg:mx-16">
+      <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-silver-chalice lg:mx-16">
         <div
           className={`flex flex-wrap items-center justify-center space-y-4 ${
             isWide ? "xl:space-x-6 xl:space-y-0" : ""
