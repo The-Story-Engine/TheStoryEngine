@@ -11,7 +11,7 @@ const tseFontSizes = {
   b2: defaultTheme.fontSize.base, // ~16px
   body: defaultTheme.fontSize.base, // ~16px
   chat: defaultTheme.fontSize.sm, // ~14px
-  caption: defaultTheme.fontSize.xs, // ~12px
+  caption: "0.625rem", // ~10px
 };
 
 const tseShades = {
