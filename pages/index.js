@@ -29,12 +29,12 @@ export default function Home() {
           <div className="flex flex-col items-center mt-10 text-center md:mt-16 max-w-96 lg:mt-0">
             {isStoryInitialized ? (
               <>
-                <h2 className="text-2xl font-bold md:text-4xl text-emperor w-sm">
+                <h2 className="font-bold text-h2 md:text-h1 text-emperor w-sm">
                   Howdy, I'm
                   <br />
                   the Inspirational Jellyfish
                 </h2>
-                <p className="mt-4 text-xl md:mt-6 md:text-2xl w-sm">
+                <p className="mt-4 text-story md:mt-6 md:text-h2 w-sm">
                   {hasStoryContent ? returnMessage : welcomeMessage}
                 </p>
                 <LinkButton href="/write">Write a story</LinkButton>

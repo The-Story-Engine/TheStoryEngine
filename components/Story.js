@@ -42,14 +42,14 @@ const Story = ({ story, saveStory }) => {
           value={story.title}
           onChange={setStoryTitle}
           placeholder="Title..."
-          className="w-full h-12 text-2xl font-semibold"
+          className="w-full h-12 font-semibold text-h2"
         />
       </div>
       <Text
         value={story.text}
         onChange={setStoryText}
         placeholder="Story..."
-        className="flex-grow w-full text-xl"
+        className="flex-grow w-full text-story"
       />
       {story.title || story.text ? (
         <p

@@ -1,6 +1,18 @@
-const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
+
+const tseFontSizes = {
+  h1: defaultTheme.fontSize["4xl"], // ~36px
+  h2: defaultTheme.fontSize["2xl"], // ~24px
+  h3: defaultTheme.fontSize["2xl"], // ~24px
+  b1: defaultTheme.fontSize["2xl"], // ~24px
+  h4: defaultTheme.fontSize.xl, // ~20px
+  story: defaultTheme.fontSize.xl, // ~20px
+  b2: defaultTheme.fontSize.base, // ~16px
+  body: defaultTheme.fontSize.base, // ~16px
+  chat: defaultTheme.fontSize.sm, // ~14px
+  caption: defaultTheme.fontSize.xs, // ~12px
+};
 
 const tseShades = {
   malibu: {
@@ -132,15 +144,16 @@ module.exports = {
       spacing: {
         4.5: "1.125rem",
       },
-      backgroundImage: (theme) => ({
+      backgroundImage: {
         ink: "url('/ink.jpg')",
         "ink-large": "url('/ink_large.jpg')",
         "ink-pink": "url('/ink_pink.jpg')",
-      }),
+      },
       backgroundPosition: {
         "jf-tl": "40% 17%",
         "speech-tl": "50% 50%",
       },
+      fontSize: tseFontSizes,
       colors: {
         tse: {
           malibu: "#92DDF7",

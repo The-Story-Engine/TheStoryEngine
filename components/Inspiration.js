@@ -63,7 +63,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
             </div>
             <div className="relative">
               {isJellyfish ? (
-                <p className="absolute left-0.5 text-xs text-emperor -top-4.5">
+                <p className="absolute left-0.5 text-caption text-emperor -top-4.5">
                   {message.from.name}
                 </p>
               ) : null}
