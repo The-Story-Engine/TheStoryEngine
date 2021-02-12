@@ -171,7 +171,7 @@ module.exports = {
         ...tseShades,
       },
       borderWidth: {
-        6: "6px",
+        3: "3px",
       },
       fontFamily: {
         sans: ["Dosis", ...defaultTheme.fontFamily.sans],

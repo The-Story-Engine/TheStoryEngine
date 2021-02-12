@@ -13,12 +13,12 @@ export default function Header({ buttons = null }) {
       />
       <img
         className="relative h-16 sm:hidden bottom-1"
-        src="/stacked-logo.png"
+        src="/logo_stacked.png"
       />
     </>
   );
   return (
-    <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 pt-5 pb-5 space-x-3">
+    <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 pt-5 pb-5">
       {pathname !== "/" ? (
         <Link href="/">
           <a aria-label="Home">{logo}</a>
@@ -26,7 +26,7 @@ export default function Header({ buttons = null }) {
       ) : (
         logo
       )}
-      <div className="flex-shrink-0 max-h-14">{buttons}</div>
+      <div className="flex-shrink-0 ml-3 max-h-14">{buttons}</div>
     </div>
   );
 }
