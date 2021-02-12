@@ -123,7 +123,7 @@ export default function Footer({ isWide }) {
   );
   return (
     <footer className="bg-white">
-      <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-gray-400 lg:mx-16">
+      <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-silver-chalice lg:mx-16">
         <div
           className={`flex flex-wrap items-center justify-center space-y-4 ${
             isWide ? "xl:space-x-6 xl:space-y-0" : ""
@@ -131,11 +131,11 @@ export default function Footer({ isWide }) {
         >
           <div className="flex flex-wrap items-center justify-center space-x-6 space-y-4 sm:space-y-0">
             <div className="flex-shrink-0 space-y-1">
-              <p className="text-sm">Inspired By</p>
+              <p className="text-caption">Inspired By</p>
               <Ministry />
             </div>
             <div className="flex-shrink-0 space-y-1">
-              <p className="text-sm">Funded By</p>
+              <p className="text-caption">Funded By</p>
               <Innovate />
             </div>
             <div className="flex flex-shrink-0 space-x-2">
@@ -145,7 +145,7 @@ export default function Footer({ isWide }) {
             </div>
           </div>
           <p
-            className={`max-w-sm text-sm text-center ${
+            className={`max-w-sm text-chat text-center ${
               isWide ? "xl:text-left" : ""
             }`}
           >

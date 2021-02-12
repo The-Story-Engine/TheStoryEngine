@@ -63,7 +63,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
             </div>
             <div className="relative">
               {isJellyfish ? (
-                <p className="absolute left-0.5 text-xs text-grey-500 -top-4.5">
+                <p className="absolute left-0.5 text-caption text-emperor -top-4.5">
                   {message.from.name}
                 </p>
               ) : null}
@@ -105,7 +105,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
             >
               {isInit ? inspirationElements : null}
             </div>
-            <div className="w-full mt-6 border-b-2 border-gray-400" />
+            <div className="w-full mt-6 border-b-2 border-silver-chalice" />
             <div className="flex items-center self-stretch justify-between flex-shrink-0 mx-4 mt-4">
               <motion.div
                 animate={wiggleControls}

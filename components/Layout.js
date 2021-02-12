@@ -136,7 +136,7 @@ export default function Layout({
                   <>
                     <div className="fixed inset-0 z-10 md:hidden">
                       <div
-                        className="absolute inset-0 bg-gray-600 opacity-75"
+                        className="absolute inset-0 bg-emperor opacity-75"
                         aria-hidden="true"
                         onClick={toggleIsRightOpen}
                       ></div>
