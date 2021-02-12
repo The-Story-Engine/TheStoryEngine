@@ -145,7 +145,7 @@ export default function Footer({ isWide }) {
             </div>
           </div>
           <p
-            className={`max-w-sm text-caption text-center ${
+            className={`max-w-sm text-chat text-center ${
               isWide ? "xl:text-left" : ""
             }`}
           >
