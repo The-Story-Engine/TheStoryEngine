@@ -2,26 +2,35 @@ import Layout from "@components/Layout";
 import Jellyfish from "@components/InkJellyfish";
 import LinkButton from "@components/LinkButton";
 import { useUserStory } from "utils-client";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common", "home"])),
+  },
+});
 
 const Placeholder = () => <div className="w-0 h-48 mt-16 lg:w-sm md:h-64" />;
 
-const returnMessage = "Welcome back, tap below to continue your story!";
-const welcomeMessage = (
-  <>
-    {"I’ve got lots of ideas to help with your"}
-    <br />
-    {"writing, tap below to get started!"}
-  </>
-);
-
 export default function Home() {
+  const { t } = useTranslation(["home", "common"]);
+  const returnMessage = t("WELCOME.BODY.RETURN");
+  const welcomeMessage = (
+    <>
+      {t("WELCOME.BODY.NEW.0")}
+      <br />
+      {t("WELCOME.BODY.NEW.1")}
+    </>
+  );
+
   const { story } = useUserStory();
 
   const isStoryInitialized = !!story.id;
   const hasStoryContent = !!(story.text || story.title);
   return (
     <Layout
-      pageName="Home"
+      pageName={t("common:PAGE_NAMES.HOME")}
       growMainWidth={true}
       mainContent={
         <div className="flex flex-col items-center justify-center flex-grow p-5 lg:flex-row">
@@ -30,14 +39,14 @@ export default function Home() {
             {isStoryInitialized ? (
               <>
                 <h2 className="font-bold text-h2 md:text-h1 text-emperor w-sm">
-                  Howdy, I'm
+                  {t("WELCOME.HEADLINE.0")}
                   <br />
-                  the Inspirational Jellyfish
+                  {t("WELCOME.HEADLINE.1")}
                 </h2>
                 <p className="mt-4 text-story md:mt-6 md:text-h2 w-sm">
                   {hasStoryContent ? returnMessage : welcomeMessage}
                 </p>
-                <LinkButton href="/write">Write a story</LinkButton>
+                <LinkButton href="/write">{t("WRITE")}</LinkButton>
               </>
             ) : (
               <Placeholder />

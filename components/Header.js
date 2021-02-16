@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import LogoSVG from "public/logo_banner.svg";
+import { useTranslation } from "next-i18next";
 
 export default function Header({ buttons = null }) {
   const { pathname } = useRouter();
+  const { t } = useTranslation("common");
   const logo = (
     <>
       <LogoSVG
@@ -21,7 +23,7 @@ export default function Header({ buttons = null }) {
     <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 pt-5 pb-5">
       {pathname !== "/" ? (
         <Link href="/">
-          <a aria-label="Home">{logo}</a>
+          <a aria-label={t("PAGE_NAMES.HOME")}>{logo}</a>
         </Link>
       ) : (
         logo

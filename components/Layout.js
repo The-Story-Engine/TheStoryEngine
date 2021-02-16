@@ -7,6 +7,7 @@ import NavButton from "@components/NavButton";
 import InkJellyfish from "@components/InkJellyfish";
 import Button from "@components/Button";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 const setViewHeight = () => {
   const vh = window.innerHeight * 0.01;
@@ -23,6 +24,7 @@ export default function Layout({
   mobileFitMainToScreen = true,
   pageName,
 }) {
+  const { t } = useTranslation("common");
   useEffect(() => {
     if (window.innerWidth > 767) {
       setIsRightOpen(true);
@@ -45,23 +47,19 @@ export default function Layout({
   return (
     <>
       <Head>
-        <title>{pageName} - The Story Engine</title>
-        <meta
-          name="Description"
-          content="A space for inspired creative writing, home of the inspirational jellyfish."
-        ></meta>
+        <title>
+          {pageName} - {t("META.SITE_NAME")}
+        </title>
+        <meta name="Description" content={t("META.DESCRIPTION")}></meta>
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@TSEjellyfish" />
-        <meta name="twitter:title" content="The Story Engine" />
-        <meta
-          name="twitter:description"
-          content="A space for inspired creative writing, home of the inspirational jellyfish."
-        />
+        <meta name="twitter:title" content={t("META.SITE_NAME")} />
+        <meta name="twitter:description" content={t("META.DESCRIPTION")} />
         <meta
           name="twitter:image"
           content="https://thestoryengine.co.uk/inkinspirationaljellyfish-1.jpg"
         />
-        <meta name="twitter:image:alt" content="Illustrated Jellyfish" />
+        <meta name="twitter:image:alt" content={t("SVG_ALT.JELLYFISH")} />
         <link rel="icon" href="/inkinspirationaljellyfish-1.jpg" />
         <link
           href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap"
@@ -76,7 +74,7 @@ export default function Layout({
       >
         {renderRightBar && !isRightOpen ? (
           <Button
-            aria-label="Show Inspiration Sidebar"
+            aria-label={t("CHAT.SHOW_LABEL")}
             className="fixed z-10 w-16 h-16 top-28 right-4 md:hidden"
             noStyle={true}
             onPress={toggleIsRightOpen}
@@ -136,7 +134,7 @@ export default function Layout({
                   <>
                     <div className="fixed inset-0 z-10 md:hidden">
                       <div
-                        className="absolute inset-0 bg-emperor opacity-75"
+                        className="absolute inset-0 opacity-75 bg-emperor"
                         aria-hidden="true"
                         onClick={toggleIsRightOpen}
                       ></div>
@@ -146,7 +144,7 @@ export default function Layout({
                         className={`relative h-full w-full bg-white rounded-tl-2xl transition-all duration-500`}
                       >
                         <NavButton
-                          aria-label={"Hide Inspiration Sidebar"}
+                          aria-label={t("CHAT.SHOW_LABEL")}
                           noStyle={true}
                           direction={"right"}
                           className="absolute top-0 left-0 z-10 p-4"
@@ -169,8 +167,8 @@ export default function Layout({
                     <NavButton
                       aria-label={
                         isRightOpen
-                          ? "Hide Inspiration Sidebar"
-                          : "Show Inspiration Sidebar"
+                          ? t("CHAT.HIDE_LABEL")
+                          : t("CHAT.SHOW_LABEL")
                       }
                       noStyle={true}
                       direction={isRightOpen ? "right" : "left"}

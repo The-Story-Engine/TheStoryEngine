@@ -6,8 +6,10 @@ import WriterSVG from "public/writer.svg";
 import { useChatMessages, useJellyfish } from "utils-client";
 import { useEffect, useMemo, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
+  const { t } = useTranslation("common");
   const wiggleControls = useAnimation();
   const wiggleVariants = {
     still: { rotate: 0 },
@@ -22,7 +24,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
 
   const changeInspiration = () => {
     if (!isPendingInspiration) {
-      pushWriterMessage("Inspire me!");
+      pushWriterMessage(t("CHAT.INSPIRE"));
       inspireMe();
     }
   };
@@ -121,13 +123,13 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
                   changeInspiration();
                 }}
               >
-                Inspire me!
+                {t("CHAT.INSPIRE")}
               </Button>
             </div>
           </div>
         ) : (
           <Button
-            aria-label="Show Inspiration Sidebar"
+            aria-label={t("CHAT.SHOW_LABEL")}
             className="w-full"
             noStyle={true}
             onPress={toggleIsOpen}

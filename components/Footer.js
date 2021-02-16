@@ -1,5 +1,6 @@
 import { useLink } from "react-aria";
 import { useRef } from "react";
+import { useTranslation } from "next-i18next";
 
 const Instagram = () => {
   const ref = useRef();
@@ -18,7 +19,7 @@ const Instagram = () => {
       {...linkProps}
       className="flex items-center justify-center w-10"
     >
-      <img alt="Instagram Logo" src="/instagram.png" />
+      <img alt="Instagram" src="/instagram.png" />
     </a>
   );
 };
@@ -39,7 +40,7 @@ const Facebook = ({
       className="flex items-center justify-center w-10"
     >
       <img
-        alt="Facebook Logo"
+        alt="Facebook"
         src="/facebook.png"
         className="relative"
         style={{ top: "2px" }}
@@ -63,7 +64,7 @@ const Twitter = ({
       rel={rel}
       className="flex items-center justify-center w-10"
     >
-      <img alt="Twitter Logo" src="/twitter.png" className="relative" />
+      <img alt="Twitter" src="/twitter.png" className="relative" />
     </a>
   );
 };
@@ -84,7 +85,7 @@ const Ministry = ({
       className="flex items-center justify-center h-9"
     >
       <img
-        alt="Ministry of Stories Logo"
+        alt="Ministry of Stories"
         src="/ministry-small.jpg"
         className="h-full"
       />
@@ -107,11 +108,7 @@ const Innovate = ({
       rel={rel}
       className="flex items-center justify-center h-9"
     >
-      <img
-        alt="Innovate UK Logo"
-        src="/innovateuk-small.jpg"
-        className="h-full"
-      />
+      <img alt="Innovate UK" src="/innovateuk-small.jpg" className="h-full" />
     </a>
   );
 };
@@ -121,6 +118,7 @@ export default function Footer({ isWide }) {
     { href: "https://tseventures.com", target: "_blank", rel: "noopener" },
     linkRef
   );
+  const { t } = useTranslation("common");
   return (
     <footer className="bg-white">
       <div className="flex flex-col items-center px-8 py-12 mx-8 space-y-8 border-t-2 border-silver-chalice lg:mx-16">
@@ -131,11 +129,11 @@ export default function Footer({ isWide }) {
         >
           <div className="flex flex-wrap items-center justify-center space-x-6 space-y-4 sm:space-y-0">
             <div className="flex-shrink-0 space-y-1">
-              <p className="text-caption">Inspired By</p>
+              <p className="text-caption">{t("FOOTER.INSPIRED")}</p>
               <Ministry />
             </div>
             <div className="flex-shrink-0 space-y-1">
-              <p className="text-caption">Funded By</p>
+              <p className="text-caption">{t("FOOTER.FUNDED")}</p>
               <Innovate />
             </div>
             <div className="flex flex-shrink-0 space-x-2">
@@ -149,9 +147,7 @@ export default function Footer({ isWide }) {
               isWide ? "xl:text-left" : ""
             }`}
           >
-            The Story Engine is a space for inspired creative writing. Write
-            stories and copy them to paste anywhere. We’ll be adding features to
-            help inspire you through 2021. To follow us use the links here.
+            {t("FOOTER.ABOUT")}
           </p>
         </div>
         <div className="font-semibold text-center">

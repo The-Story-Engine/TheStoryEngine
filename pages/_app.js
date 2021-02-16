@@ -1,5 +1,6 @@
 import "@styles/globals.css";
 import { SSRProvider } from "@react-aria/ssr";
+import { appWithTranslation } from "next-i18next";
 
 function Application({ Component, pageProps }) {
   return (
@@ -9,4 +10,4 @@ function Application({ Component, pageProps }) {
   );
 }
 
-export default Application;
+export default appWithTranslation(Application);
