@@ -5,14 +5,23 @@ import ReadingSVG from "public/writing.svg";
 import CopySVG from "public/copy.svg";
 import { useUserStory, copy } from "utils-client";
 import { useButton } from "@react-aria/button";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common", "write"])),
+  },
+});
 
 if (typeof window !== "undefined") {
   window.tseSafeUnload = true;
 }
 
 const ResetButton = ({ reset, isDisabled = false }) => {
+  const { t } = useTranslation("write");
   const ref = useRef();
   const { buttonProps } = useButton({ onPress: reset, isDisabled }, ref);
   return (
@@ -22,22 +31,23 @@ const ResetButton = ({ reset, isDisabled = false }) => {
       className="h-14 disabled:text-silver-chalice disabled:cursor-default"
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <ReadingSVG title="Illustration of person reading book" />
-      <p className="pt-1 leading-none text-caption">Reset</p>
+      <ReadingSVG title={t("ICON_ALT.READING")} />
+      <p className="pt-1 leading-none text-caption">{t("RESET.LABEL")}</p>
     </motion.button>
   );
 };
 
 const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
   const ref = useRef();
+  const { t } = useTranslation("write");
   const copyStory = async () => {
     copyCallback();
     try {
       await copy(story);
-      alert("Story copied! Get pasting.");
+      alert(t("COPY.SUCCESS"));
     } catch (error) {
       console.error(error);
-      alert("Copy failed, please select and copy your story manually!");
+      alert(t("COPY.FAIL"));
     }
   };
   const { buttonProps } = useButton({ onPress: copyStory, isDisabled }, ref);
@@ -51,17 +61,18 @@ const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
       }
       whileTap={{ scale: isDisabled ? 1 : 0.95 }}
     >
-      <CopySVG title="Illustration of pencil & notepad" />
-      <p className="pt-1 leading-none text-caption">Copy</p>
+      <CopySVG title={t("ICON_ALT.WRITING")} />
+      <p className="pt-1 leading-none text-caption">{t("COPY.LABEL")}</p>
     </motion.button>
   );
 };
 
 export default function Home() {
   const { story, updateStory, resetStory } = useUserStory();
+  const { t } = useTranslation(["write", "common"]);
   const reset = () => {
     if (story.title || story.text) {
-      if (window.confirm("Do you really want to reset your story?")) {
+      if (window.confirm(t("RESET.CONFIRM"))) {
         resetStory();
       }
     }
@@ -88,7 +99,7 @@ export default function Home() {
 
   return (
     <Layout
-      pageName="Writing Space"
+      pageName={t("common:PAGE_NAMES.WRITE")}
       mobileFitMainToScreen={false}
       headerButtons={
         <div className="space-x-3">
@@ -115,9 +126,9 @@ export default function Home() {
       }
       belowFold={
         <div className="px-8 py-12 space-y-2 italic font-semibold text-center max-w-52rem lg:px-16">
-          <p>Your story is temporarily stored in your web browser only.</p>
+          <p>{t("DATA_NOTICE.0")}</p>
           <p>
-            You can safely{" "}
+            {t("DATA_NOTICE.1.0")}
             <a
               onClick={() => {
                 window.tseSafeUnload = true;
@@ -126,14 +137,11 @@ export default function Home() {
               href="/write"
               className="font-extrabold cursor-pointer hover:underline focus-visible:underline"
             >
-              reload
-            </a>{" "}
-            and keep writing, closing the tab will reset your story.
+              {t("DATA_NOTICE.1.1")}
+            </a>
+            {t("DATA_NOTICE.1.2")}
           </p>
-          <p>
-            As the jellyfish grows up, we'll always be 100% transparent about
-            what we store and how we store it.
-          </p>
+          <p>{t("DATA_NOTICE.2")}</p>
         </div>
       }
       mainContent={

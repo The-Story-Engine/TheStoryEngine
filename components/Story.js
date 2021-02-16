@@ -1,16 +1,17 @@
 import { useRef } from "react";
 import { useTextField } from "@react-aria/textfield";
-import TextareaAutosize from "react-autosize-textarea";
 import { useIsTyping } from "utils-client";
+import { useTranslation } from "next-i18next";
 
 const Title = ({ onChange, value, placeholder, className }) => {
+  const { t } = useTranslation("write");
   const ref = useRef();
   const { inputProps } = useTextField(
     {
       onChange,
       value,
       placeholder,
-      "aria-label": "Story Title",
+      "aria-label": t("STORY.TITLE.LABEL"),
     },
     ref
   );
@@ -18,6 +19,7 @@ const Title = ({ onChange, value, placeholder, className }) => {
 };
 
 const Text = ({ onChange, value, placeholder, className }) => {
+  const { t } = useTranslation("write");
   const ref = useRef();
   const { inputProps } = useTextField({
     onChange,
@@ -25,12 +27,13 @@ const Text = ({ onChange, value, placeholder, className }) => {
     placeholder,
     className,
     id: "story-text",
-    "aria-label": "Story Text",
+    "aria-label": t("STORY.TEXT.LABEL"),
   });
   return <textarea {...inputProps} className={className} ref={ref} />;
 };
 
 const Story = ({ story, saveStory }) => {
+  const { t } = useTranslation("write");
   const setStoryTitle = (newTitle) => saveStory({ title: newTitle });
   const setStoryText = (newText) => saveStory({ text: newText });
   const isTyping = useIsTyping(story);
@@ -41,22 +44,24 @@ const Story = ({ story, saveStory }) => {
         <Title
           value={story.title}
           onChange={setStoryTitle}
-          placeholder="Title..."
+          placeholder={t("STORY.TITLE.PLACEHOLDER")}
           className="w-full h-12 font-semibold text-h2"
         />
       </div>
       <Text
         value={story.text}
         onChange={setStoryText}
-        placeholder="Story..."
+        placeholder={t("STORY.TEXT.PLACEHOLDER")}
         className="flex-grow w-full text-story"
       />
       {story.title || story.text ? (
         <p
-          aria-label="Save Status"
+          aria-label={t("STORY.SAVE_STATUS.LABEL")}
           className="m-2 mt-3 text-center text-emperor"
         >
-          {isTyping ? "Saving to Browser Tab" : "Saved to Browser Tab"}
+          {isTyping
+            ? t("STORY.SAVE_STATUS.SAVING_TAB")
+            : t("STORY.SAVE_STATUS.SAVED_TAB")}
         </p>
       ) : null}
     </div>

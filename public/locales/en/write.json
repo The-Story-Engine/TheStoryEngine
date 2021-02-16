@@ -1,0 +1,39 @@
+{
+  "RESET": {
+    "LABEL": "Reset",
+    "CONFIRM": "Do you really want to reset your story?"
+  },
+  "ICON_ALT": {
+    "READING": "Person Reading Book",
+    "WRITING": "Pencil & notepad"
+  },
+  "COPY": {
+    "LABEL": "Copy",
+    "SUCCESS": "Story copied! Get pasting.",
+    "FAIL": "Copy failed, please select and copy your story manually!"
+  },
+  "DATA_NOTICE": [
+    "Your story is temporarily stored in your web browser only.",
+    [
+      "You can safely ",
+      "reload",
+      " and keep writing, closing the tab will reset your story."
+    ],
+    "As the jellyfish grows up, we'll always be 100% transparent about what we store and how we store it."
+  ],
+  "STORY": {
+    "TITLE": {
+      "LABEL": "Story Title",
+      "PLACEHOLDER": "Title..."
+    },
+    "TEXT": {
+      "LABEL": "Story Text",
+      "PLACEHOLDER": "Story..."
+    },
+    "SAVE_STATUS": {
+      "LABEL": "Save Status",
+      "SAVING_TAB": "Saving to Browser Tab",
+      "SAVED_TAB": "Saved to Browser Tab"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "WELCOME": {
+    "HEADLINE": ["Howdy I'm", "the Inspirational Jellyfish"],
+    "BODY": {
+      "RETURN": "Welcome back, tap below to continue your story!",
+      "NEW": [
+        "I’ve got lots of ideas to help with your",
+        "writing, tap below to get started!"
+      ]
+    }
+  },
+  "WRITE": "Write a story"
+}
