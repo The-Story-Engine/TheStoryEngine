@@ -16,6 +16,7 @@
     "framer-motion": "^3.2.1",
     "id128": "^1.6.3",
     "next": "10.0.6",
+    "next-i18next": "^8.0.0-beta.4",
     "next-on-netlify": "^2.8.7",
     "postcss": "^8.2.4",
     "postcss-focus-visible": "^5.0.0",
