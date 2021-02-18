@@ -226,6 +226,7 @@ module.exports = {
       ringOffsetWidth: ["focus-visible"],
       ringOpacity: ["focus-visible"],
       textDecoration: ["focus-visible"],
+      fontWeight: ["hover", "focus"],
     },
   },
   plugins: [
