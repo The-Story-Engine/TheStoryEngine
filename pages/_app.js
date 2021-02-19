@@ -2,6 +2,7 @@ import "@styles/globals.css";
 import { SSRProvider } from "@react-aria/ssr";
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import * as Fathom from "fathom-client";
 
 function Application({ Component, pageProps }) {
