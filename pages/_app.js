@@ -12,7 +12,7 @@ function Application({ Component, pageProps }) {
     // Initialize Fathom when the app loads
     Fathom.load("FLQOELXH", {
       includedDomains: ["thestoryengine.co.uk"],
-      url: "https://chimpanzee.thestoryengine.co.uk/fathom.js",
+      url: "https://chimpanzee.thestoryengine.co.uk/script.js",
     });
 
     function onRouteChangeComplete() {
