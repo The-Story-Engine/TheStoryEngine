@@ -12,6 +12,7 @@
     "@babel/core": "^7",
     "@svgr/webpack": "^5.5.0",
     "autoprefixer": "^10.2.4",
+    "fathom-client": "^3.0.0",
     "focus-visible": "^5.2.0",
     "framer-motion": "^3.2.1",
     "id128": "^1.6.3",
