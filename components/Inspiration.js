@@ -26,6 +26,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
     if (!isPendingInspiration) {
       pushWriterMessage(t("CHAT.INSPIRE"));
       inspireMe();
+      setTimeout(() => window.fathom.trackGoal("HD3SGWBU", 0));
     }
   };
   const containerRef = useRef();
