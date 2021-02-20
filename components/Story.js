@@ -3,7 +3,7 @@ import { useTextField } from "@react-aria/textfield";
 import { useIsTyping } from "utils-client";
 import { useTranslation } from "next-i18next";
 
-const Title = ({ onChange, value, placeholder, className }) => {
+const Title = ({ onChange, value, placeholder, className, ...rest }) => {
   const { t } = useTranslation("write");
   const ref = useRef();
   const { inputProps } = useTextField(
@@ -12,13 +12,14 @@ const Title = ({ onChange, value, placeholder, className }) => {
       value,
       placeholder,
       "aria-label": t("STORY.TITLE.LABEL"),
+      ...rest,
     },
     ref
   );
   return <textarea {...inputProps} className={className} ref={ref} />;
 };
 
-const Text = ({ onChange, value, placeholder, className }) => {
+const Text = ({ onChange, value, placeholder, className, ...rest }) => {
   const { t } = useTranslation("write");
   const ref = useRef();
   const { inputProps } = useTextField({
@@ -28,6 +29,7 @@ const Text = ({ onChange, value, placeholder, className }) => {
     className,
     id: "story-text",
     "aria-label": t("STORY.TEXT.LABEL"),
+    ...rest,
   });
   return <textarea {...inputProps} className={className} ref={ref} />;
 };
@@ -43,14 +45,18 @@ const Story = ({ story, saveStory }) => {
       <div className="pb-2 mb-4 border-b-2 border-silver-chalice lg:mb-6">
         <Title
           value={story.title}
-          onChange={setStoryTitle}
+          onChange={saveStory && setStoryTitle}
           placeholder={t("STORY.TITLE.PLACEHOLDER")}
+          disabled={!saveStory}
+          readonly={!saveStory}
           className="w-full h-12 font-semibold text-h2"
         />
       </div>
       <Text
         value={story.text}
-        onChange={setStoryText}
+        onChange={saveStory && setStoryText}
+        disabled={!saveStory}
+        readonly={!saveStory}
         placeholder={t("STORY.TEXT.PLACEHOLDER")}
         className="flex-grow w-full text-story"
       />

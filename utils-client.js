@@ -306,3 +306,53 @@ export const migrate = () => {
     }
   }
 };
+
+import { useQuery } from "react-query";
+
+import { request, gql } from "graphql-request";
+const endpoint = "http://localhost:8080/v1/graphql";
+
+export const fetchStory = async (id) => {
+  const { story_by_pk } = await request(
+    endpoint,
+    gql`
+      query StoryById {
+        story_by_pk(id: "${id}") {
+          id
+          created_at
+          updated_at
+          messages
+          story
+          user_id
+        }
+      }
+    `
+  );
+  return story_by_pk;
+};
+
+export const fetchStories = async (limit = 10) => {
+  const { story } = await request(
+    endpoint,
+    gql`
+      query Stories {
+        story(limit: ${limit}) {
+          id
+          created_at
+          title: story(path: "title")
+          updated_at
+          user_id
+        }
+      }
+    `
+  );
+  return story;
+};
+
+export const useStories = (limit = 10) => {
+  return useQuery(["stories", limit], () => fetchStories(limit));
+};
+
+export const useStory = (id) => {
+  return useQuery(["story", id], () => fetchStory(id));
+};

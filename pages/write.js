@@ -67,7 +67,7 @@ const CopyButton = ({ story, isDisabled = false, copyCallback }) => {
   );
 };
 
-export default function Home() {
+export default function Write() {
   const { story, updateStory, resetStory } = useUserStory();
   const { t } = useTranslation(["write", "common"]);
   const reset = () => {
