@@ -332,6 +332,8 @@ export const fetchStory = async (id) => {
 };
 
 export const fetchStories = async (limit = 10) => {
+  const response = await fetch("/api/token");
+  const { accessToken } = await response.json();
   const { story } = await request(
     endpoint,
     gql`

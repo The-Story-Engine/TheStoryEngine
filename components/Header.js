@@ -4,6 +4,24 @@ import LogoSVG from "public/logo_banner.svg";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import Button from "@components/Button";
+import { useUser } from "@auth0/nextjs-auth0";
+
+const Auth = () => {
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  if (user) {
+    return (
+      <div>
+        Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
+      </div>
+    );
+  }
+
+  return <a href="/api/auth/login">Login</a>;
+};
 
 const MobileMenuButton = ({ isOpen = false, toggle }) => {
   const { t } = useTranslation("common");
@@ -24,9 +42,9 @@ const MobileMenuButton = ({ isOpen = false, toggle }) => {
         aria-hidden="true"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M4 6h16M4 12h16M4 18h16"
         />
       </svg>
@@ -39,9 +57,9 @@ const MobileMenuButton = ({ isOpen = false, toggle }) => {
         aria-hidden="true"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M6 18L18 6M6 6l12 12"
         />
       </svg>
@@ -80,7 +98,7 @@ export default function Header({ buttons = null }) {
     <div className="absolute top-0 left-0 right-0 z-10">
       <div className="flex items-center justify-between px-5 pt-5 pb-5">
         <span>
-          <div class="absolute top-6 left-5 flex items-center sm:hidden">
+          <div className="absolute flex items-center top-6 left-5 sm:hidden">
             <MobileMenuButton
               toggle={() => setIsOpen(!isOpen)}
               isOpen={isOpen}
@@ -104,6 +122,7 @@ export default function Header({ buttons = null }) {
             )}
           />
         </nav>
+        <Auth />
         <div className="flex-shrink-0 ml-3 max-h-14">{buttons}</div>
       </div>
       <div

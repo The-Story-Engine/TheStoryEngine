@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import * as Fathom from "fathom-client";
+import { UserProvider } from "@auth0/nextjs-auth0";
 
 function Application({ Component, pageProps }) {
   const queryClientRef = React.useRef();
@@ -36,14 +37,16 @@ function Application({ Component, pageProps }) {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClientRef.current}>
-      <SSRProvider>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
-        </Hydrate>
-        <ReactQueryDevtools />
-      </SSRProvider>
-    </QueryClientProvider>
+    <UserProvider>
+      <QueryClientProvider client={queryClientRef.current}>
+        <SSRProvider>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Component {...pageProps} />
+          </Hydrate>
+          <ReactQueryDevtools />
+        </SSRProvider>
+      </QueryClientProvider>
+    </UserProvider>
   );
 }
 

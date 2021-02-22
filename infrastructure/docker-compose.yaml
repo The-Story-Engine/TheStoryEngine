@@ -3,6 +3,8 @@ services:
   postgres:
     image: postgres:12
     restart: always
+    ports:
+      - "5342:5342"
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
@@ -23,5 +25,10 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_JWT_SECRET:
+        {
+          "type": "RS512",
+          "key": "-----BEGIN CERTIFICATE-----\nMIIDATCCAemgAwIBAgIJY8i5LLfAtNBMMA0GCSqGSIb3DQEBCwUAMB4xHDAaBgNV\nBAMTE3RzZS11ay5ldS5hdXRoMC5jb20wHhcNMjEwMjIxMDkzMDA5WhcNMzQxMDMx\nMDkzMDA5WjAeMRwwGgYDVQQDExN0c2UtdWsuZXUuYXV0aDAuY29tMIIBIjANBgkq\nhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2RBAj9sAtKcAJbVg2fCTHe0lCuB24Pqn\n2DvRH7McYclEUww/lYWSetXl4Oyy3JK5nwVkxYj9PZZRdJlvuJgTGYGMUbZx8GmG\njPm+WyeAnSWYnnsKuTP4FWEB2E+j/swuzyLavukFnE6mucI6p319nmXUnGnNvMBS\n5kjDCYHzAoJpT7KpUHOLahdCAd2qnZ1kfJ6iv3L1YmNUr0kwr1lELekU3TPdaDwT\nd3bBaolyQ25XVvM+xgylp00Rq2hJwnOcMoHNORuWpEcWPmE6MD0tRbcfNm0wTEMK\nBCCBb1zg1jWvCNu/Cl643CLMUsR6Y2mssRD8w3eyw3ZAxNFZXh8kOQIDAQABo0Iw\nQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQyIhEccHCFaA7a+k/kcY/scmSP\nwzAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBANKQlih0iMVkgcWB\n2oj+ObtLnwWor8LI2JaBIY5tIzAuW/YTrM8STJsU9Gm2XlX03IfRd9NCy8QsWwSE\nLWK9q1x3jmobCoxHqAud0/dpzAQ8GQp1Alaz8iVWYKk7MWFnnq2t1yzLDJ9H7979\nX80O1CBwBayULGWDxDI4xbICRE+7v1hQAEX+297Or/jsVNnkeF8sDFUlJbuL0YEU\nuzPsWpo3IW4x5Eu0A1g26JkrR/kRYlptwPaRs339a2V3abWNKXakHgIvG86oINLP\nIcgZKRVqb4Youq1zEqw03z+B4GdlDK0KJwNL2jYU24H6Qq07a+tI5bw+/Da0z6Ob\nOf9/UgM=\n-----END CERTIFICATE-----",
+        }
 volumes:
   db_data:
