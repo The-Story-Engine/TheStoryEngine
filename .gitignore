@@ -1,11 +1,9 @@
 # .gitignore
 /node_modules/
 .cache
-# Local Netlify folder
-.netlify
 /.next/
-.env*
+.env
+.env.local
+.env.staging
 
 /out/
-/out_publish/
-/out_functions/ 
