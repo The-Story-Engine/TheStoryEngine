@@ -1,0 +1,60 @@
+{
+  "TITLE": "Workspaces",
+  "SUB_TITLE": [
+    "Inspire your writers in a Story Engine workspace!",
+    "We'll be launching the "
+  ],
+  "PER_MONTH": "Per Month",
+  "FAMILY": {
+    "TITLE": "Family",
+    "FEATURE_LIST": [
+      ["", "Three+ child", "writers"],
+      ["", "Two+ parent/guardian", "accounts"],
+      ["Create", "custom challenges"],
+      ["Set", "assignments"],
+      ["Inspirational", "conversations", "with the Inspirational Jellyfish"],
+      ["Story", "drafting & editing", "tools"],
+      ["", "Publish", "finished stories publicly"]
+    ],
+    "LAUNCH": ["Launching", "Q2", "2021"]
+  },
+  "COMMUNITY": {
+    "TITLE": "Community",
+    "FEATURE_LIST": [
+      ["", "Ten+ writers"],
+      ["", "Two+ owner", "accounts"],
+      ["", "Two+ mentor", "accounts"],
+      ["Real-time", "mentor chats"],
+      ["", "Moderation", "tools"],
+      ["Mentor", "ID verification", "tools"],
+      ["Persistent", "audit logging", "for safeguarding"]
+    ],
+    "LAUNCH": ["Launching", "Q3", "2021"]
+  },
+  "SUPPORT": {
+    "TITLE": "Support",
+    "SUB_TITLE": [
+      "Like what we're doing and want to help keep the lights on?",
+      "Send a donation!"
+    ],
+    "CREDIT": [
+      "To say thanks,",
+      "£{{amount}} in workspace credit",
+      "will be waiting for you when we launch."
+    ],
+    "CREDIT_BEFORE": [
+      "To say thanks,",
+      "double your donation in workspace credit",
+      "will be waiting for you when we launch."
+    ],
+    "BUTTON_LABEL": "Donate",
+    "AMOUNT": {
+      "LABEL": "Amount",
+      "AMOUNTS": ["5", "10", "50", "100"],
+      "OTHER": "Other"
+    },
+    "EMAIL": {
+      "LABEL": "Email address"
+    }
+  }
+}
