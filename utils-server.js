@@ -1,4 +1,4 @@
-const graphqlUrl = "http://localhost:8080/v1/graphql";
+const graphqlUrl = process.env.GRAPHQL_API;
 export async function fetchAdminGraphQL(
   operationsDoc,
   operationName,
@@ -139,10 +139,13 @@ export function confirmUserWaitlist(jwt, id) {
 var postmark = require("postmark");
 var client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
-export async function sendEmail(template, email, jwt) {
-  const link = `http://localhost:3000/api/waitlist/confirm?token=${jwt}`;
+export async function sendEmail(template, email, jwt, linkDomain) {
+  const domainUrl = linkDomain.includes("localhost")
+    ? `http://${linkDomain}`
+    : `https://${linkDomain}`;
+  const link = `${domainUrl}/api/waitlist/confirm?token=${jwt}`;
 
-  client.sendEmail({
+  await client.sendEmail({
     From: "hello@thestoryengine.co.uk",
     To: email,
     Subject: "Please Confirm your Address!",
