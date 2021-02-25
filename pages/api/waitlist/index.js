@@ -39,6 +39,7 @@ export default async function waitlist(req, res) {
       if (data.waitlist[0].confirmed) {
         // add unfulfilled donation if present in body
         confirmedEmail = true;
+        emailId = data.waitlist[0].id;
       } else {
         // overwrite record, continue
         const {
@@ -93,17 +94,23 @@ export default async function waitlist(req, res) {
         sendEmail(
           "manage existing waitlist with pending donate",
           email,
-          encodedToken
+          encodedToken,
+          req.headers.host
         );
       } else {
         console.log(
           `email verify with donate template to ${email} for ${emailId}`
         );
-        sendEmail("email verify with pending donate", email, encodedToken);
+        sendEmail(
+          "email verify with pending donate",
+          email,
+          encodedToken,
+          req.headers.host
+        );
       }
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
-      sendEmail("email verify", email, encodedToken);
+      sendEmail("email verify", email, encodedToken, req.headers.host);
       // send verify email
     }
 
