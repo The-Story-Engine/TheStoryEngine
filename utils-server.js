@@ -145,7 +145,7 @@ export async function sendEmail(template, email, jwt, linkDomain) {
     : `https://${linkDomain}`;
   const link = `${domainUrl}/api/waitlist/confirm?token=${jwt}`;
 
-  client.sendEmail({
+  await client.sendEmail({
     From: "hello@thestoryengine.co.uk",
     To: email,
     Subject: "Please Confirm your Address!",

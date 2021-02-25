@@ -91,7 +91,7 @@ export default async function waitlist(req, res) {
         console.log(
           `email manage with donate template to ${email} for ${emailId}`
         );
-        sendEmail(
+        await sendEmail(
           "manage existing waitlist with pending donate",
           email,
           encodedToken,
@@ -101,7 +101,7 @@ export default async function waitlist(req, res) {
         console.log(
           `email verify with donate template to ${email} for ${emailId}`
         );
-        sendEmail(
+        await sendEmail(
           "email verify with pending donate",
           email,
           encodedToken,
@@ -110,7 +110,7 @@ export default async function waitlist(req, res) {
       }
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
-      sendEmail("email verify", email, encodedToken, req.headers.host);
+      await sendEmail("email verify", email, encodedToken, req.headers.host);
       // send verify email
     }
 
