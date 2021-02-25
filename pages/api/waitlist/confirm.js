@@ -8,7 +8,7 @@ export default async function waitlistConfirm(req, res) {
     data: waitlistData,
   } = await fetchUserWaitlist(jwt);
   if (waitlistErrors?.length) {
-    return res.status(500).json(errors);
+    return res.status(500).json(waitlistErrors);
   }
   // flip confirmed flag true on record
   const { errors, data } = await confirmUserWaitlist(
