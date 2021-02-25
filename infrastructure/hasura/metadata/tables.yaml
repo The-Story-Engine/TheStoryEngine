@@ -1,1 +1,34 @@
-[]
+- table:
+    schema: public
+    name: waitlist
+  select_permissions:
+    - role: user
+      permission:
+        columns:
+          - confirmed
+          - created_at
+          - donations
+          - email
+          - id
+          - lists
+          - updated_at
+        filter:
+          id:
+            _eq: X-Hasura-Email-Id
+        limit: 1
+  update_permissions:
+    - role: user
+      permission:
+        columns:
+          - confirmed
+          - lists
+        filter:
+          id:
+            _eq: X-Hasura-Email-Id
+        check: null
+  delete_permissions:
+    - role: user
+      permission:
+        filter:
+          email:
+            _eq: X-Hasura-Email

@@ -26,7 +26,7 @@ const FeatureList = ({ features, className }) => {
     <ul className={`${className} space-y-3`}>
       {features.map((feature) => {
         return (
-          <li className="flex items-center space-x-3">
+          <li key={feature} className="flex items-center space-x-3">
             <svg
               className="flex-shrink-0 w-5 h-5 text-malachite"
               xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +82,8 @@ const AmountSelection = ({ setAmount: setOuterAmount }) => {
           <div className="max-w-lg">
             <div className="flex flex-wrap mt-4 space-x-4">
               {t("SUPPORT.AMOUNT.AMOUNTS", { returnObjects: true }).map(
-                (amount, index) => (
-                  <div className="flex items-center">
+                (amount) => (
+                  <div key={amount} className="flex items-center">
                     <input
                       id={`amount-${amount}`}
                       name="amount"
@@ -95,7 +95,7 @@ const AmountSelection = ({ setAmount: setOuterAmount }) => {
                       }
                     />
                     <label
-                      for={`amount-${amount}`}
+                      htmlFor={`amount-${amount}`}
                       className="block ml-3 text-sm font-medium text-gray-700"
                     >
                       £ {amount}
@@ -115,7 +115,7 @@ const AmountSelection = ({ setAmount: setOuterAmount }) => {
                   className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
                 />
                 <label
-                  for="amount-other"
+                  htmlFor="amount-other"
                   className="block ml-3 text-sm font-medium text-gray-700"
                 >
                   {t("SUPPORT.AMOUNT.OTHER")}
@@ -192,7 +192,7 @@ export default function Home() {
       </p>
       <div className="self-stretch sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:p-5">
         <label
-          for="email"
+          htmlFor="email"
           className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
         >
           {t("SUPPORT.EMAIL.LABEL")}
@@ -202,7 +202,7 @@ export default function Home() {
             id="email"
             name="email"
             type="email"
-            autocomplete="email"
+            autoComplete="email"
             className="block w-full max-w-lg p-2 text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
@@ -258,7 +258,7 @@ export default function Home() {
                 <AmountSelection amount={amount} setAmount={setAmount} />
                 <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                   >
                     {t("SUPPORT.EMAIL.LABEL")}
@@ -268,7 +268,7 @@ export default function Home() {
                       id="email"
                       name="email"
                       type="email"
-                      autocomplete="email"
+                      autoComplete="email"
                       className="block w-full max-w-lg p-2 text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
