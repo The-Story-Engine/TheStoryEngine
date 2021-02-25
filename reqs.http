@@ -1,0 +1,17 @@
+
+### Create new user
+POST http://localhost:3000/api/waitlist
+content-type: application/json
+
+{
+    "email": "jedd@thestoryengine.co.uk",
+    "lists": ["launch"],
+    "donation": {
+        "amount": 20,
+        "currency": "GBP"
+    }
+}
+
+
+### Confirm
+GET http://localhost:3000/api/waitlist/confirm?token=
