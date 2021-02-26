@@ -306,3 +306,31 @@ export const migrate = () => {
     }
   }
 };
+
+export const getStripeIntent = async ({ amount, email }) => {
+  const response = await fetch("/api/donate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      amount: amount,
+      email,
+    }),
+  });
+  return response.json();
+};
+
+export const joinWaitlist = async ({ email }) => {
+  const response = await fetch("/api/waitlist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      lists: ["launch"],
+      email,
+    }),
+  });
+  return response.json();
+};

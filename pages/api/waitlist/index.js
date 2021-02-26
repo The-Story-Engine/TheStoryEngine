@@ -24,9 +24,11 @@ export default async function waitlist(req, res) {
     // add new record
     let emailId;
     let confirmedEmail = false;
-    const { errors, data } = await insertUnconfirmedWaitlist(email, lists, [
-      donation,
-    ]);
+    const { errors, data } = await insertUnconfirmedWaitlist(
+      email,
+      lists,
+      donation && [donation]
+    );
     if (
       errors?.length &&
       errors.some((error) => error.message.includes("waitlist_email_key"))
@@ -50,7 +52,7 @@ export default async function waitlist(req, res) {
           existingId: data.waitlist[0].id,
           email,
           lists,
-          donations: [donation],
+          donations: donation && [donation],
         });
         if (errors?.length) {
           return res.status(500).json(errors);
@@ -85,13 +87,15 @@ export default async function waitlist(req, res) {
       algorithm: "HS256",
     });
 
+    let emailResult;
+
     if (donation && donation.amount) {
       if (email.confirmed) {
         // TODO: append unpaid donation to existing waitlist record
         console.log(
           `email manage with donate template to ${email} for ${emailId}`
         );
-        await sendEmail(
+        emailResult = await sendEmail(
           "manage existing waitlist with pending donate",
           email,
           encodedToken,
@@ -101,7 +105,7 @@ export default async function waitlist(req, res) {
         console.log(
           `email verify with donate template to ${email} for ${emailId}`
         );
-        await sendEmail(
+        emailResult = await sendEmail(
           "email verify with pending donate",
           email,
           encodedToken,
@@ -110,12 +114,17 @@ export default async function waitlist(req, res) {
       }
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
-      await sendEmail("email verify", email, encodedToken, req.headers.host);
+      emailResult = await sendEmail(
+        "email verify",
+        email,
+        encodedToken,
+        req.headers.host
+      );
       // send verify email
     }
 
     res.statusCode = 200;
-    res.end(JSON.stringify({ token: encodedToken }));
+    res.json(emailResult);
     return;
   }
 

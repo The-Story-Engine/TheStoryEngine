@@ -108,7 +108,7 @@ export function deleteExistingInsertNewWaitlist({
   existingId,
   email,
   lists,
-  donations,
+  donations = [],
 }) {
   return fetchAdminGraphQL(deleteInsertWaitlistQuery, "DeleteInsertWaitlist", {
     email,
@@ -145,7 +145,7 @@ export async function sendEmail(template, email, jwt, linkDomain) {
     : `https://${linkDomain}`;
   const link = `${domainUrl}/api/waitlist/confirm?token=${jwt}`;
 
-  await client.sendEmail({
+  return await client.sendEmail({
     From: "hello@thestoryengine.co.uk",
     To: email,
     Subject: "Please Confirm your Address!",
