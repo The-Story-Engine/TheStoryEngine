@@ -13,7 +13,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { getStripeIntent, joinWaitlist } from "utils-client";
 
 const CheckoutInner = ({ intentSecret, amount }) => {
