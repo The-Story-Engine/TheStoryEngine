@@ -4,6 +4,9 @@ import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import * as Fathom from "fathom-client";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function Application({ Component, pageProps }) {
   const router = useRouter();
@@ -29,7 +32,9 @@ function Application({ Component, pageProps }) {
 
   return (
     <SSRProvider>
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </SSRProvider>
   );
 }

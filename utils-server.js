@@ -79,6 +79,10 @@ const insertWaitlistQuery = `
 mutation InsertWaitlist($email: String!, $lists: _text, $donations:jsonb) {
     insert_waitlist_one(object: {email: $email, lists: $lists, donations: $donations}) {
       id
+      email
+      lists
+      confirmed
+      donations
     }
   }
 `;

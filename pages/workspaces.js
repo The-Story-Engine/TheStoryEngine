@@ -6,6 +6,7 @@ import HomeSVG from "public/home.svg";
 import StripeSVG from "public/stripe-badge.svg";
 import LoadingSVG from "public/spinner.svg";
 import Button from "@components/Button";
+import Waitlist from "@components/Waitlist";
 import { useEffect, useRef, useState } from "react";
 import {
   CardElement,
@@ -69,6 +70,7 @@ const Checkout = (props) => {
   const [stripePromise, setStripePromise] = useState();
 
   useEffect(() => {
+    loadStripe.setLoadParameters({ advancedFraudSignals: false });
     setStripePromise(
       loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
     );
@@ -301,47 +303,8 @@ export default function Workspaces() {
         <span className="font-semibold">£5 of workspace credit</span> when we
         launch.
       </p>
-      <div className="self-stretch sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:p-5">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-        >
-          {t("SUPPORT.EMAIL.LABEL")}
-        </label>
-        <div className="mt-1 sm:mt-0 sm:col-span-3">
-          <input
-            id="email"
-            name="email"
-            ref={emailRef}
-            type="email"
-            value={email}
-            onChange={({ target: { value } }) => {
-              setEmail(value);
-              setEmailInvalid(false);
-            }}
-            autoComplete="email"
-            className="block w-full max-w-lg p-2 text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </div>
-      </div>
-      <div>
-        <p className="text-center">
-          You'll get a confirmation email now, and an email for each of the 2
-          launches later this year.
-        </p>
-        <p className="text-center">
-          Your email will then be stored for 12 months so we know it's you when
-          you sign up.
-        </p>
-      </div>
-      <div className="flex mt-6 space-x-12">
-        {waitlistPending ? (
-          <LoadingSVG />
-        ) : (
-          <Button onPress={handleWaitlist} isDisabled={emailInvalid}>
-            Join List
-          </Button>
-        )}
+      <div className="self-stretch">
+        <Waitlist />
       </div>
     </div>
   );

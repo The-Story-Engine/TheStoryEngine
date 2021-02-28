@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Ulid } from "id128";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 /**
  *
@@ -333,4 +334,20 @@ export const joinWaitlist = async ({ email }) => {
     }),
   });
   return response.json();
+};
+
+export const useCreateWaitlistMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation("waitlist", joinWaitlist, {
+    onSuccess: (result) => {
+      queryClient.setQueryData("waitlist", result);
+      // TODO Subscribe to changes?
+    },
+  });
+};
+
+export const useWaitlistQuery = () => {
+  // TODO: request with auth
+  return useQuery("waitlist", () => null, { enabled: false });
 };
