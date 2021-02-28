@@ -1,10 +1,10 @@
 
 ### Create new user
-POST https://tse.fish/api/waitlist
+POST http://localhost:3000/api/waitlist
 content-type: application/json
 
 {
-    "email": "mark@thestoryengine.co.uk",
+    "email": "keshawn.kassulke38@ethereal.email",
     "lists": ["launch"],
     "donation": {
         "amount": 20,

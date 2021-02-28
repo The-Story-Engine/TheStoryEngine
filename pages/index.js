@@ -46,7 +46,9 @@ export default function Home() {
                 <p className="mt-4 text-story md:mt-6 md:text-h2 w-sm">
                   {hasStoryContent ? returnMessage : welcomeMessage}
                 </p>
-                <LinkButton href="/write">{t("WRITE")}</LinkButton>
+                <div className="mt-8 md:mt-14">
+                  <LinkButton href="/write">{t("WRITE")}</LinkButton>
+                </div>
               </>
             ) : (
               <Placeholder />

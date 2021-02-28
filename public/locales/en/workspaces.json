@@ -5,14 +5,14 @@
     "We'll be launching the "
   ],
   "PER_MONTH": "Per Month",
-  "FAMILY": {
-    "TITLE": "Family",
+  "HOME": {
+    "TITLE": "Home",
     "FEATURE_LIST": [
       ["", "Three+ child", "writers"],
       ["", "Two+ parent/guardian", "accounts"],
       ["Create", "custom challenges"],
       ["Set", "assignments"],
-      ["Inspirational", "conversations", "with the Inspirational Jellyfish"],
+      ["Inspirational Jellyfish", "conversations"],
       ["Story", "drafting & editing", "tools"],
       ["", "Publish", "finished stories publicly"]
     ],

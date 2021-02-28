@@ -1,6 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Ulid } from "id128";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useRouter } from "next/router";
+const waitlistQuery = `
+query Waitlist {
+  waitlist {
+    id
+    created_at
+    email
+    lists
+    confirmed
+    updated_at
+    donations
+  }
+}
+`;
+
+const confirmWaitlistQuery = `
+mutation ConfirmWaitlist ($id: uuid!) {
+    update_waitlist_by_pk(pk_columns: {id: $id}, _set: {confirmed: true}) {
+        id
+        created_at
+        email
+        lists
+        confirmed
+        updated_at
+        donations
+    }
+  }
+`;
 
 /**
  *
@@ -338,16 +366,71 @@ export const joinWaitlist = async ({ email }) => {
 
 export const useCreateWaitlistMutation = () => {
   const queryClient = useQueryClient();
+  return useMutation(joinWaitlist, {
+    onSuccess: (result) => queryClient.setQueryData("waitlistEmail", result),
+  });
+};
 
-  return useMutation("waitlist", joinWaitlist, {
-    onSuccess: (result) => {
-      queryClient.setQueryData("waitlist", result);
-      // TODO Subscribe to changes?
+const directGraphQLQuery = async (query, token, variables = {}) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  });
+  return response.json();
+};
+
+export const useWaitlistToken = () => {
+  const [token, setToken] = useState();
+  let router = useRouter();
+  useEffect(() => {
+    let existingToken = router?.query?.token;
+    if (typeof window !== "undefined") {
+      if (existingToken) {
+        window.sessionStorage.setItem("tseWaitlistToken", existingToken);
+      } else {
+        existingToken = window.sessionStorage.getItem("tseWaitlistToken");
+      }
+    }
+    setToken(existingToken);
+  }, []);
+  return token;
+};
+
+const confirmWaitlist = async (id) => {
+  const token = window.sessionStorage.getItem("tseWaitlistToken");
+  const response = await directGraphQLQuery(confirmWaitlistQuery, token, {
+    id,
+  });
+  return response?.data?.update_waitlist_by_pk;
+};
+
+export const useConfirmWaitlistMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation("confirmWaitlist", confirmWaitlist, {
+    onSuccess: (result) => queryClient.setQueryData("waitlist", result),
   });
 };
 
 export const useWaitlistQuery = () => {
-  // TODO: request with auth
-  return useQuery("waitlist", () => null, { enabled: false });
+  const token = useWaitlistToken();
+  return useQuery(
+    "waitlist",
+    async () => {
+      const response = directGraphQLQuery(waitlistQuery, token);
+      return response?.data?.waitlist[0];
+    },
+    { enabled: !!token }
+  );
+};
+
+export const useWaitlistEmailQuery = () => {
+  return useQuery("waitlistEmail", () => null, { enabled: false });
 };
