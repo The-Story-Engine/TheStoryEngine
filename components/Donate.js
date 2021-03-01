@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Waitlist from "@components/Waitlist";
 import Button from "@components/Button";
 import { useTranslation } from "next-i18next";
 import { getStripeIntent, useWaitlistQuery } from "utils-client";
 import StripeSVG from "public/stripe-badge.svg";
+import SpinnerSVG from "public/spinner.svg";
 import {
   CardElement,
   Elements,
@@ -15,38 +16,56 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 
 const translationSpaces = ["workspaces", "common"];
 
+const Error = ({ message }) => <p className="text-mandy">{message}</p>;
+
 const CheckoutInner = ({ intentSecret, amount }) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    setIsLoading(true);
+    const cardResult = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
-    if (error) {
-      console.log("PAYMENT ERROR!");
-      console.error(error);
-    }
-    const result = await stripe.confirmCardPayment(intentSecret, {
-      payment_method: paymentMethod.id,
-    });
-    if (result.error) {
-      // TODO: Handle error
+    if (cardResult?.error) {
+      console.log("createPaymentMethod error");
+      console.error(cardResult.error);
+      setResult(cardResult);
     } else {
-      // TODO: Handle success
+      const paymentResult = await stripe.confirmCardPayment(intentSecret, {
+        payment_method: cardResult.paymentMethod.id,
+      });
+      if (paymentResult?.error) {
+        console.log("confirmCardPayment error");
+        console.error(paymentResult.error);
+      }
+      setResult(paymentResult);
     }
-    console.log(result);
-    setResult(result);
+    setIsLoading(false);
   };
+
+  let errorMessage;
+
+  if (result?.error) {
+    if (result.error.type === "card_error") {
+      errorMessage = result.error.message;
+    } else {
+      errorMessage = "Payment failed.";
+    }
+  }
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="self-stretch space-y-6">
-        <div className="sm:border-t sm:border-gray-200 sm:pt-5">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center self-stretch space-y-6"
+      >
+        <div className="self-stretch sm:border-t sm:border-gray-200 sm:pt-5">
           <div>
             <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
           </div>
@@ -54,10 +73,12 @@ const CheckoutInner = ({ intentSecret, amount }) => {
         <Button
           isDisabled={!!result || !stripe}
           type="submit"
-          disabled={!stripe}
+          isDisabled={!stripe || isLoading}
+          className={isLoading ? "animate-pulse" : ""}
         >
-          Pay £{amount}
+          {isLoading ? "Loading..." : `Pay £${amount}`}
         </Button>
+        {errorMessage ? <Error message={result.error.message} /> : null}
       </form>
       {result && <code>{JSON.stringify(result, null, "  ")}</code>}
     </>
@@ -179,18 +200,17 @@ const boldMid = ([start, emphasize, end]) => (
 export default function Donate() {
   const [amount, setAmount] = useState();
   const [paymentIntent, setPaymentIntent] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const waitlistQuery = useWaitlistQuery();
   const { t } = useTranslation(translationSpaces);
 
   const handleDonate = async () => {
-    const emailIsValid = emailRef?.current?.reportValidity();
-
-    if (!emailIsValid) {
-      return setEmailInvalid(true);
-    } else {
-      setEmailInvalid(false);
-    }
-
-    const paymentIntent = await getStripeIntent({ amount, email });
+    setIsLoading(true);
+    const paymentIntent = await getStripeIntent({
+      amount,
+      email: waitlistQuery.data?.email,
+    });
+    setIsLoading(false);
     setPaymentIntent(paymentIntent);
   };
   return (
@@ -209,24 +229,33 @@ export default function Donate() {
             )
           : boldMid(t("SUPPORT.CREDIT_BEFORE", { returnObjects: true }))}
       </p>
-      <div className="space-y-6 sm:space-y-5">
-        <AmountSelection amount={amount} setAmount={setAmount} />
-        <Waitlist />
-      </div>
-      <div className="flex flex-col mt-6 space-y-6">
-        {paymentIntent ? (
-          <Checkout
-            intentSecret={paymentIntent.intentSecret}
-            amount={paymentIntent.amount}
-          />
+      <div className="flex flex-col mt-6 space-y-6 sm:space-y-5">
+        {waitlistQuery.data ? (
+          paymentIntent ? (
+            <Checkout
+              intentSecret={paymentIntent.intentSecret}
+              amount={paymentIntent.amount}
+            />
+          ) : (
+            <>
+              <AmountSelection amount={amount} setAmount={setAmount} />
+              <Button
+                className="self-center"
+                isDisabled={!amount || isLoading}
+                onPress={handleDonate}
+                className={
+                  isLoading ? "self-center animate-pulse" : "self-center"
+                }
+              >
+                {isLoading ? "Loading..." : t("SUPPORT.BUTTON_LABEL")}
+              </Button>
+            </>
+          )
         ) : (
-          <Button
-            className="self-center"
-            isDisabled={!amount || !email || emailInvalid}
-            onPress={handleDonate}
-          >
-            {t("SUPPORT.BUTTON_LABEL")}
-          </Button>
+          <p className="font-semibold text-center text-malachite">
+            Please join waitlist above and follow email confirmation link to
+            donate.
+          </p>
         )}
         <a href="https://stripe.com" target="_blank" className="self-center">
           <StripeSVG className="h-8" />

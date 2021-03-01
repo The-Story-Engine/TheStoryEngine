@@ -398,9 +398,10 @@ export const useWaitlistToken = () => {
         existingToken = window.sessionStorage.getItem("tseWaitlistToken");
       }
     }
+    console.log({ existingToken });
     setToken(existingToken);
   }, []);
-  return token;
+  return [token, setToken];
 };
 
 const confirmWaitlist = async (id) => {
@@ -420,11 +421,26 @@ export const useConfirmWaitlistMutation = () => {
 };
 
 export const useWaitlistQuery = () => {
-  const token = useWaitlistToken();
+  const queryClient = useQueryClient();
+
+  const [token, setToken] = useWaitlistToken();
+  console.log({ token });
   return useQuery(
     "waitlist",
     async () => {
-      const response = directGraphQLQuery(waitlistQuery, token);
+      const response = await directGraphQLQuery(waitlistQuery, token);
+      console.log({ waitlistResponse: response });
+      if (response.errors) {
+        window.sessionStorage.removeItem("tseWaitlistToken");
+        setToken();
+        queryClient.resetQueries("waitlist");
+        queryClient.setQueryData(
+          "waitlistError",
+          "Email confirmation link expired, please try again."
+        );
+      } else {
+        queryClient.resetQueries("waitlistError");
+      }
       return response?.data?.waitlist[0];
     },
     { enabled: !!token }
@@ -433,4 +449,8 @@ export const useWaitlistQuery = () => {
 
 export const useWaitlistEmailQuery = () => {
   return useQuery("waitlistEmail", () => null, { enabled: false });
+};
+
+export const useWaitlistErrorQuery = () => {
+  return useQuery("waitlistError", () => null, { enabled: false });
 };

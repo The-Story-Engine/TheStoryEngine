@@ -76,7 +76,7 @@ export default async function waitlist(req, res) {
       sub: emailId,
       aud: process.env.HASURA_JWT_AUDIENCE,
       iat: Date.now() / 1000,
-      exp: Math.floor(Date.now() / 1000) + 0.5 * 60 * 60, // 30 mins
+      exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 hrs
       "https://hasura.io/jwt/claims": {
         "x-hasura-allowed-roles": ["user"],
         "x-hasura-default-role": "user",

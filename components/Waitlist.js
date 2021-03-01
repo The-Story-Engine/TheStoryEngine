@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import { useTranslation } from "next-i18next";
 
-import { useCreateWaitlistMutation } from "utils-client";
+import { useCreateWaitlistMutation, useWaitlistErrorQuery } from "utils-client";
 import Button from "@components/Button";
 
 const translationSpaces = ["workspaces", "common"];
+
+const Error = ({ message }) => <p className="text-mandy">{message}</p>;
 
 export default function Waitlist() {
   const { t } = useTranslation(translationSpaces);
@@ -13,6 +15,7 @@ export default function Waitlist() {
   const emailRef = useRef();
   const [email, setEmail] = useState("");
   const [emailInvalid, setEmailInvalid] = useState(false);
+  const waitlistErrorQuery = useWaitlistErrorQuery();
 
   const handleWaitlist = async () => {
     const emailIsValid = emailRef?.current?.reportValidity();
@@ -97,9 +100,13 @@ export default function Waitlist() {
           <Button
             onPress={handleWaitlist}
             isDisabled={emailInvalid || createWaitlistMutation.isLoading}
+            className={createWaitlistMutation.isLoading ? "animate-pulse" : ""}
           >
             {createWaitlistMutation.isLoading ? "Sending..." : "Join List"}
           </Button>
+          {waitlistErrorQuery.data ? (
+            <Error message={waitlistErrorQuery.data} />
+          ) : null}
         </>
       )}
     </div>

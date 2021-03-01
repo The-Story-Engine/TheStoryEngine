@@ -26,9 +26,10 @@ export default function WaitlistPage() {
 
   useEffect(() => {
     if (waitlistQuery.data && !waitlistQuery.data.confirmed) {
-      confirmWaitlistMutation();
+      console.log({ id: waitlistQuery.data.id });
+      confirmWaitlistMutation.mutate(waitlistQuery.data.id);
     }
-  });
+  }, [waitlistQuery.data]);
 
   const waitlist = (
     <div className="flex flex-col items-center max-w-2xl space-y-4">
@@ -67,9 +68,9 @@ export default function WaitlistPage() {
                 waitlist
               )}
             </div>
-            {/* <div className="flex flex-col items-center pt-12">
-                  <Donate/>
-              </div> */}
+            <div className="flex flex-col items-center pt-12">
+              <Donate />
+            </div>
           </div>
         </div>
       }
