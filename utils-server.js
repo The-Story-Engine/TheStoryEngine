@@ -6,6 +6,17 @@ export async function fetchAdminGraphQL(
   operationName,
   variables
 ) {
+  console.log({
+    method: "POST",
+    body: JSON.stringify({
+      query: operationsDoc,
+      variables: variables,
+      operationName: operationName,
+    }),
+    headers: new Headers({
+      "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
+    }),
+  });
   const result = await fetch(graphqlUrl, {
     method: "POST",
     body: JSON.stringify({
