@@ -433,15 +433,15 @@ export const useWaitlistQuery = () => {
       if (response.errors) {
         window.sessionStorage.removeItem("tseWaitlistToken");
         setToken();
-        queryClient.resetQueries("waitlist");
         queryClient.setQueryData(
           "waitlistError",
           "Email confirmation link expired, please try again."
         );
+        return null;
       } else {
         queryClient.resetQueries("waitlistError");
+        return response?.data?.waitlist[0];
       }
-      return response?.data?.waitlist[0];
     },
     { enabled: !!token }
   );
