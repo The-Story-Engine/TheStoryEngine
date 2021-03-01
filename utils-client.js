@@ -398,9 +398,8 @@ export const useWaitlistToken = () => {
         existingToken = window.sessionStorage.getItem("tseWaitlistToken");
       }
     }
-    console.log({ existingToken });
     setToken(existingToken);
-  }, []);
+  }, [router?.query?.token]);
   return [token, setToken];
 };
 
@@ -424,7 +423,6 @@ export const useWaitlistQuery = () => {
   const queryClient = useQueryClient();
 
   const [token, setToken] = useWaitlistToken();
-  console.log({ token });
   return useQuery(
     "waitlist",
     async () => {
@@ -453,4 +451,12 @@ export const useWaitlistEmailQuery = () => {
 
 export const useWaitlistErrorQuery = () => {
   return useQuery("waitlistError", () => null, { enabled: false });
+};
+
+export const useWaitlistLogout = () => {
+  const router = useRouter();
+  return () => {
+    window.sessionStorage.removeItem("tseWaitlistToken");
+    router.push("/waitlist", undefined, { shallow: false });
+  };
 };

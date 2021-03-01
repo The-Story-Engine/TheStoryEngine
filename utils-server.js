@@ -6,17 +6,6 @@ export async function fetchAdminGraphQL(
   operationName,
   variables
 ) {
-  console.log({
-    method: "POST",
-    body: JSON.stringify({
-      query: operationsDoc,
-      variables: variables,
-      operationName: operationName,
-    }),
-    headers: new Headers({
-      "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
-    }),
-  });
   const result = await fetch(graphqlUrl, {
     method: "POST",
     body: JSON.stringify({
@@ -160,7 +149,6 @@ export async function sendEmail(template, email, jwt, linkDomain) {
     ? `http://${linkDomain}`
     : `https://${linkDomain}`;
   const link = `${domainUrl}/waitlist?token=${jwt}`;
-
   return await client.sendEmail({
     From: "hello@thestoryengine.co.uk",
     To: email,

@@ -1,5 +1,6 @@
 import Layout from "@components/Layout";
 import Waitlist from "@components/Waitlist";
+import Button from "@components/Button";
 import Donate from "@components/Donate";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -7,6 +8,8 @@ import {
   useWaitlistQuery,
   useConfirmWaitlistMutation,
   useWaitlistEmailQuery,
+  waitlistLogout,
+  useWaitlistLogout,
 } from "utils-client";
 import { useEffect } from "react";
 
@@ -23,10 +26,10 @@ export default function WaitlistPage() {
   const waitlistQuery = useWaitlistQuery();
   const confirmWaitlistMutation = useConfirmWaitlistMutation();
   const waitlistEmailQuery = useWaitlistEmailQuery();
+  const waitlistLogout = useWaitlistLogout();
 
   useEffect(() => {
     if (waitlistQuery.data && !waitlistQuery.data.confirmed) {
-      console.log({ id: waitlistQuery.data.id });
       confirmWaitlistMutation.mutate(waitlistQuery.data.id);
     }
   }, [waitlistQuery.data]);
@@ -55,7 +58,7 @@ export default function WaitlistPage() {
             <div className="flex flex-col items-center">
               <h2 className="w-full font-bold text-center text-h1">Waitlist</h2>
             </div>
-            <div className="flex flex-col items-center pt-12">
+            <div className="flex flex-col items-center pt-12 space-y-6">
               {waitlistQuery.data ? (
                 <>
                   <h2 className="text-h3">
@@ -63,6 +66,7 @@ export default function WaitlistPage() {
                     here.
                   </h2>
                   <p>{JSON.stringify(waitlistQuery.data, null, "  ")}</p>
+                  <Button onPress={waitlistLogout}>Logout</Button>
                 </>
               ) : (
                 waitlist

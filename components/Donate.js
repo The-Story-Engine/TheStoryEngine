@@ -61,26 +61,31 @@ const CheckoutInner = ({ intentSecret, amount }) => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center self-stretch space-y-6"
-      >
-        <div className="self-stretch sm:border-t sm:border-gray-200 sm:pt-5">
-          <div>
-            <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
-          </div>
-        </div>
-        <Button
-          isDisabled={!!result || !stripe}
-          type="submit"
-          isDisabled={!stripe || isLoading}
-          className={isLoading ? "animate-pulse" : ""}
+      {result ? (
+        <code>{JSON.stringify(result, null, "  ")}</code>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center self-stretch space-y-6"
         >
-          {isLoading ? "Loading..." : `Pay £${amount}`}
-        </Button>
-        {errorMessage ? <Error message={result.error.message} /> : null}
-      </form>
-      {result && <code>{JSON.stringify(result, null, "  ")}</code>}
+          <div className="self-stretch sm:border-t sm:border-gray-200 sm:pt-5">
+            <div>
+              <CardElement
+                options={{ style: { base: { fontSize: "16px" } } }}
+              />
+            </div>
+          </div>
+          <Button
+            isDisabled={!!result || !stripe}
+            type="submit"
+            isDisabled={!stripe || isLoading}
+            className={isLoading ? "animate-pulse" : ""}
+          >
+            {isLoading ? "Loading..." : `Pay £${amount}`}
+          </Button>
+          {errorMessage ? <Error message={result.error.message} /> : null}
+        </form>
+      )}
     </>
   );
 };
