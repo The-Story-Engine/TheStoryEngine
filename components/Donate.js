@@ -52,7 +52,7 @@ const CheckoutInner = ({ intentSecret, amount }) => {
   let errorMessage;
 
   if (result?.error) {
-    if (result.error.type === "card_error") {
+    if (["card_error", "validation_error"].includes(result.error.type)) {
       errorMessage = result.error.message;
     } else {
       errorMessage = "Payment failed.";
@@ -61,7 +61,7 @@ const CheckoutInner = ({ intentSecret, amount }) => {
 
   return (
     <>
-      {result ? (
+      {result && !errorMessage ? (
         <code>{JSON.stringify(result, null, "  ")}</code>
       ) : (
         <form
@@ -75,6 +75,7 @@ const CheckoutInner = ({ intentSecret, amount }) => {
               />
             </div>
           </div>
+          {errorMessage ? <Error message={result.error.message} /> : null}
           <Button
             isDisabled={!!result || !stripe}
             type="submit"
@@ -83,7 +84,6 @@ const CheckoutInner = ({ intentSecret, amount }) => {
           >
             {isLoading ? "Loading..." : `Pay £${amount}`}
           </Button>
-          {errorMessage ? <Error message={result.error.message} /> : null}
         </form>
       )}
     </>

@@ -52,8 +52,6 @@ export default function Waitlist() {
     );
   }
 
-  console.log(createWaitlistMutation.status);
-
   return (
     <div className="flex flex-col items-center space-y-4">
       {result ? (
