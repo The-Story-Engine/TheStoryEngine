@@ -145,17 +145,19 @@ export function confirmUserWaitlist(jwt, id) {
 var client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
 export async function sendEmail(template, email, jwt, linkDomain) {
-  const domainUrl = linkDomain.includes("localhost")
-    ? `http://${linkDomain}`
-    : `https://${linkDomain}`;
-  const link = `${domainUrl}/waitlist?token=${jwt}`;
-  console.log(link);
-  /*return await client.sendEmail({
-    From: "hello@thestoryengine.co.uk",
-    To: email,
-    Subject: "Please Confirm your Address!",
-    HtmlBody: `<strong>Template:</strong> ${template}, <a href="${link}" target="_blank">link!</a>`,
-    TextBody: `template: ${template}, link: ${link}`,
-    MessageStream: "outbound",
-  });*/
+  if (linkDomain.includes("localhost")) {
+    const link = `http://${linkDomain}/waitlist?token=${jwt}`;
+    console.log({ link, template, email });
+    return { ok: true };
+  } else {
+    const link = `https://${linkDomain}/waitlist?token=${jwt}`;
+    return await client.sendEmail({
+      From: "hello@thestoryengine.co.uk",
+      To: email,
+      Subject: "Please Confirm your Address!",
+      HtmlBody: `<strong>Template:</strong> ${template}, <a href="${link}" target="_blank">link!</a>`,
+      TextBody: `template: ${template}, link: ${link}`,
+      MessageStream: "outbound",
+    });
+  }
 }
