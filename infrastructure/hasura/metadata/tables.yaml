@@ -30,5 +30,5 @@
     - role: user
       permission:
         filter:
-          email:
-            _eq: X-Hasura-Email
+          id:
+            _eq: X-Hasura-Email-Id

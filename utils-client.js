@@ -30,6 +30,28 @@ mutation ConfirmWaitlist ($id: uuid!) {
   }
 `;
 
+const updateListsQuery = `
+mutation UpdateLists ($id: uuid!, $lists: _text) {
+  update_waitlist_by_pk(pk_columns: {id: $id}, _set: {lists: $lists}) {
+    id
+    created_at
+    email
+    lists
+    confirmed
+    updated_at
+    donations
+  }
+}
+`;
+
+const deleteWaitlistQuery = `
+mutation DeleteWaitlist($id: uuid!) {
+  delete_waitlist_by_pk(id: $id) {
+    id
+  }
+}
+`;
+
 /**
  *
  * Initialize story state from localStorage
@@ -411,10 +433,45 @@ const confirmWaitlist = async (id) => {
   return response?.data?.update_waitlist_by_pk;
 };
 
+const deleteWaitlist = async (id) => {
+  const token = window.sessionStorage.getItem("tseWaitlistToken");
+  const response = await directGraphQLQuery(deleteWaitlistQuery, token, {
+    id,
+  });
+  return response?.data?.update_waitlist_by_pk;
+};
+
+const arrayToHasuraList = (strings) => `{${strings.join(",")}}`;
+
+const updateLists = async (id, lists = []) => {
+  const token = window.sessionStorage.getItem("tseWaitlistToken");
+  const response = await directGraphQLQuery(updateListsQuery, token, {
+    id,
+    lists: arrayToHasuraList(lists),
+  });
+  return response?.data?.update_waitlist_by_pk;
+};
+
 export const useConfirmWaitlistMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation("confirmWaitlist", confirmWaitlist, {
+    onSuccess: (result) => queryClient.setQueryData("waitlist", result),
+  });
+};
+
+export const useDeleteWaitlistMutation = (id) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(["deleteWaitlist", id], () => deleteWaitlist(id), {
+    onSuccess: () => queryClient.setQueryData("waitlist", null),
+  });
+};
+
+export const useUpdateListsMutation = (id) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(["updateLists", id], (lists) => updateLists(id, lists), {
     onSuccess: (result) => queryClient.setQueryData("waitlist", result),
   });
 };
