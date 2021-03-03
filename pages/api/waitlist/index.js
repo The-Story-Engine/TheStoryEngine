@@ -115,7 +115,7 @@ export default async function waitlist(req, res) {
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
       emailResult = await sendEmail(
-        "email verify",
+        "email-verify",
         email,
         encodedToken,
         req.headers.host

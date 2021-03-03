@@ -4,8 +4,6 @@ Master branch is live at https://jelly.tse.fish through Netlify auto deployment:
 
 This is a [Next.js](https://nextjs.org/) v10.0.1 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/Bk4UicocL)!
 
-This project is branched from the netlify [next.js & netlify starter](https://github.com/cassidoo/next-netlify-starter), it has a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases.
-
 [PostgreSQL](https://www.postgresql.org/) is the database software
 [Hasura](https://hasura.io/) is the database management service
 
