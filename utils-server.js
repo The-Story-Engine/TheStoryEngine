@@ -107,26 +107,27 @@ export async function sendEmail(template, email, jwt, linkDomain) {
       MessageStream: "outbound",
     });
   }
+}
 
-  export async function sendTemplateEmail(template, email, jwt, linkDomain) {
-    if (linkDomain.includes("localhost")) {
-      const link = `http://${linkDomain}/waitlist?token=${jwt}`;
-      console.log({ link, template, email });
-      return { ok: true };
-    } else {
-      const link = `https://${linkDomain}/waitlist?token=${jwt}`;
-      return await postmarkClient.sendEmailWithTemplate({
-        TemplateAlias: template,
-        TemplateModel: {
-          action_url: link,
-          product_name: "The Story Engine",
-          email: email,
-          support_mail: "hello@tseventures.com",
-          sender_name: "TSE Team",
-        },
-        From: "hello@thestoryengine.co.uk",
-        To: email,
-        MessageStream: "outbound",
-      });
-    }
+export async function sendTemplateEmail(template, email, jwt, linkDomain) {
+  if (linkDomain.includes("localhost")) {
+    const link = `http://${linkDomain}/waitlist?token=${jwt}`;
+    console.log({ link, template, email });
+    return { ok: true };
+  } else {
+    const link = `https://${linkDomain}/waitlist?token=${jwt}`;
+    return await postmarkClient.sendEmailWithTemplate({
+      TemplateAlias: template,
+      TemplateModel: {
+        action_url: link,
+        product_name: "The Story Engine",
+        email: email,
+        support_mail: "hello@tseventures.com",
+        sender_name: "TSE Team",
+      },
+      From: "hello@thestoryengine.co.uk",
+      To: email,
+      MessageStream: "outbound",
+    });
+  }
 }
