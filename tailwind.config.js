@@ -227,14 +227,8 @@ module.exports = {
       ringOpacity: ["focus-visible"],
       textDecoration: ["focus-visible"],
       fontWeight: ["hover", "focus"],
+      animation: ["disabled"],
     },
   },
-  plugins: [
-    plugin(function ({ addBase, theme }) {
-      addBase({
-        html: { color: theme("textColor.grey.600") },
-      });
-    }),
-    require("tailwind-scrollbar"),
-  ],
+  plugins: [require("tailwind-scrollbar"), require("@tailwindcss/forms")],
 };
