@@ -235,7 +235,7 @@ export default function Donate() {
         {amount
           ? boldMid(
               t("SUPPORT.CREDIT", {
-                amount: amount * 2 + 5,
+                amount: amount * 2,
                 returnObjects: true,
               })
             )

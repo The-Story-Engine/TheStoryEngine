@@ -375,14 +375,14 @@ export const getStripeIntent = async ({ amount, email }) => {
   return response.json();
 };
 
-export const joinWaitlist = async ({ email }) => {
+export const joinWaitlist = async ({ email, lists = [] }) => {
   const response = await fetch("/api/waitlist", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      lists: ["launch"],
+      lists,
       email,
     }),
   });
