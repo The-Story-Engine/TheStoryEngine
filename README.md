@@ -1,4 +1,4 @@
-# Jellyfish MVP
+# TheStoryEngine UK
 
 Master branch is live at https://jelly.tse.fish through Netlify auto deployment: [![Netlify Status](https://api.netlify.com/api/v1/badges/4e0b8176-4b48-45b1-ac94-229be361c43d/deploy-status)](https://app.netlify.com/sites/next-starter/deploys)
 
@@ -6,19 +6,29 @@ This is a [Next.js](https://nextjs.org/) v10.0.1 project bootstrapped with [`cre
 
 This project is branched from the netlify [next.js & netlify starter](https://github.com/cassidoo/next-netlify-starter), it has a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases.
 
-[FaunaDB](https://fauna.com) is the database service
+[PostgreSQL](https://www.postgresql.org/) is the database software
+[Hasura](https://hasura.io/) is the database management service
 
 ## Getting Started
 
-First, run the development server:
+After cloning the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Second, go to https://localhost:3000
+- Install NPM dependencies with `npm install`
+- Install docker app https://www.docker.com/products/docker-desktop
+  - Navigate to /infrastructure
+  - Run `docker compose up -d`
+- Install Hasura bash app with `curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash`
+  - Navigate to /infrastructure/hasura
+  - Run `hasura metadata apply`
+  - Go to localhost:8080/console
+    - Naviagte to Data tab
+    - Ensure that the tables are being tracked on the left
+- Copy `env.example` to `.env.local` and enter the keys in `.env.local` for:
+  - Stripe
+  - Postmark
+  - Hasura
+- Run `npm run dev` in /
+- Go to http://localhost:3000
 
 ## Pages
 
