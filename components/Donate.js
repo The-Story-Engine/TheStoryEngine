@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 
-import Waitlist from "@components/Waitlist";
 import Button from "@components/Button";
 import { useTranslation } from "next-i18next";
 import { getStripeIntent, useWaitlistQuery } from "utils-client";
 import StripeSVG from "public/stripe-badge.svg";
-import SpinnerSVG from "public/spinner.svg";
 import {
   CardElement,
   Elements,
@@ -101,7 +99,11 @@ const Checkout = (props) => {
   const [stripePromise, setStripePromise] = useState();
 
   useEffect(() => {
-    loadStripe.setLoadParameters({ advancedFraudSignals: false });
+    try {
+      loadStripe.setLoadParameters({ advancedFraudSignals: false });
+    } catch (error) {
+      // ignore
+    }
     setStripePromise(
       loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
     );
@@ -244,10 +246,19 @@ export default function Donate() {
       <div className="flex flex-col mt-6 space-y-6 sm:space-y-5">
         {waitlistQuery.data ? (
           paymentIntent ? (
-            <Checkout
-              intentSecret={paymentIntent.intentSecret}
-              amount={paymentIntent.amount}
-            />
+            <>
+              <AmountSelection
+                amount={amount}
+                setAmount={(amount) => {
+                  setAmount(amount);
+                  setPaymentIntent();
+                }}
+              />
+              <Checkout
+                intentSecret={paymentIntent.intentSecret}
+                amount={paymentIntent.amount}
+              />
+            </>
           ) : (
             <>
               <AmountSelection amount={amount} setAmount={setAmount} />
