@@ -68,7 +68,7 @@ const CheckboxField = ({
         <div className="mt-4 sm:mt-0 sm:col-span-3">
           <div className="max-w-lg space-y-4">
             {lists.map(({ value, title, description }) => (
-              <div className="relative flex items-start">
+              <div key={value} className="relative flex items-start">
                 <div className="flex items-center h-5">
                   <input
                     onChange={handleChange}
@@ -81,7 +81,7 @@ const CheckboxField = ({
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label for={value} className="font-medium text-gray-700">
+                  <label htmlFor={value} className="font-medium text-gray-700">
                     {title}
                   </label>
                   <p className="text-gray-500">{description}</p>
@@ -107,42 +107,42 @@ const LaunchCreditTable = ({ joinDate }) => (
         </div>
       </div>
       <div className="mt-4 sm:mt-0 sm:col-span-3">
-        <div class="flex flex-col">
-          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50">
+        <div className="flex flex-col">
+          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                       >
                         Amount
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                       >
                         Date
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                       >
                         Description
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                         £5
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                         {joinDate}
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                         Joined workspaces waitlist.
                       </td>
                     </tr>
@@ -233,7 +233,7 @@ export default function WaitlistPage() {
                     onPress={handleDelete}
                     isDisabled={deleteWaitlistMutation.isLoading}
                   >
-                    Remove
+                    Delete
                   </ButtonWarning>
                 </>
               ) : (

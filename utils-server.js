@@ -1,6 +1,50 @@
-var postmark = require("postmark");
+import * as postmark from "postmark";
+
+import { arrayToHasuraList } from "utils-common";
 
 const graphqlUrl = process.env.NEXT_PUBLIC_GRAPHQL_API;
+const hasuraAdminSecret = process.env.HASURA_ADMIN_SECRET;
+const postmarkSecretKey = process.env.POSTMARK_KEY;
+
+var postmarkClient = new postmark.ServerClient(postmarkSecretKey);
+
+export const waitlistEmailQuery = `
+query WaitlistByEmail($email: String!) {
+  waitlist (where: {email: {_eq: $email}}) {
+    id
+    created_at
+    email
+    lists
+    confirmed
+    updated_at
+    donations
+  }
+}
+`;
+
+export const insertWaitlistQuery = `
+mutation InsertWaitlist($email: String!, $lists: _text, $donations:jsonb) {
+    insert_waitlist_one(object: {email: $email, lists: $lists, donations: $donations}) {
+      id
+      email
+      lists
+      confirmed
+      donations
+    }
+  }
+`;
+
+export const deleteInsertWaitlistQuery = `
+mutation DeleteInsertWaitlist($email: String!, $lists: _text, $donations: jsonb, $existingId: uuid!) {
+    delete_waitlist_by_pk(id: $existingId) {
+      id
+    }
+    insert_waitlist_one(object: {email: $email, lists: $lists, donations: $donations}) {
+      id
+    }
+  }
+`;
+
 export async function fetchAdminGraphQL(
   operationsDoc,
   operationName,
@@ -14,82 +58,16 @@ export async function fetchAdminGraphQL(
       operationName: operationName,
     }),
     headers: new Headers({
-      "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
+      "x-hasura-admin-secret": hasuraAdminSecret,
     }),
   });
 
   return await result.json();
 }
-export async function fetchUserGraphQL(
-  operationsDoc,
-  operationName,
-  variables,
-  jwt
-) {
-  const result = await fetch(graphqlUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      query: operationsDoc,
-      variables: variables,
-      operationName: operationName,
-    }),
-    headers: new Headers({
-      Authorization: `Bearer ${jwt}`,
-    }),
-  });
-
-  return await result.json();
-}
-
-const waitlistQuery = `
-    query Waitlist {
-      waitlist {
-        id
-        created_at
-        email
-        lists
-        confirmed
-        updated_at
-        donations
-      }
-    }
-  `;
-
-export function fetchUserWaitlist(jwt) {
-  return fetchUserGraphQL(waitlistQuery, "Waitlist", {}, jwt);
-}
-
-const waitlistEmailQuery = `
-    query WaitlistByEmail($email: String!) {
-      waitlist (where: {email: {_eq: $email}}) {
-        id
-        created_at
-        email
-        lists
-        confirmed
-        updated_at
-        donations
-      }
-    }
-  `;
 
 export function fetchEmailWaitlist(email) {
   return fetchAdminGraphQL(waitlistEmailQuery, "WaitlistByEmail", { email });
 }
-
-const insertWaitlistQuery = `
-mutation InsertWaitlist($email: String!, $lists: _text, $donations:jsonb) {
-    insert_waitlist_one(object: {email: $email, lists: $lists, donations: $donations}) {
-      id
-      email
-      lists
-      confirmed
-      donations
-    }
-  }
-`;
-
-const arrayToHasuraList = (strings) => `{${strings.join(",")}}`;
 
 export function insertUnconfirmedWaitlist(email, lists = [], donations = []) {
   return fetchAdminGraphQL(insertWaitlistQuery, "InsertWaitlist", {
@@ -98,17 +76,6 @@ export function insertUnconfirmedWaitlist(email, lists = [], donations = []) {
     donations,
   });
 }
-
-const deleteInsertWaitlistQuery = `
-mutation DeleteInsertWaitlist($email: String!, $lists: _text, $donations: jsonb, $existingId: uuid!) {
-    delete_waitlist_by_pk(id: $existingId) {
-      id
-    }
-    insert_waitlist_one(object: {email: $email, lists: $lists, donations: $donations}) {
-      id
-    }
-  }
-`;
 
 export function deleteExistingInsertNewWaitlist({
   existingId,
@@ -124,26 +91,6 @@ export function deleteExistingInsertNewWaitlist({
   });
 }
 
-const confirmWaitlistQuery = `
-mutation ConfirmWaitlist ($id: uuid!) {
-    update_waitlist_by_pk(pk_columns: {id: $id}, _set: {confirmed: true}) {
-        id
-        created_at
-        email
-        lists
-        confirmed
-        updated_at
-        donations
-    }
-  }
-`;
-
-export function confirmUserWaitlist(jwt, id) {
-  return fetchUserGraphQL(confirmWaitlistQuery, "ConfirmWaitlist", { id }, jwt);
-}
-
-var client = new postmark.ServerClient(process.env.POSTMARK_KEY);
-
 export async function sendEmail(template, email, jwt, linkDomain) {
   if (linkDomain.includes("localhost")) {
     const link = `http://${linkDomain}/waitlist?token=${jwt}`;
@@ -151,7 +98,7 @@ export async function sendEmail(template, email, jwt, linkDomain) {
     return { ok: true };
   } else {
     const link = `https://${linkDomain}/waitlist?token=${jwt}`;
-    return await client.sendEmail({
+    return await postmarkClient.sendEmail({
       From: "hello@thestoryengine.co.uk",
       To: email,
       Subject: "Please Confirm your Address!",

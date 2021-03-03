@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Ulid } from "id128";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
+
+import { arrayToHasuraList } from "utils-common";
+
 const waitlistQuery = `
 query Waitlist {
   waitlist {
@@ -441,8 +444,6 @@ const deleteWaitlist = async (id) => {
   return response?.data?.update_waitlist_by_pk;
 };
 
-const arrayToHasuraList = (strings) => `{${strings.join(",")}}`;
-
 const updateLists = async (id, lists = []) => {
   const token = window.sessionStorage.getItem("tseWaitlistToken");
   const response = await directGraphQLQuery(updateListsQuery, token, {
@@ -508,6 +509,10 @@ export const useWaitlistEmailQuery = () => {
 
 export const useWaitlistErrorQuery = () => {
   return useQuery("waitlistError", () => null, { enabled: false });
+};
+
+export const useGraphToken = () => {
+  return useQuery("graphToken", () => null, { enabled: false });
 };
 
 export const useWaitlistLogout = () => {

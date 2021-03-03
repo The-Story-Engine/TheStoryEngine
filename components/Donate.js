@@ -24,9 +24,16 @@ const CheckoutInner = ({ intentSecret, amount }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState();
+  const [inputErrorMessage, setInputErrorMessage] = useState();
+
+  const handleCardChange = ({ error }) => {
+    setResult();
+    setInputErrorMessage(error?.message);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setResult();
     setIsLoading(true);
     const cardResult = await stripe.createPaymentMethod({
       type: "card",
@@ -49,7 +56,7 @@ const CheckoutInner = ({ intentSecret, amount }) => {
     setIsLoading(false);
   };
 
-  let errorMessage;
+  let errorMessage = inputErrorMessage;
 
   if (result?.error) {
     if (["card_error", "validation_error"].includes(result.error.type)) {
@@ -72,14 +79,14 @@ const CheckoutInner = ({ intentSecret, amount }) => {
             <div>
               <CardElement
                 options={{ style: { base: { fontSize: "16px" } } }}
+                onChange={handleCardChange}
               />
             </div>
           </div>
-          {errorMessage ? <Error message={result.error.message} /> : null}
+          {errorMessage ? <Error message={errorMessage} /> : null}
           <Button
-            isDisabled={!!result || !stripe}
             type="submit"
-            isDisabled={!stripe || isLoading}
+            isDisabled={!stripe || inputErrorMessage || isLoading}
             className={isLoading ? "animate-pulse" : ""}
           >
             {isLoading ? "Loading..." : `Pay £${amount}`}
