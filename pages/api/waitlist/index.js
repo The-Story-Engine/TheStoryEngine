@@ -5,6 +5,7 @@ import {
   insertUnconfirmedWaitlist,
   deleteExistingInsertNewWaitlist,
   sendEmail,
+  sendTemplateEmail,
 } from "utils-server";
 
 export default async function waitlist(req, res) {
@@ -114,7 +115,7 @@ export default async function waitlist(req, res) {
       }
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
-      emailResult = await sendEmail(
+      emailResult = await sendTemplateEmail(
         "email-verify",
         email,
         encodedToken,
