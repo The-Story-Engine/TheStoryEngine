@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 
 import { useCreateWaitlistMutation, useWaitlistErrorQuery } from "utils-client";
 import Button from "@components/Button";
+import ListCheckboxes from "@components/ListCheckboxes";
 
 const translationSpaces = ["workspaces", "common"];
 
@@ -14,6 +15,7 @@ export default function Waitlist() {
 
   const emailRef = useRef();
   const [email, setEmail] = useState("");
+  const [lists, setLists] = useState(["launch"]);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const waitlistErrorQuery = useWaitlistErrorQuery();
 
@@ -25,7 +27,7 @@ export default function Waitlist() {
     } else {
       setEmailInvalid(false);
     }
-    await createWaitlistMutation.mutate({ email });
+    await createWaitlistMutation.mutate({ email, lists });
   };
 
   let result;
@@ -85,16 +87,15 @@ export default function Waitlist() {
               />
             </div>
           </div>
-          <div>
-            <p className="text-center">
-              You'll get a confirmation email now, and an email for each of the
-              2 launches later this year.
-            </p>
-            <p className="text-center">
-              Your email will then be stored for 12 months so we know it's you
-              when you sign up.
-            </p>
-          </div>
+          <ListCheckboxes
+            title="Emails"
+            checked={lists}
+            isDisabled={
+              !!createWaitlistMutation.status &&
+              createWaitlistMutation.status !== "idle"
+            }
+            onChange={setLists}
+          />
           <Button
             onPress={handleWaitlist}
             isDisabled={emailInvalid || createWaitlistMutation.isLoading}
