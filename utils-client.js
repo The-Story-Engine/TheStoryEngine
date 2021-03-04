@@ -361,7 +361,7 @@ export const migrate = () => {
   }
 };
 
-export const getStripeIntent = async ({ amount, email }) => {
+export const getStripeIntent = async ({ amount, email, waitlistId }) => {
   const response = await fetch("/api/donate", {
     method: "POST",
     headers: {
@@ -370,6 +370,7 @@ export const getStripeIntent = async ({ amount, email }) => {
     body: JSON.stringify({
       amount: amount,
       email,
+      waitlistId,
     }),
   });
   return response.json();
@@ -389,10 +390,32 @@ export const joinWaitlist = async ({ email, lists = [] }) => {
   return response.json();
 };
 
+export const completeDonation = async ({ waitlistId, intentId, email }) => {
+  const response = await fetch("/api/donate/complete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      waitlistId,
+      intentId,
+      email,
+    }),
+  });
+  return response.json();
+};
+
 export const useCreateWaitlistMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(joinWaitlist, {
     onSuccess: (result) => queryClient.setQueryData("waitlistEmail", result),
+  });
+};
+
+export const useCompleteDonationMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation(completeDonation, {
+    onSuccess: (result) => queryClient.setQueryData("waitlist", result),
   });
 };
 

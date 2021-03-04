@@ -22,6 +22,17 @@ POST http://localhost:3000/api/donate
 content-type: application/json
 
 {
+    "waitlistId": "e3fd86e2-d3d4-4cbb-97e8-1b7de6eff61f",
     "email": "jedd@thestoryengine.co.uk",
     "amount": "20"
+}
+
+### Get stripe payment intent
+POST http://localhost:3000/api/donate/complete
+content-type: application/json
+
+{
+    "email": "boop@doop.com",
+    "waitlistId": "e3fd86e2-d3d4-4cbb-97e8-1b7de6eff61f",
+    "intentId": "pi_1IQyZ0DS72lMqlMhLuxDB98A"
 }

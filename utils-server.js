@@ -45,6 +45,28 @@ mutation DeleteInsertWaitlist($email: String!, $lists: _text, $donations: jsonb,
   }
 `;
 
+export const appendDonationWaitlistQuery = `
+mutation AppendWaitlistDonation($id: uuid!, $donation: jsonb) {
+  update_waitlist_by_pk(pk_columns: {id: $id}, _append: {donations: $donation}) {
+    id
+  }
+}
+`;
+
+export const updateDonationsWaitlistQuery = `
+mutation UpdateWaitlistDonations($id: uuid!, $donations: jsonb) {
+  update_waitlist_by_pk(pk_columns: {id: $id}, _set: {donations: $donations}) {
+    id
+    created_at
+    updated_at
+    confirmed
+    donations
+    email
+    lists
+  }
+}
+`;
+
 export async function fetchAdminGraphQL(
   operationsDoc,
   operationName,
@@ -89,6 +111,28 @@ export function deleteExistingInsertNewWaitlist({
     donations,
     existingId,
   });
+}
+
+export function appendWaitlistDonation({ id, donation }) {
+  return fetchAdminGraphQL(
+    appendDonationWaitlistQuery,
+    "AppendWaitlistDonation",
+    {
+      id,
+      donation,
+    }
+  );
+}
+
+export function updateWaitlistDonations({ id, donations }) {
+  return fetchAdminGraphQL(
+    updateDonationsWaitlistQuery,
+    "UpdateWaitlistDonations",
+    {
+      id,
+      donations,
+    }
+  );
 }
 
 export async function sendEmail(template, email, jwt, linkDomain) {

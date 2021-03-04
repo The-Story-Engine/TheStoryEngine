@@ -24,7 +24,7 @@ export const getStaticProps = async ({ locale }) => ({
   },
 });
 
-const LaunchCreditTable = ({ joinDate }) => (
+const LaunchCreditTable = ({ joinDate, donations = [] }) => (
   <div role="group" aria-labelledby="label-email">
     <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-baseline">
       <div>
@@ -53,7 +53,7 @@ const LaunchCreditTable = ({ joinDate }) => (
                         scope="col"
                         className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                       >
-                        Date
+                        Date Added
                       </th>
                       <th
                         scope="col"
@@ -75,6 +75,32 @@ const LaunchCreditTable = ({ joinDate }) => (
                         Joined workspaces waitlist.
                       </td>
                     </tr>
+                    {donations
+                      .filter((donation) => donation?.status === "succeeded")
+                      .map((donation) => (
+                        <tr key={donation.id}>
+                          <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                            £{(donation.amount / 100) * 2}
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {new Intl.DateTimeFormat("en-GB", {
+                              dateStyle: "long",
+                            }).format(new Date(donation.created * 1000))}
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            £{donation.amount / 100} Donation. Thankyou!{" "}
+                            {donation?.receiptUrls ? (
+                              <a
+                                href={donation?.receiptUrls[0]}
+                                className="font-semibold cursor-pointer hover:underline focus-visible:underline"
+                                target="_blank"
+                              >
+                                View Receipt.
+                              </a>
+                            ) : null}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
@@ -157,6 +183,7 @@ export default function WaitlistPage() {
                     joinDate={new Intl.DateTimeFormat("en-GB", {
                       dateStyle: "long",
                     }).format(new Date(waitlistQuery.data.created_at))}
+                    donations={waitlistQuery.data.donations}
                   />
                   <ButtonWarning
                     onPress={handleDelete}

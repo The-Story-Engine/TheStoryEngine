@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 
 import Button from "@components/Button";
 import { useTranslation } from "next-i18next";
-import { getStripeIntent, useWaitlistQuery } from "utils-client";
+import {
+  getStripeIntent,
+  useCompleteDonationMutation,
+  useWaitlistQuery,
+} from "utils-client";
 import StripeSVG from "public/stripe-badge.svg";
 import {
   CardElement,
@@ -16,13 +20,14 @@ const translationSpaces = ["workspaces", "common"];
 
 const Error = ({ message }) => <p className="text-mandy">{message}</p>;
 
-const CheckoutInner = ({ intentSecret, amount }) => {
+const CheckoutInner = ({ intentSecret, amount, waitlistId }) => {
   const stripe = useStripe();
   const elements = useElements();
 
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState();
   const [inputErrorMessage, setInputErrorMessage] = useState();
+  const completeDonationMutation = useCompleteDonationMutation();
 
   const handleCardChange = ({ error }) => {
     setResult();
@@ -48,6 +53,12 @@ const CheckoutInner = ({ intentSecret, amount }) => {
       if (paymentResult?.error) {
         console.log("confirmCardPayment error");
         console.error(paymentResult.error);
+      } else {
+        completeDonationMutation.mutate({
+          email: paymentResult.paymentIntent?.receipt_email,
+          intentId: paymentResult.paymentIntent?.id,
+          waitlistId,
+        });
       }
       setResult(paymentResult);
     }
@@ -67,7 +78,12 @@ const CheckoutInner = ({ intentSecret, amount }) => {
   return (
     <>
       {result && !errorMessage ? (
-        <code>{JSON.stringify(result, null, "  ")}</code>
+        <p className="text-center">
+          Thankyou! A receipt has been emailed to{" "}
+          <span className="font-mono">
+            {result.paymentIntent?.receipt_email}
+          </span>
+        </p>
       ) : (
         <form
           onSubmit={handleSubmit}
@@ -223,6 +239,7 @@ export default function Donate() {
     const paymentIntent = await getStripeIntent({
       amount,
       email: waitlistQuery.data?.email,
+      waitlistId: waitlistQuery.data?.id,
     });
     setIsLoading(false);
     setPaymentIntent(paymentIntent);
@@ -233,7 +250,7 @@ export default function Donate() {
         <p>{t("SUPPORT.SUB_TITLE.0")}</p>
         <p className="pt-2">{t("SUPPORT.SUB_TITLE.1")}</p>
       </div>
-      <p>
+      <p className="text-center">
         {amount
           ? boldMid(
               t("SUPPORT.CREDIT", {
@@ -257,6 +274,7 @@ export default function Donate() {
               <Checkout
                 intentSecret={paymentIntent.intentSecret}
                 amount={paymentIntent.amount}
+                waitlistId={waitlistQuery.data?.id}
               />
             </>
           ) : (
