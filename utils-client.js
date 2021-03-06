@@ -438,15 +438,15 @@ export const useWaitlistToken = () => {
   const [token, setToken] = useState();
   let router = useRouter();
   useEffect(() => {
-    let existingToken = router?.query?.token;
-    if (typeof window !== "undefined") {
-      if (existingToken) {
-        window.sessionStorage.setItem("tseWaitlistToken", existingToken);
-      } else {
-        existingToken = window.sessionStorage.getItem("tseWaitlistToken");
-      }
+    const queryToken = router?.query?.token;
+    if (queryToken) {
+      window.sessionStorage.setItem("tseWaitlistToken", queryToken);
+      router.replace("/waitlist");
+      setToken(queryToken);
+    } else {
+      const browserToken = window.sessionStorage.getItem("tseWaitlistToken");
+      setToken(browserToken);
     }
-    setToken(existingToken);
   }, [router?.query?.token]);
   return [token, setToken];
 };
@@ -539,9 +539,8 @@ export const useGraphToken = () => {
 };
 
 export const useWaitlistLogout = () => {
-  const router = useRouter();
   return () => {
     window.sessionStorage.removeItem("tseWaitlistToken");
-    router.push("/waitlist", undefined, { shallow: false });
+    window.location.reload();
   };
 };
