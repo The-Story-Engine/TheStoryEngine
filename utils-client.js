@@ -441,7 +441,7 @@ export const useWaitlistToken = () => {
     const queryToken = router?.query?.token;
     if (queryToken) {
       window.sessionStorage.setItem("tseWaitlistToken", queryToken);
-      router.replace("/waitlist");
+      router.replace("/roadmap#waitlist");
       setToken(queryToken);
     } else {
       const browserToken = window.sessionStorage.getItem("tseWaitlistToken");

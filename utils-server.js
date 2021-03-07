@@ -137,11 +137,11 @@ export function updateWaitlistDonations({ id, donations }) {
 
 export async function sendEmail(template, email, jwt, linkDomain) {
   if (linkDomain.includes("localhost")) {
-    const link = `http://${linkDomain}/waitlist?token=${jwt}`;
+    const link = `http://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     console.log({ link, template, email });
     return { ok: true };
   } else {
-    const link = `https://${linkDomain}/waitlist?token=${jwt}`;
+    const link = `https://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     return await postmarkClient.sendEmail({
       From: "hello@thestoryengine.co.uk",
       To: email,
@@ -155,11 +155,11 @@ export async function sendEmail(template, email, jwt, linkDomain) {
 
 export async function sendTemplateEmail(template, email, jwt, linkDomain) {
   if (linkDomain.includes("localhost")) {
-    const link = `http://${linkDomain}/waitlist?token=${jwt}`;
+    const link = `http://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     console.log({ link, template, email });
     return { ok: true };
   } else {
-    const link = `https://${linkDomain}/waitlist?token=${jwt}`;
+    const link = `https://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     return await postmarkClient.sendEmailWithTemplate({
       TemplateAlias: template,
       TemplateModel: {

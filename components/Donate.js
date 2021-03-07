@@ -20,7 +20,7 @@ const translationSpaces = ["workspaces", "common"];
 
 const Error = ({ message }) => <p className="text-mandy">{message}</p>;
 
-const CheckoutInner = ({ intentSecret, amount, waitlistId }) => {
+const CheckoutInner = ({ intentSecret, amount, waitlistId, setIsComplete }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -75,38 +75,35 @@ const CheckoutInner = ({ intentSecret, amount, waitlistId }) => {
     }
   }
 
+  useEffect(() => {
+    if (result && !errorMessage) {
+      setIsComplete(true);
+    }
+  }, [result, errorMessage]);
+
   return (
     <>
-      {result && !errorMessage ? (
-        <p className="text-center">
-          Thankyou! A receipt has been emailed to{" "}
-          <span className="font-mono">
-            {result.paymentIntent?.receipt_email}
-          </span>
-        </p>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center self-stretch space-y-6"
-        >
-          <div className="self-stretch sm:border-t sm:border-gray-200 sm:pt-5">
-            <div>
-              <CardElement
-                options={{ style: { base: { fontSize: "16px" } } }}
-                onChange={handleCardChange}
-              />
-            </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center self-stretch space-y-6"
+      >
+        <div className="self-stretch sm:border-t sm:border-gray-200 sm:pt-5">
+          <div>
+            <CardElement
+              options={{ style: { base: { fontSize: "16px" } } }}
+              onChange={handleCardChange}
+            />
           </div>
-          {errorMessage ? <Error message={errorMessage} /> : null}
-          <Button
-            type="submit"
-            isDisabled={!stripe || inputErrorMessage || isLoading}
-            className={isLoading ? "animate-pulse" : ""}
-          >
-            {isLoading ? "Loading..." : `Pay £${amount}`}
-          </Button>
-        </form>
-      )}
+        </div>
+        {errorMessage ? <Error message={errorMessage} /> : null}
+        <Button
+          type="submit"
+          isDisabled={!stripe || inputErrorMessage || isLoading}
+          className={isLoading ? "animate-pulse" : ""}
+        >
+          {isLoading ? "Loading..." : `Pay £${amount}`}
+        </Button>
+      </form>
     </>
   );
 };
@@ -231,6 +228,7 @@ export default function Donate() {
   const [amount, setAmount] = useState();
   const [paymentIntent, setPaymentIntent] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   const waitlistQuery = useWaitlistQuery();
   const { t } = useTranslation(translationSpaces);
 
@@ -250,58 +248,72 @@ export default function Donate() {
         <p>{t("SUPPORT.SUB_TITLE.0")}</p>
         <p className="pt-2">{t("SUPPORT.SUB_TITLE.1")}</p>
       </div>
-      <p className="text-center">
-        {amount
-          ? boldMid(
-              t("SUPPORT.CREDIT", {
-                amount: amount * 2,
-                returnObjects: true,
-              })
-            )
-          : boldMid(t("SUPPORT.CREDIT_BEFORE", { returnObjects: true }))}
-      </p>
-      <div className="flex flex-col mt-6 space-y-6 sm:space-y-5">
-        {waitlistQuery.data ? (
-          paymentIntent ? (
-            <>
-              <AmountSelection
-                amount={amount}
-                setAmount={(amount) => {
-                  setAmount(amount);
-                  setPaymentIntent();
-                }}
-              />
-              <Checkout
-                intentSecret={paymentIntent.intentSecret}
-                amount={paymentIntent.amount}
-                waitlistId={waitlistQuery.data?.id}
-              />
-            </>
-          ) : (
-            <>
-              <AmountSelection amount={amount} setAmount={setAmount} />
-              <Button
-                className="self-center"
-                isDisabled={!amount || isLoading}
-                onPress={handleDonate}
-                className={
-                  isLoading ? "self-center animate-pulse" : "self-center"
-                }
-              >
-                {isLoading ? "Loading..." : t("SUPPORT.BUTTON_LABEL")}
-              </Button>
-            </>
-          )
-        ) : (
-          <p className="font-semibold text-center text-malachite">
-            Please join waitlist above and follow email confirmation link to
-            donate.
+      {isComplete ? (
+        <p className="text-center text-story text-malachite">
+          Thankyou! A receipt has been emailed to{" "}
+          <span className="font-mono">{waitlistQuery.data?.email}</span>
+        </p>
+      ) : (
+        <>
+          <p className="text-center">
+            {amount
+              ? boldMid(
+                  t("SUPPORT.CREDIT", {
+                    amount: amount * 2,
+                    returnObjects: true,
+                  })
+                )
+              : boldMid(t("SUPPORT.CREDIT_BEFORE", { returnObjects: true }))}
           </p>
-        )}
-        <a href="https://stripe.com" target="_blank" className="self-center">
-          <StripeSVG className="h-8" />
-        </a>
-      </div>
+          <div className="flex flex-col mt-6 space-y-6 sm:space-y-5">
+            {waitlistQuery.data ? (
+              paymentIntent ? (
+                <>
+                  <AmountSelection
+                    amount={amount}
+                    setAmount={(amount) => {
+                      setAmount(amount);
+                      setPaymentIntent();
+                    }}
+                  />
+                  <Checkout
+                    intentSecret={paymentIntent.intentSecret}
+                    amount={paymentIntent.amount}
+                    waitlistId={waitlistQuery.data?.id}
+                    setIsComplete={setIsComplete}
+                  />
+                </>
+              ) : (
+                <>
+                  <AmountSelection amount={amount} setAmount={setAmount} />
+                  <Button
+                    className="self-center"
+                    isDisabled={!amount || isLoading}
+                    onPress={handleDonate}
+                    className={
+                      isLoading ? "self-center animate-pulse" : "self-center"
+                    }
+                  >
+                    {isLoading ? "Loading..." : t("SUPPORT.BUTTON_LABEL")}
+                  </Button>
+                </>
+              )
+            ) : (
+              <p className="font-semibold text-center text-malachite">
+                Please join waitlist above and follow email confirmation link to
+                donate.
+              </p>
+            )}
+            <a
+              href="https://stripe.com"
+              target="_blank"
+              className="self-center"
+            >
+              <StripeSVG className="h-8" />
+            </a>
+          </div>
+        </>
+      )}
     </div>
   );
 }
