@@ -141,6 +141,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      zIndex: {
+        "-10": "-10",
+      },
       spacing: {
         4.5: "1.125rem",
       },

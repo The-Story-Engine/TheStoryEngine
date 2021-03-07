@@ -4,6 +4,10 @@ import Button from "@components/Button";
 import ButtonWarning from "@components/ButtonWarning";
 import Donate from "@components/Donate";
 import ListCheckboxes from "@components/ListCheckboxes";
+import WriterSVG from "public/writer.svg";
+import HomeSVG from "public/home.svg";
+import CommunitySVG from "public/community.svg";
+import JellyfishSVG from "public/jellyfish.svg";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import {
@@ -14,7 +18,7 @@ import {
   useUpdateListsMutation,
   useDeleteWaitlistMutation,
 } from "utils-client";
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 
 const translationSpaces = ["workspaces", "common"];
 
@@ -152,6 +156,42 @@ export default function WaitlistPage() {
       </div>
     </div>
   );
+  const SVGs = {
+    WRITER: WriterSVG,
+    HOME: HomeSVG,
+    COMMUNITY: CommunitySVG,
+  };
+  const roadMap = [
+    {
+      title: "The Story Engine",
+      when: "",
+      icon: JellyfishSVG,
+      description:
+        "A space to write, with the Inspirational Jellyfish cheering you on.",
+    },
+    {
+      title: "Writer Accounts",
+      when: "Q2",
+      icon: WriterSVG,
+      description: "A space to iterate & save stories for writers of all ages.",
+    },
+    {
+      title: "Home Workspaces",
+      when: "Q3",
+      icon: HomeSVG,
+      description:
+        "A space for parents & guardians challenging writers to find inspiration.",
+    },
+    {
+      title: "Community Workspaces",
+      when: "Q4",
+      icon: CommunitySVG,
+      description: "A space to mentor & develop writing groups safely.",
+    },
+  ];
+  const timelineDots = (
+    <div className="relative z-10 self-center h-16 border-l-8 border-dotted border-malachite-600" />
+  );
   return (
     <Layout
       pageName={t("common:PAGE_NAMES.WORKSPACES")}
@@ -160,43 +200,95 @@ export default function WaitlistPage() {
         <div className="flex justify-center flex-grow p-8 mt-2 mb-6 md:mt-6">
           <div className="flex flex-col items-stretch flex-grow max-w-6xl space-y-10 divide-y-2 divide-silver-chalice">
             <div className="flex flex-col items-center">
-              <h2 className="w-full font-bold text-center text-h1">Waitlist</h2>
+              <h2 className="w-full font-bold text-center text-h1">Roadmap</h2>
             </div>
-            <div className="flex flex-col items-center pt-12 space-y-6">
-              {waitlistQuery.data ? (
-                <>
-                  <div className="flex flex-col items-center space-y-3">
-                    <h2 className="text-story">
-                      <span className="font-mono">
-                        {waitlistQuery.data.email}
-                      </span>
-                    </h2>
-                    <Button onPress={waitlistLogout}>Logout</Button>
-                  </div>
-                  <ListCheckboxes
-                    title="Emails"
-                    checked={waitlistQuery.data.lists}
-                    isDisabled={updateListsMutation.isLoading}
-                    onChange={updateListsMutation.mutate}
-                  />
-                  <LaunchCreditTable
-                    joinDate={new Intl.DateTimeFormat("en-GB", {
-                      dateStyle: "long",
-                    }).format(new Date(waitlistQuery.data.created_at))}
-                    donations={waitlistQuery.data.donations}
-                  />
-                  <ButtonWarning
-                    onPress={handleDelete}
-                    isDisabled={deleteWaitlistMutation.isLoading}
-                  >
-                    Delete
-                  </ButtonWarning>
-                </>
-              ) : (
-                waitlist
+            <div className="flex flex-col items-stretch pt-6 space-y-6 text-center">
+              <h3 className="font-bold text-h1">2021</h3>
+              {timelineDots}
+              {roadMap.map(
+                ({ title, when, icon: Icon, description }, index) => (
+                  <Fragment key={title}>
+                    <div className="space-y-4">
+                      <h3 className="relative z-10 text-h1">{when}</h3>
+                      <div className="flex items-center justify-center">
+                        <div className="relative">
+                          <div
+                            className="absolute z-0 bg-no-repeat bg-contain bg-ink opacity-70"
+                            style={{
+                              height: "175%",
+                              width: "175%",
+                              top: "60%",
+                              left: "45%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                          />
+                          <Icon
+                            className={`relative z-10 ${
+                              index === 0 ? "w-36" : "w-24"
+                            }`}
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="relative z-10 font-bold text-h3">
+                          {title}
+                        </h3>
+                        <p className="relative z-10 font-light text-story">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+                    {timelineDots}
+                  </Fragment>
+                )
               )}
             </div>
-            <div className="flex flex-col items-center pt-12">
+            <div className="flex flex-col items-center pt-8">
+              <h2
+                className="w-full font-semibold text-center text-h1"
+                id="waitlist"
+              >
+                Waitlist
+              </h2>
+              <div className="flex flex-col items-center pt-12 space-y-6">
+                {waitlistQuery.data ? (
+                  <>
+                    <div className="flex flex-col items-center space-y-3">
+                      <h2 className="text-story">
+                        <span className="font-mono">
+                          {waitlistQuery.data.email}
+                        </span>
+                      </h2>
+                      <Button onPress={waitlistLogout}>Logout</Button>
+                    </div>
+                    <ListCheckboxes
+                      title="Emails"
+                      checked={waitlistQuery.data.lists}
+                      isDisabled={updateListsMutation.isLoading}
+                      onChange={updateListsMutation.mutate}
+                    />
+                    <LaunchCreditTable
+                      joinDate={new Intl.DateTimeFormat("en-GB", {
+                        dateStyle: "long",
+                      }).format(new Date(waitlistQuery.data.created_at))}
+                      donations={waitlistQuery.data.donations}
+                    />
+                    <ButtonWarning
+                      onPress={handleDelete}
+                      isDisabled={deleteWaitlistMutation.isLoading}
+                    >
+                      Delete
+                    </ButtonWarning>
+                  </>
+                ) : (
+                  waitlist
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col items-center pt-8 space-y-12">
+              <h2 className="w-full font-semibold text-center text-h1">
+                Donate
+              </h2>
               <Donate />
             </div>
           </div>

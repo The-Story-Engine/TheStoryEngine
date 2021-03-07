@@ -112,6 +112,15 @@ export default function Header({ buttons = null }) {
               </span>
             )}
           />
+          <NavLink
+            path="roadmap"
+            className="p-3 text-h3"
+            render={(isCurrent) => (
+              <span className={`${isCurrent ? " font-bold" : ""}`}>
+                {t("PAGE_NAMES.ROADMAP")}
+              </span>
+            )}
+          />
         </nav>
         <div className="flex-shrink-0 ml-3 max-h-14">{buttons}</div>
       </div>
@@ -144,6 +153,15 @@ export default function Header({ buttons = null }) {
           render={(isCurrent) => (
             <span className={`${isCurrent ? " font-bold" : ""}`}>
               {t("PAGE_NAMES.OUR_STORY")}
+            </span>
+          )}
+        />
+        <NavLink
+          path="roadmap"
+          className="p-3 text-h3"
+          render={(isCurrent) => (
+            <span className={`${isCurrent ? " font-bold" : ""}`}>
+              {t("PAGE_NAMES.ROADMAP")}
             </span>
           )}
         />

@@ -4,8 +4,6 @@ import { useTranslation } from "next-i18next";
 import CommunitySVG from "public/community.svg";
 import HomeSVG from "public/home.svg";
 import LinkButton from "@components/LinkButton";
-import Waitlist from "@components/Waitlist";
-import { useWaitlistQuery } from "utils-client";
 
 const translationSpaces = ["workspaces", "common"];
 
@@ -51,7 +49,7 @@ const FeatureList = ({ features, className }) => {
 const FeatureCards = () => {
   const { t } = useTranslation(translationSpaces);
   return (
-    <div className="flex flex-wrap space-x-12">
+    <div className="flex flex-wrap justify-center space-y-12 md:space-y-0 md:space-x-12">
       <div className="flex flex-col p-8 space-y-8 bg-center bg-no-repeat bg-cover w-sm bg-ink-large border-3 rounded-2xl border-emperor">
         <div className="flex justify-start pb-8 pl-8 space-x-6 border-b-2 border-silver-chalice">
           <HomeSVG className="w-20" />
@@ -114,25 +112,12 @@ export default function Workspaces() {
                 <p>{t("SUB_TITLE.0")}</p>
               </div>
               <div className="my-4">
-                <LinkButton href="/waitlist">Join Waitlist</LinkButton>
+                <LinkButton href="/roadmap#waitlist">Join Waitlist</LinkButton>
               </div>
               <div className="mt-6">
                 <FeatureCards />
               </div>
             </div>
-            {/* <div className="flex flex-col items-center pt-12">
-              {waitlistQuery.data ? (
-                <h2 className="text-h3">
-                  Wahoo! Please check your inbox to confirm your address and
-                  join the list.
-                </h2>
-              ) : (
-                waitlist
-              )}
-            </div> */}
-            {/* <div className="flex flex-col items-center pt-12">
-                <Donate/>
-            </div> */}
           </div>
         </div>
       }

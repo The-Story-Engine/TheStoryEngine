@@ -55,19 +55,19 @@ export default function Waitlist() {
   }
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center w-full">
       {result ? (
         result
       ) : (
         <>
-          <div className="w-full sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:p-5">
+          <div className="w-full sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              className="block font-medium text-gray-700 sm:mt-px sm:pt-2"
             >
               {t("SUPPORT.EMAIL.LABEL")}
             </label>
-            <div className="mt-1 sm:mt-0 sm:col-span-3">
+            <div className="mt-2 mb-4 sm:mx-0 sm:col-span-3">
               <input
                 id="email"
                 name="email"
@@ -98,8 +98,12 @@ export default function Waitlist() {
           />
           <Button
             onPress={handleWaitlist}
-            isDisabled={emailInvalid || createWaitlistMutation.isLoading}
-            className={createWaitlistMutation.isLoading ? "animate-pulse" : ""}
+            isDisabled={
+              !email || emailInvalid || createWaitlistMutation.isLoading
+            }
+            className={`mt-10 ${
+              createWaitlistMutation.isLoading ? "animate-pulse" : ""
+            }`}
           >
             {createWaitlistMutation.isLoading ? "Sending..." : "Join List"}
           </Button>

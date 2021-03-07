@@ -62,7 +62,11 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
                 isJellyfish ? "mr-4" : "ml-4 order-1"
               }`}
             >
-              {isJellyfish ? <JellyfishSVG /> : <WriterSVG />}
+              {isJellyfish ? (
+                <JellyfishSVG className="w-24 h-24" />
+              ) : (
+                <WriterSVG className="w-24 h-24" />
+              )}
             </div>
             <div className="relative">
               {isJellyfish ? (

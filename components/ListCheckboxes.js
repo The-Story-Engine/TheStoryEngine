@@ -31,16 +31,16 @@ export default function ListCheckboxes({
 
   return (
     <div role="group" aria-labelledby="label-email">
-      <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-baseline">
+      <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:pt-5 sm:items-baseline">
         <div>
           <div
-            className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
+            className="font-medium text-gray-900 sm:text-gray-700"
             id="label-email"
           >
             {title}
           </div>
         </div>
-        <div className="mt-4 sm:mt-0 sm:col-span-3">
+        <div className="mt-2 sm:mt-0 sm:col-span-3">
           <div className="max-w-lg space-y-4">
             {lists.map(({ value, title, description }) => (
               <div key={value} className="relative flex items-start">
