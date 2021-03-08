@@ -24,8 +24,20 @@ export default function Home() {
             </h2>
             <div className="mt-4 space-y-8 text-story">
               <p>{t("BODY.0")}</p>
-              <p className="px-6 py-2 font-bold text-h3">{t("BODY.1")}</p>
+              <p>
+                {t("BODY.1")}{" "}
+                <a
+                  href="https://youtu.be/FaSF1gPBKrA"
+                  target="_blank"
+                  className="font-semibold cursor-pointer hover:underline focus-visible:underline"
+                >
+                  https://youtu.be/FaSF1gPBKrA
+                </a>
+              </p>
               <p>{t("BODY.2")}</p>
+              <p className="px-6 py-2 font-semibold text-h3">{t("BODY.0")}</p>
+              <p>{t("BODY.3")}</p>
+              <p>{t("BODY.4")}</p>
             </div>
           </div>
         </div>

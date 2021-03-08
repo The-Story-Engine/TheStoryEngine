@@ -77,7 +77,7 @@ export default function Header({ buttons = null }) {
     </>
   );
   return (
-    <div className="absolute top-0 left-0 right-0 z-10">
+    <div className="absolute top-0 left-0 right-0 z-30">
       <div className="flex items-center justify-between px-5 pt-5 pb-5">
         <span>
           <div className="absolute flex items-center top-6 left-5 sm:hidden">
