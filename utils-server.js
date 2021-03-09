@@ -153,7 +153,13 @@ export async function sendEmail(template, email, jwt, linkDomain) {
   }
 }
 
-export async function sendTemplateEmail(template, email, jwt, linkDomain) {
+export async function sendTemplateEmail(
+  template,
+  email,
+  jwt,
+  linkDomain,
+  templateModel
+) {
   if (linkDomain.includes("localhost")) {
     const link = `http://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     console.log({ link, template, email });
@@ -162,13 +168,7 @@ export async function sendTemplateEmail(template, email, jwt, linkDomain) {
     const link = `https://${linkDomain}/roadmap#waitlist?token=${jwt}`;
     return await postmarkClient.sendEmailWithTemplate({
       TemplateAlias: template,
-      TemplateModel: {
-        action_url: link,
-        product_name: "The Story Engine",
-        email: email,
-        support_mail: "hello@tseventures.com",
-        sender_name: "TSE Team",
-      },
+      TemplateModel: templateModel,
       From: "hello@thestoryengine.co.uk",
       To: email,
       MessageStream: "outbound",

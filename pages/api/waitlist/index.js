@@ -10,16 +10,6 @@ import {
 
 export default async function waitlist(req, res) {
   if (req.method === "POST") {
-    // expected body:
-    // {
-    //   "email": "jedd@thestoryengine.co.uk",
-    //   "lists": ["launch"],
-    //   "donation": {
-    //       "amount": 20,
-    //       "currency": "GBP"
-    //   }
-    // };
-
     const { email, lists, donation } = req.body;
 
     // add new record
@@ -90,39 +80,39 @@ export default async function waitlist(req, res) {
 
     let emailResult;
 
-    if (donation && donation.amount) {
-      if (email.confirmed) {
-        // TODO: append unpaid donation to existing waitlist record
-        console.log(
-          `email manage with donate template to ${email} for ${emailId}`
-        );
-        emailResult = await sendEmail(
-          "manage existing waitlist with pending donate",
-          email,
-          encodedToken,
-          req.headers.host
-        );
-      } else {
-        console.log(
-          `email verify with donate template to ${email} for ${emailId}`
-        );
-        emailResult = await sendEmail(
-          "email verify with pending donate",
-          email,
-          encodedToken,
-          req.headers.host
-        );
-      }
+    if (email.confirmed) {
+      console.log(`email login to ${email} for ${emailId}`);
+      emailResult = await sendTemplateEmail(
+        "returning-user",
+        email,
+        encodedToken,
+        req.headers.host,
+        {
+          action_url: link,
+          product_name: "The Story Engine",
+          email: email,
+          support_mail: "hello@tseventures.com",
+          sender_name: "TSE Team",
+        }
+      );
     } else {
       console.log(`email verify to ${email} for ${emailId}`);
       emailResult = await sendTemplateEmail(
         "email-verify",
         email,
         encodedToken,
-        req.headers.host
+        req.headers.host,
+        {
+          action_url: link,
+          product_name: "The Story Engine",
+          email: email,
+          support_mail: "hello@tseventures.com",
+          sender_name: "TSE Team",
+        }
       );
-      // send verify email
     }
+
+    // send verify email
 
     res.statusCode = 200;
     res.json(emailResult);
