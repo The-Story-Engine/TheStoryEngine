@@ -164,33 +164,33 @@ export default function WaitlistPage() {
   const roadMap = [
     {
       title: "The Story Engine",
-      when: "",
       icon: JellyfishSVG,
       description:
         "A space to write, with the Inspirational Jellyfish cheering you on.",
     },
     {
       title: "Writer Accounts",
-      when: "Q2",
       icon: WriterSVG,
       description: "A space to iterate & save stories for writers of all ages.",
     },
     {
       title: "Home Workspaces",
-      when: "Q3",
       icon: HomeSVG,
       description:
         "A space for parents & guardians challenging writers to find inspiration.",
     },
     {
       title: "Community Workspaces",
-      when: "Q4",
       icon: CommunitySVG,
       description: "A space to mentor & develop writing groups safely.",
     },
   ];
-  const timelineDots = (
-    <div className="relative z-10 self-center h-16 border-l-8 border-dotted border-malachite-600" />
+  const TimelineDots = ({ isDone }) => (
+    <div
+      className={`relative z-10 self-center h-16 border-l-8 border-dotted ${
+        isDone ? "border-malachite" : "border-dodger-blue"
+      }`}
+    />
   );
   return (
     <Layout
@@ -203,8 +203,7 @@ export default function WaitlistPage() {
               <h2 className="w-full font-bold text-center text-h1">Roadmap</h2>
             </div>
             <div className="flex flex-col items-stretch pt-6 space-y-6 text-center">
-              <h3 className="font-bold text-h1">2021</h3>
-              {timelineDots}
+              <TimelineDots isDone={true} />
               {roadMap.map(
                 ({ title, when, icon: Icon, description }, index) => (
                   <Fragment key={title}>
@@ -238,7 +237,7 @@ export default function WaitlistPage() {
                         </p>
                       </div>
                     </div>
-                    {timelineDots}
+                    <TimelineDots isDone={false} />
                   </Fragment>
                 )
               )}
