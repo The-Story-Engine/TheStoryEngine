@@ -16,7 +16,7 @@
       ["Story", "drafting & editing", "tools"],
       ["", "Publish", "finished stories publicly"]
     ],
-    "LAUNCH": ["Launching", "Q3", "2021"]
+    "LAUNCH": ["", "Coming Soon"]
   },
   "COMMUNITY": {
     "TITLE": "Community",
@@ -29,7 +29,7 @@
       ["Mentor", "ID verification", "tools"],
       ["Persistent", "audit logging", "for safeguarding"]
     ],
-    "LAUNCH": ["Launching", "Q4", "2021"]
+    "LAUNCH": ["", "Coming Soon"]
   },
   "SUPPORT": {
     "TITLE": "Support",
