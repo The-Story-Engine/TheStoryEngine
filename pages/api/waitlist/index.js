@@ -14,12 +14,12 @@ export default async function waitlist(req, res) {
 
     // add new record
     let emailId;
-    let confirmedEmail = false;
     const { errors, data } = await insertUnconfirmedWaitlist(
       email,
       lists,
       donation && [donation]
     );
+    console.log({ data, errors });
     if (
       errors?.length &&
       errors.some((error) => error.message.includes("waitlist_email_key"))
@@ -88,7 +88,6 @@ export default async function waitlist(req, res) {
         encodedToken,
         req.headers.host,
         {
-          action_url: link,
           product_name: "The Story Engine",
           email: email,
           support_mail: "hello@tseventures.com",
@@ -103,7 +102,6 @@ export default async function waitlist(req, res) {
         encodedToken,
         req.headers.host,
         {
-          action_url: link,
           product_name: "The Story Engine",
           email: email,
           support_mail: "hello@tseventures.com",
