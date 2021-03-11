@@ -12,3 +12,5 @@ cdk.out
 .build
 
 cdk.context.json
+
+.env.*
