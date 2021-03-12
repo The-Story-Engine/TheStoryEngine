@@ -160,11 +160,13 @@ export async function sendTemplateEmail(
   linkDomain,
   templateModel
 ) {
-  const link = `http://${linkDomain}/roadmap#waitlist?token=${jwt}`;
+  const linkUrl = `${linkDomain}/roadmap?token=${jwt}#waitlist`;
   if (linkDomain.includes("localhost")) {
+    const link = `http://${linkUrl}`;
     console.log({ link, template, email });
     return { ok: true };
   } else {
+    const link = `https://${linkUrl}`;
     return await postmarkClient.sendEmailWithTemplate({
       TemplateAlias: template,
       TemplateModel: {
