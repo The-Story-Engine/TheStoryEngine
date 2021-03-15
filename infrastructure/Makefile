@@ -35,9 +35,3 @@ deploy-cdk:
 
 post-deploy-cdk:
 	@cd cdk; AWS_PROFILE=${AWS_PROFILE} AWS_REGION=${AWS_REGION} APP_NAME=${APP_NAME} HASURA_ADMIN_SECRET=${HASURA_ADMIN_SECRET} HASURA_JWT_SECRET=${HASURA_JWT_SECRET} npx ts-node bin/post-deploy.ts
-
-deploy-schema:
-	cd hasura; hasura migrate apply --endpoint https://${HASURA_HOSTNAME} --admin-secret ${HASURA_ADMIN_SECRET}
-
-deploy-meta:
-	cd hasura; hasura metadata apply --endpoint https://${HASURA_HOSTNAME} --admin-secret ${HASURA_ADMIN_SECRET}

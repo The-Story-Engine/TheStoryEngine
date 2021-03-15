@@ -2,8 +2,7 @@
 /node_modules/
 .cache
 /.next/
-.env
-.env.local
-.env.staging
+.env*
 
 /out/
+.vercel

@@ -5,12 +5,10 @@ services:
     restart: always
     ports:
       - "5342:5342"
-    volumes:
-      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    image: hasura/graphql-engine:v1.3.3
+    build: ./hasura
     ports:
       - "8080:8080"
     depends_on:

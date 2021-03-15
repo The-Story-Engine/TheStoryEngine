@@ -1,13 +1,12 @@
 # TheStoryEngine UK.
 
-Master branch is live at https://jelly.tse.fish through Netlify auto deployment: [![Netlify Status](https://api.netlify.com/api/v1/badges/4e0b8176-4b48-45b1-ac94-229be361c43d/deploy-status)](https://app.netlify.com/sites/next-starter/deploys)
+Master branch is live at https://tse.fish through Netlify auto deployment: [![Netlify Status](https://api.netlify.com/api/v1/badges/4e0b8176-4b48-45b1-ac94-229be361c43d/deploy-status)](https://app.netlify.com/sites/next-starter/deploys)
 
-This is a [Next.js](https://nextjs.org/) v10.0.1 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/Bk4UicocL)!
+This is a [Next.js](https://nextjs.org/) React application, with a [Hasura](https://hasura.io/) GraphQL API on a [PostgreSQL](https://www.postgresql.org/) database.
 
-[PostgreSQL](https://www.postgresql.org/) is the database software
-[Hasura](https://hasura.io/) is the database management service
+![Architecture](infrastructure/tse-uk-stack.png)
 
-## Getting Started
+## Local Development
 
 After cloning the repository:
 
@@ -17,9 +16,10 @@ After cloning the repository:
   - Run `docker compose up -d`
 - Install Hasura bash app with `curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash`
   - Navigate to /infrastructure/hasura
+  - Run `hasura migrate apply`
   - Run `hasura metadata apply`
   - Go to localhost:8080/console
-    - Naviagte to Data tab
+    - Navigate to Data tab
     - Ensure that the tables are being tracked on the left
 - Copy `env.example` to `.env.local` and enter the keys in `.env.local` for:
   - Stripe
@@ -34,16 +34,4 @@ After cloning the repository:
 
 ## API Routes
 
-See the [reqs.http](reqs.http) file for example bodies and responses for each endpoint:
-
-- Create New Story
-
-  - POST http://localhost:3000/api/story
-
-- Fetch Existing Story
-
-  - GET http://localhost:3000/api/story/285084836887003649
-
-- Update Existing Story
-
-  - PUT http://localhost:3000/api/story/285084836887003649
+See the [reqs.http](reqs.http) file for example bodies and responses for each endpoint.

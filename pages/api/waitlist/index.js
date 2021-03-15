@@ -19,7 +19,7 @@ export default async function waitlist(req, res) {
       lists,
       donation && [donation]
     );
-    console.log({ data, errors });
+    let confirmedEmail = false;
     if (
       errors?.length &&
       errors.some((error) => error.message.includes("waitlist_email_key"))
@@ -80,7 +80,7 @@ export default async function waitlist(req, res) {
 
     let emailResult;
 
-    if (email.confirmed) {
+    if (confirmedEmail) {
       console.log(`email login to ${email} for ${emailId}`);
       emailResult = await sendTemplateEmail(
         "returning-user",
