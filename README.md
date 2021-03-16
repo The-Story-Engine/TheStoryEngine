@@ -1,4 +1,4 @@
-# TheStoryEngine UK.
+# TheStoryEngine UK
 
 Master branch is live at https://tse.fish through Netlify auto deployment: [![Netlify Status](https://api.netlify.com/api/v1/badges/4e0b8176-4b48-45b1-ac94-229be361c43d/deploy-status)](https://app.netlify.com/sites/next-starter/deploys)
 
