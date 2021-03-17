@@ -52,7 +52,7 @@ const FeatureCards = () => {
     <div className="flex flex-wrap justify-center space-y-12 md:space-y-0 md:space-x-12">
       <div className="flex flex-col p-8 space-y-8 bg-center bg-no-repeat bg-cover w-sm bg-ink-large border-3 rounded-2xl border-emperor">
         <div className="flex justify-start pb-8 pl-8 space-x-6 border-b-2 border-silver-chalice">
-          <HomeSVG className="w-20" />
+          <HomeSVG className="w-20 h-20" />
           <div className="flex flex-col">
             <p className="font-bold text-h1">{t("HOME.TITLE")}</p>
             <p>
@@ -71,7 +71,7 @@ const FeatureCards = () => {
       </div>
       <div className="flex flex-col p-8 space-y-8 bg-center bg-no-repeat bg-cover w-sm border-3 rounded-2xl border-emperor bg-ink-large">
         <div className="flex justify-start pb-8 pl-8 space-x-6 border-b-2 border-silver-chalice">
-          <CommunitySVG className="w-20" />
+          <CommunitySVG className="w-20 h-20" />
           <div className="flex flex-col">
             <p className="font-bold text-h1">{t("COMMUNITY.TITLE")}</p>
             <p>
