@@ -19,11 +19,11 @@
     "LAUNCH": ["", "Coming Soon"]
   },
   "COMMUNITY": {
-    "TITLE": "Community",
+    "TITLE": "Group",
     "FEATURE_LIST": [
+      ["For", "Schools, Organisations and Community Projects"],
       ["", "Ten+ writers"],
-      ["", "Two+ owner", "accounts"],
-      ["", "Two+ mentor", "accounts"],
+      ["", "Two+ owner & mentor", "accounts"],
       ["Real-time", "mentor chats"],
       ["", "Moderation", "tools"],
       ["Mentor", "ID verification", "tools"],

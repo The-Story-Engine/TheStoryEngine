@@ -1,7 +1,8 @@
 import Layout from "@components/Layout";
 import LinkButton from "@components/LinkButton";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useTranslation, Trans } from "next-i18next";
+import Image from "next/image";
 
 const translationSpaces = ["story", "common"];
 
@@ -26,15 +27,28 @@ export default function Home() {
             </h2>
             <div className="max-w-2xl mt-10 space-y-8 text-story">
               <p>{t("BODY.0")}</p>
+              <div className="py-10 transform scale-110">
+                <Image
+                  src="/story-picture.png"
+                  alt="Young writer at laptop using The Story Engine"
+                  layout="responsive"
+                  width="100"
+                  height="70"
+                />
+              </div>
               <p>
-                {t("BODY.1")}{" "}
-                <a
-                  href="https://youtu.be/FaSF1gPBKrA"
-                  target="_blank"
-                  className="font-semibold cursor-pointer hover:underline focus-visible:underline"
-                >
-                  {t("TALK_LABEL")}
-                </a>
+                <Trans
+                  i18nKey="story:BODY.1"
+                  components={{
+                    talkLink: (
+                      <a
+                        href="https://youtu.be/FaSF1gPBKrA"
+                        target="_blank"
+                        className="font-semibold cursor-pointer hover:underline focus-visible:underline"
+                      />
+                    ),
+                  }}
+                />
               </p>
               <p>{t("BODY.2")}</p>
               <p className="px-6 py-2 font-semibold text-h3">
