@@ -4,10 +4,12 @@ import Button from "@components/Button";
 import ButtonWarning from "@components/ButtonWarning";
 import Donate from "@components/Donate";
 import ListCheckboxes from "@components/ListCheckboxes";
+import LinkButton from "@components/LinkButton";
 import WriterSVG from "public/writer.svg";
 import HomeSVG from "public/home.svg";
 import CommunitySVG from "public/community.svg";
 import JellyfishSVG from "public/jellyfish.svg";
+import ArrowSVG from "public/big-arrow.svg";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import {
@@ -186,18 +188,31 @@ export default function WaitlistPage() {
     },
   ];
   const TimelineDots = ({ isDone }) => (
-    <div
-      className={`relative z-10 self-center h-16 border-l-8 border-dotted ${
-        isDone ? "border-malachite" : "border-dodger-blue"
-      }`}
-    />
+    <div className="self-center py-2 space-y-4 opacity-60">
+      <ArrowSVG
+        className={`w-6 h-6 transform -rotate-90 ${
+          isDone ? "text-malachite" : "text-dodger-blue"
+        }`}
+      />
+      <ArrowSVG
+        className={`w-6 h-6 transform -rotate-90 ${
+          isDone ? "text-malachite" : "text-dodger-blue"
+        }`}
+      />
+      <ArrowSVG
+        className={`w-6 h-6 transform -rotate-90 ${
+          isDone ? "text-malachite" : "text-dodger-blue"
+        }`}
+      />
+    </div>
   );
   return (
     <Layout
       pageName={t("common:PAGE_NAMES.WORKSPACES")}
+      headerButtons={<LinkButton href="/write">Write!</LinkButton>}
       growMainWidth={true}
       mainContent={
-        <div className="flex justify-center flex-grow p-8 mt-2 mb-6 md:mt-6">
+        <div className="flex justify-center flex-grow p-8 mt-2 mb-6 md:my-6">
           <div className="flex flex-col items-stretch flex-grow max-w-6xl space-y-10 divide-y-2 divide-silver-chalice">
             <div className="flex flex-col items-center">
               <h2 className="w-full font-bold text-center text-h1">Roadmap</h2>
