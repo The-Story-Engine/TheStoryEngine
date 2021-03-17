@@ -113,11 +113,11 @@ export default function Workspaces() {
               <div className="max-w-2xl mb-6 space-y-4 text-center text-h3">
                 <p>{t("SUB_TITLE.0")}</p>
               </div>
-              <div className="my-4">
+              {/* <div className="my-4">
                 <LinkButtonLarge href="/roadmap#waitlist">
                   Join Waitlist
                 </LinkButtonLarge>
-              </div>
+              </div> */}
               <div className="mt-6">
                 <FeatureCards />
               </div>
