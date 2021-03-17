@@ -182,7 +182,7 @@ export default function WaitlistPage() {
         "A space for parents & guardians challenging writers to find inspiration.",
     },
     {
-      title: "Community Workspaces",
+      title: "Group Workspaces",
       icon: CommunitySVG,
       description: "A space to mentor & develop writing groups safely.",
     },
