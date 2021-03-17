@@ -27,15 +27,6 @@ export default function Home() {
             </h2>
             <div className="max-w-2xl mt-10 space-y-8 text-story">
               <p>{t("BODY.0")}</p>
-              <div className="py-10 transform scale-110">
-                <Image
-                  src="/story-picture.png"
-                  alt="Young writer at laptop using The Story Engine"
-                  layout="responsive"
-                  width="100"
-                  height="70"
-                />
-              </div>
               <p>
                 <Trans
                   i18nKey="story:BODY.1"
@@ -55,7 +46,36 @@ export default function Home() {
                 {t("PULL_QUOTE")}
               </p>
               <p>{t("BODY.3")}</p>
-              <p>{t("BODY.4")}</p>
+              <div className="transform scale-90">
+                <Image
+                  src="/story-picture.png"
+                  alt="Young writer at laptop using The Story Engine"
+                  layout="responsive"
+                  width="100"
+                  height="70"
+                />
+              </div>
+              <p>
+                <Trans
+                  i18nKey="story:BODY.4"
+                  components={{
+                    wsLink: (
+                      <a
+                        href="https://theworkshop.co.uk/"
+                        target="_blank"
+                        className="font-semibold cursor-pointer hover:underline focus-visible:underline"
+                      />
+                    ),
+                    tseLink: (
+                      <a
+                        href="https://tseventures.com/"
+                        target="_blank"
+                        className="font-semibold cursor-pointer hover:underline focus-visible:underline"
+                      />
+                    ),
+                  }}
+                />
+              </p>
               <p>{t("BODY.5")}</p>
             </div>
           </div>
