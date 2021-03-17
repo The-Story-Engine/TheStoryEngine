@@ -1,8 +1,8 @@
 # TheStoryEngine UK
 
-Master branch is live at https://tse.fish through Netlify auto deployment: [![Netlify Status](https://api.netlify.com/api/v1/badges/4e0b8176-4b48-45b1-ac94-229be361c43d/deploy-status)](https://app.netlify.com/sites/next-starter/deploys)
+Master branch is live at https://thestoryengine.couk through Vercel
 
-This is a [Next.js](https://nextjs.org/) React application, with a
+This is a [Next.js](https://nextjs.org/) React application, with a backend deployed to AWS, see [/infrastructure README](infrastructure/README.md) for more details.
 
 ![Architecture](infrastructure/tse-uk-stack.png)
 
