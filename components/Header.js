@@ -67,11 +67,11 @@ export default function Header({ buttons = null }) {
     <>
       <LogoSVG
         title="The Story Engine"
-        className="hidden sm:block h-14"
+        className="hidden lg:block h-14"
         style={{ transform: "translateY(-0.3rem)" }}
       />
       <img
-        className="relative h-16 sm:hidden bottom-1"
+        className="relative h-16 lg:hidden bottom-1"
         src="/logo_stacked.png"
       />
     </>
@@ -80,20 +80,29 @@ export default function Header({ buttons = null }) {
     <div className="absolute top-0 left-0 right-0 z-30">
       <div className="flex items-center justify-between px-5 pt-5 pb-5">
         <span>
-          <div className="absolute flex items-center top-6 left-5 sm:hidden">
+          <div className="absolute flex items-center top-6 left-5 lg:hidden">
             <MobileMenuButton
               toggle={() => setIsOpen(!isOpen)}
               isOpen={isOpen}
             />
           </div>
         </span>
-        <span className="sm:hidden">
+        <span className="lg:hidden">
           <NavLink path="" render={() => logo} />
         </span>
-        <nav className="items-center hidden space-x-2 sm:flex sm:flex-grow">
+        <nav className="items-center hidden space-x-2 lg:flex lg:flex-grow">
           <div className="mr-8">
             <NavLink path="" render={() => logo} />
           </div>
+          <NavLink
+            path=""
+            className="p-3 text-h3"
+            render={(isCurrent) => (
+              <span className={`${isCurrent ? " font-bold" : ""}`}>
+                {t("PAGE_NAMES.HOME")}
+              </span>
+            )}
+          />
           <NavLink
             path="workspaces"
             className="p-3 text-h3"
@@ -127,7 +136,7 @@ export default function Header({ buttons = null }) {
       <div
         className={`${
           isOpen ? "relative" : "hidden"
-        } -top-2 sm:hidden w-full pb-6 px-4 space-y-3 flex flex-col bg-gray-100`}
+        } -top-2 lg:hidden w-full pb-6 px-4 space-y-3 flex flex-col bg-gray-100`}
       >
         <NavLink
           path=""

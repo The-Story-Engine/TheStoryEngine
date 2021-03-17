@@ -4,6 +4,7 @@ import { useTranslation } from "next-i18next";
 import CommunitySVG from "public/community.svg";
 import HomeSVG from "public/home.svg";
 import LinkButton from "@components/LinkButton";
+import LinkButtonLarge from "@components/LinkButtonLarge";
 
 const translationSpaces = ["workspaces", "common"];
 
@@ -99,6 +100,7 @@ export default function Workspaces() {
     <Layout
       pageName={t("common:PAGE_NAMES.WORKSPACES")}
       growMainWidth={true}
+      headerButtons={<LinkButton href="/write">Write!</LinkButton>}
       mainContent={
         <div className="flex justify-center flex-grow p-8 mt-2 mb-6 md:mt-6">
           <div className="flex flex-col items-stretch flex-grow max-w-6xl space-y-10 divide-y-2 divide-silver-chalice">
@@ -112,7 +114,9 @@ export default function Workspaces() {
                 <p>{t("SUB_TITLE.0")}</p>
               </div>
               <div className="my-4">
-                <LinkButton href="/roadmap#waitlist">Join Waitlist</LinkButton>
+                <LinkButtonLarge href="/roadmap#waitlist">
+                  Join Waitlist
+                </LinkButtonLarge>
               </div>
               <div className="mt-6">
                 <FeatureCards />

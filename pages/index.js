@@ -1,6 +1,6 @@
 import Layout from "@components/Layout";
 import Jellyfish from "@components/InkJellyfish";
-import LinkButton from "@components/LinkButton";
+import LinkButton from "@components/LinkButtonLarge";
 import { useUserStory } from "utils-client";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";

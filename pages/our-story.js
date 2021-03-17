@@ -1,4 +1,5 @@
 import Layout from "@components/Layout";
+import LinkButton from "@components/LinkButton";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
@@ -15,14 +16,15 @@ export default function Home() {
   return (
     <Layout
       pageName={t("common:PAGE_NAMES.HOME")}
+      headerButtons={<LinkButton href="/write">Write!</LinkButton>}
       growMainWidth={true}
       mainContent={
-        <div className="flex justify-center flex-grow p-8 mt-2 md:mt-8">
+        <div className="flex justify-center flex-grow p-8 mt-2 md:mt-6">
           <div className="flex flex-col items-center flex-grow max-w-6xl">
-            <h2 className="w-full pb-6 font-bold text-center border-b-2 text-h1 border-silver-chalice">
+            <h2 className="w-full pb-10 font-bold text-center border-b-2 text-h1 border-silver-chalice">
               {t("TITLE")}
             </h2>
-            <div className="max-w-2xl mt-4 space-y-8 text-story">
+            <div className="max-w-2xl mt-10 space-y-8 text-story">
               <p>{t("BODY.0")}</p>
               <p>
                 {t("BODY.1")}{" "}

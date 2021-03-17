@@ -4,6 +4,7 @@ import Button from "@components/Button";
 import ButtonWarning from "@components/ButtonWarning";
 import Donate from "@components/Donate";
 import ListCheckboxes from "@components/ListCheckboxes";
+import LinkButton from "@components/LinkButton";
 import WriterSVG from "public/writer.svg";
 import HomeSVG from "public/home.svg";
 import CommunitySVG from "public/community.svg";
@@ -208,6 +209,7 @@ export default function WaitlistPage() {
   return (
     <Layout
       pageName={t("common:PAGE_NAMES.WORKSPACES")}
+      headerButtons={<LinkButton href="/write">Write!</LinkButton>}
       growMainWidth={true}
       mainContent={
         <div className="flex justify-center flex-grow p-8 mt-2 mb-6 md:my-6">
