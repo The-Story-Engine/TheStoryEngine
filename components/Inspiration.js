@@ -2,6 +2,7 @@ import InkJellyfish from "@components/InkJellyfish";
 import Button from "@components/Button";
 import Speech from "@components/Speech";
 import JellyfishSVG from "public/jellyfish.svg";
+import JellyfishAvatarSVG from "public/jellyfish-square.svg";
 import WriterSVG from "public/writer.svg";
 import { useChatMessages, useJellyfish } from "utils-client";
 import { useEffect, useMemo, useRef } from "react";
@@ -58,11 +59,11 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
             key={message.message.text + message.sentMs}
           >
             <div
-              className={`w-12 flex-shrink-0 ${
+              className={`w-12 h-12 flex-shrink-0 ${
                 isJellyfish ? "mr-4" : "ml-4 order-1"
               }`}
             >
-              {isJellyfish ? <JellyfishSVG /> : <WriterSVG />}
+              {isJellyfish ? <JellyfishAvatarSVG /> : <WriterSVG />}
             </div>
             <div className="relative">
               {isJellyfish ? (
