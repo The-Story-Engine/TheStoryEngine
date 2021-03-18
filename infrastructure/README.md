@@ -33,7 +33,19 @@ The stack has been split into multiple components to make deployment and rollbac
 
 ## How to deploy
 
-We have 2 environments, staging and production. Production is automatically deployed using github actions, from all commits to master. Staging is deployed to manually:
+We have 2 environments, staging and production.
+
+The initial deploy of each is done locally using `make deploy`.
+
+Deletion protection is then switched on in the RDS databases and subsequent iterations to the infrastructure can happen through github actions.
+
+Each pull request on main where files are changed within the `infrastructure` directory, is commented with the changes it contains with regard to the prod and staging environments.
+
+The staging and production environments each then have an action that can be manually triggered to deploy those updates.
+
+This process keeps critical secrets such as the JWT key and hasura admin secret out of the deploy process and reduces the risk of accidental destructive operations.
+
+Here are the instructions for local deployment:
 
 - Sign your local AWS cli in to the TSE AWS account as your IAM user.
 - Copy `.env.example` to `.env` and fill out the properties:
@@ -47,7 +59,8 @@ MULTI_AZ=false or true (false for staging, true for production)
 HOSTED_ZONE_ID=The ID of the zone in which to create the DNS records
 HOSTED_ZONE_NAME=The name of the same zone
 HASURA_ADMIN_SECRET=A secret to use to access the hasura admin interface
-HASURA_JWT_SECRET='{"type":"HS256", "key": ""}' - Fill out the 'key' with something with at least 256bit.
+HASURA_JWT_SECRET_KEY= A secret, at least 256bit.
+HASURA_JWT_AUDIENCE= Audience used in the jwt token
 HASURA_HOSTNAME=The hostname to use for Hasura, must exist in the hosted zone given above.
 ACTIONS_HOSTNAME=The hostname to use for the Actions endpoint, must exist in the hosted zone given above.
 ```
@@ -59,7 +72,7 @@ ACTIONS_HOSTNAME=The hostname to use for the Actions endpoint, must exist in the
 - To deploy:
   - `make deploy`
 
-This has been tested on macOS Catalina only but should work on Linux.
+When then setting up the github actions in `./.github`, is crucial that the env variables are all copied over correctly except for the hasura secrets.
 
 ## Learning More
 
