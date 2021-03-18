@@ -34,6 +34,7 @@ export interface HasuraStackProps extends StackProps {
   certificates: Certificates;
   vpc: Vpc;
   multiAz: boolean;
+  hasuraCORSDomain: string;
 }
 
 export class HasuraStack extends Stack {
@@ -129,9 +130,10 @@ export class HasuraStack extends Stack {
           containerPort: 8080,
           enableLogging: true,
           environment: {
-            HASURA_GRAPHQL_ENABLE_CONSOLE: "true",
+            HASURA_GRAPHQL_ENABLE_CONSOLE: "false",
             HASURA_GRAPHQL_PG_CONNECTIONS: "100",
-            HASURA_GRAPHQL_LOG_LEVEL: "debug",
+            HASURA_GRAPHQL_LOG_LEVEL: "warn",
+            HASURA_GRAPHQL_CORS_DOMAIN: props.hasuraCORSDomain,
           },
           secrets: {
             HASURA_GRAPHQL_DATABASE_URL: ECSSecret.fromSecretsManager(
