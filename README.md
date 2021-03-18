@@ -1,10 +1,12 @@
 # TheStoryEngine UK
 
-Master branch is live at https://thestoryengine.couk through Vercel
+Live at https://thestoryengine.co.uk
 
-This is a [Next.js](https://nextjs.org/) React application, with a backend deployed to AWS, see [/infrastructure README](infrastructure/README.md) for more details.
+This is a [Next.js](https://nextjs.org/) React application hosted on Vercel, with a GraphQL backend deployed to AWS, see [/infrastructure README](infrastructure/README.md) for more details.
 
 ![Architecture](infrastructure/tse-uk-stack.png)
+
+The frontend has 2 environments: Production & Preview, these follow the default Vercel pattern where Production always reflects the latest commit on `main` branch, and all pull requests on `main` get their own Preview deployment. The Preview deployments all point to the `staging` backend deployment.
 
 ## Local Development
 
