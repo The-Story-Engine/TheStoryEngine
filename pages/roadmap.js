@@ -257,7 +257,7 @@ export default function WaitlistPage() {
                 )
               )}
             </div>
-            {/* <div className="flex flex-col items-center pt-8">
+            <div className="flex flex-col items-center pt-8">
               <h2
                 className="w-full font-semibold text-center text-h1"
                 id="waitlist"
@@ -298,13 +298,13 @@ export default function WaitlistPage() {
                   waitlist
                 )}
               </div>
-            </div> */}
-            {/* <div className="flex flex-col items-center pt-8 space-y-12">
+            </div>
+            <div className="flex flex-col items-center pt-8 space-y-12">
               <h2 className="w-full font-semibold text-center text-h1">
                 Donate
               </h2>
               <Donate />
-            </div> */}
+            </div>
           </div>
         </div>
       }
