@@ -124,6 +124,7 @@ export default function Inspiration({ isInit, isOpen, toggleIsOpen }) {
                 onPress={() => {
                   changeInspiration();
                 }}
+                className={isPendingInspiration ? "animate-pulse" : ""}
               >
                 {t("CHAT.INSPIRE")}
               </Button>

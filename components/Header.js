@@ -9,7 +9,7 @@ const MobileMenuButton = ({ isOpen = false, toggle }) => {
   const { t } = useTranslation("common");
   return (
     <Button
-      ariaLabel={t("MOBILE_MENU.TOGGLE_LABEL")}
+      aria-label={t("MOBILE_MENU.TOGGLE_LABEL")}
       onPress={toggle}
       noStyle={true}
       className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -66,13 +66,14 @@ export default function Header({ buttons = null }) {
   const logo = (
     <>
       <LogoSVG
-        title="The Story Engine"
+        title="The Story Engine Logo"
         className="hidden lg:block h-14"
         style={{ transform: "translateY(-0.3rem)" }}
       />
       <img
         className="relative h-16 lg:hidden bottom-1"
         src="/logo_stacked.png"
+        alt="The Story Engine Logo"
       />
     </>
   );
