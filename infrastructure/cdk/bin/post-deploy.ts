@@ -87,7 +87,7 @@ async function setDatabaseConnectionUrl(): Promise<void> {
 
   const putHasuraJwtSecret: AWS.SecretsManager.PutSecretValueRequest = {
     SecretId: hasuraJwtSecretArn,
-    SecretString: `'{"type":"HS256", "key": "${hasuraJwtSecretKey}", "audience": "${hasuraJwtAudience}"}'`,
+    SecretString: `{"type":"HS256", "key": "${hasuraJwtSecretKey}", "audience": "${hasuraJwtAudience}"}`,
   };
   await secretsmanager.putSecretValue(putHasuraJwtSecret).promise();
 }
