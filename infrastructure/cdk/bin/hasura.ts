@@ -4,7 +4,6 @@ import * as cdk from "@aws-cdk/core";
 import { HasuraStack } from "../lib/hasura-stack";
 import { CertificatesStack } from "../lib/certificates-stack";
 import { VPCStack } from "../lib/vpc-stack";
-import { ActionsStack } from "../lib/actions-stack";
 
 const app = new cdk.App();
 const multiAz = process.env.MULTI_AZ === "true";
@@ -44,11 +43,6 @@ if (!hasuraHostname) {
   throw Error("HASURA_HOSTNAME must be defined in environment");
 }
 
-const actionsHostname = process.env.ACTIONS_HOSTNAME;
-if (!actionsHostname) {
-  throw Error("ACTIONS_HOSTNAME must be defined in environment");
-}
-
 // default value for now
 const hasuraCORSDomain =
   process.env.HASURA_GRAPHQL_CORS_DOMAIN ||
@@ -64,7 +58,6 @@ const certificatesStack = new CertificatesStack(
     env,
     hostedZoneId,
     hostedZoneName,
-    actionsHostname,
     hasuraHostname,
   }
 );
@@ -81,13 +74,4 @@ new HasuraStack(app, `${appName}-HasuraStack`, {
   hasuraHostname,
   multiAz,
   hasuraCORSDomain,
-});
-
-new ActionsStack(app, `${appName}-ActionsStack`, {
-  env,
-  appName,
-  certificates: certificatesStack.certificates,
-  hostedZoneId,
-  hostedZoneName,
-  actionsHostname,
 });

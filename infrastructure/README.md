@@ -17,7 +17,6 @@ In addition to the Hasura deployment a simple API gateway with a single function
 ## Project Layout
 
 - `cdk` Contains the main CDK stack
-- `actions` Contains a simple lambda handler that returns a 'fortune'
 - `hasura` Contains a simple schema that connects the deployed 'action'
 
 ## CDK Layout
@@ -27,7 +26,6 @@ CDK has been configured into 4 stacks
 - `vpc-stack` contains the main VPC component to deploy Hasura into
 - `certificates-stack` the ACM certificates for the Hasura and actions endpoints
 - `hasura-stack` the main Hasura Fargate and RDS components
-- `actions-stack` the API Gateway / Lambda stack for the actions endpoint.
 
 The stack has been split into multiple components to make deployment and rollback easier. Note that new AWS accounts have an ACM limit of 20 certificates, so it's easy to run out of certificates if you regularly build up and tear down the environments.
 
@@ -62,7 +60,6 @@ HASURA_ADMIN_SECRET=A secret to use to access the hasura admin interface
 HASURA_JWT_SECRET_KEY= A secret, at least 256bit.
 HASURA_JWT_AUDIENCE= Audience used in the jwt token
 HASURA_HOSTNAME=The hostname to use for Hasura, must exist in the hosted zone given above.
-ACTIONS_HOSTNAME=The hostname to use for the Actions endpoint, must exist in the hosted zone given above.
 ```
 
 - To see a preview of the changes do

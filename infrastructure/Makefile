@@ -11,19 +11,15 @@ export HELP
 
 EXECUTION_DATE:=$(shell date +'%Y%m%d%H%M')
 
-include .env
+-include .env
 
 all help:
 	@echo "$$HELP"
 
 dependencies:
-	cd actions; npm ci
 	cd cdk; npm ci
 
-build: dependencies build-actions build-cdk
-
-build-actions:
-	cd actions; npm run build
+build: dependencies build-cdk
 
 build-cdk:
 	cd cdk; npm run build
