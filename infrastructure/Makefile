@@ -17,8 +17,8 @@ all help:
 	@echo "$$HELP"
 
 dependencies:
-	cd actions; npm install
-	cd cdk; npm install
+	cd actions; npm ci
+	cd cdk; npm ci
 
 build: dependencies build-actions build-cdk
 
@@ -30,11 +30,13 @@ build-cdk:
 
 deploy: build deploy-cdk post-deploy-cdk
 
+diff: build diff-cdk
+
 deploy-cdk:
 	cd cdk; AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID} AWS_REGION=${AWS_REGION} HOSTED_ZONE_NAME=${HOSTED_ZONE_NAME} HOSTED_ZONE_ID=${HOSTED_ZONE_ID} HASURA_HOSTNAME=${HASURA_HOSTNAME} ACTIONS_HOSTNAME=${ACTIONS_HOSTNAME} APP_NAME=${APP_NAME} npx cdk deploy '*'  --profile ${AWS_PROFILE} --outputs-file cdk.outputs.json
 
-diff:
+diff-cdk:
 	cd cdk; AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID} AWS_REGION=${AWS_REGION} HOSTED_ZONE_NAME=${HOSTED_ZONE_NAME} HOSTED_ZONE_ID=${HOSTED_ZONE_ID} HASURA_HOSTNAME=${HASURA_HOSTNAME} ACTIONS_HOSTNAME=${ACTIONS_HOSTNAME} APP_NAME=${APP_NAME} npx cdk diff '*'  --profile ${AWS_PROFILE} --outputs-file cdk.outputs.json
 
 post-deploy-cdk:
-	@cd cdk; AWS_PROFILE=${AWS_PROFILE} AWS_REGION=${AWS_REGION} APP_NAME=${APP_NAME} HASURA_ADMIN_SECRET=${HASURA_ADMIN_SECRET} HASURA_JWT_SECRET=${HASURA_JWT_SECRET} npx ts-node bin/post-deploy.ts
+	@cd cdk; AWS_PROFILE=${AWS_PROFILE} AWS_REGION=${AWS_REGION} APP_NAME=${APP_NAME} HASURA_JWT_AUDIENCE=${HASURA_JWT_AUDIENCE} HASURA_ADMIN_SECRET=${HASURA_ADMIN_SECRET} HASURA_JWT_SECRET_KEY=${HASURA_JWT_SECRET_KEY} npx ts-node bin/post-deploy.ts
