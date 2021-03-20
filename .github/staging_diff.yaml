@@ -1,21 +1,32 @@
-name: Backend Staging Diff
+name: AWS Infra Staging Diff
 
 on:
-  pull_request:
+  push:
     paths:
       - "infrastructure/**"
     branches: main
-  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: infrastructure
 
 jobs:
-  cdk-diff:
+  cdk-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: cdk diff
-        uses: youyo/aws-cdk-github-actions@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          cdk_subcommand: "diff"
-          actions_comment: true
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: cdk deploy
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+        run: make diff
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
