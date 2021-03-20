@@ -508,7 +508,6 @@ export const useWaitlistQuery = () => {
     "waitlist",
     async () => {
       const response = await directGraphQLQuery(waitlistQuery, token);
-      console.log({ waitlistResponse: response });
       if (response.errors) {
         window.sessionStorage.removeItem("tseWaitlistToken");
         setToken();
