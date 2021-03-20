@@ -46,7 +46,7 @@ if (!hasuraHostname) {
 // default value for now
 const hasuraCORSDomain =
   process.env.HASURA_GRAPHQL_CORS_DOMAIN ||
-  "https://thestoryengine.co.uk, https://*.thestoryengine.co.uk, https://*-thestoryengine.vercel.app";
+  "https://thestoryengine.co.uk, https://*.thestoryengine.co.uk, https://tse.fish";
 if (!hasuraCORSDomain) {
   throw Error("HASURA_GRAPHQL_CORS_DOMAIN must be defined in environment");
 }
@@ -74,4 +74,13 @@ new HasuraStack(app, `${appName}-HasuraStack`, {
   hasuraHostname,
   multiAz,
   hasuraCORSDomain,
+});
+
+new ActionsStack(app, `${appName}-ActionsStack`, {
+  env,
+  appName,
+  certificates: certificatesStack.certificates,
+  hostedZoneId,
+  hostedZoneName,
+  actionsHostname,
 });
