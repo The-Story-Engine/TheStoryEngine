@@ -1,11 +1,10 @@
 name: AWS Infra Production Deploy
 
 on:
-  workflow_dispatch:
-  # push:
-  #   branches: [main]
-  #   paths:
-  #     - "infrastructure/**"
+  push:
+    branches: [main]
+    paths:
+      - "infrastructure/**"
 
 defaults:
   run:
