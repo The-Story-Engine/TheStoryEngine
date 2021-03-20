@@ -1,12 +1,10 @@
 name: AWS Infra Staging Deploy
 
 on:
-  workflow_dispatch:
-# on:
-#   push:
-#     paths:
-#       - "infrastructure/**"
-#     branches: main
+  push:
+    paths:
+      - "infrastructure/**"
+    branches: [staging]
 
 defaults:
   run:

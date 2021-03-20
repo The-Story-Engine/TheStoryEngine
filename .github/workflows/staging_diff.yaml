@@ -2,11 +2,10 @@ name: AWS Infra Staging Diff
 
 on:
   workflow_dispatch:
-# on:
-#   push:
-#     paths:
-#       - "infrastructure/**"
-#     branches: main
+  pull_request:
+    paths:
+      - "infrastructure/**"
+    branches: [staging]
 
 defaults:
   run:
