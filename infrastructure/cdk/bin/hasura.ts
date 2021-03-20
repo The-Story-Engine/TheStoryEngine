@@ -75,12 +75,3 @@ new HasuraStack(app, `${appName}-HasuraStack`, {
   multiAz,
   hasuraCORSDomain,
 });
-
-new ActionsStack(app, `${appName}-ActionsStack`, {
-  env,
-  appName,
-  certificates: certificatesStack.certificates,
-  hostedZoneId,
-  hostedZoneName,
-  actionsHostname,
-});
