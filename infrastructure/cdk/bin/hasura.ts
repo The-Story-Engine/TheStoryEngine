@@ -46,7 +46,7 @@ if (!hasuraHostname) {
 // default value for now
 const hasuraCORSDomain =
   process.env.HASURA_GRAPHQL_CORS_DOMAIN ||
-  "https://thestoryengine.co.uk, https://*.thestoryengine.co.uk, https://tse.fish";
+  "https://thestoryengine.co.uk, https://*.thestoryengine.co.uk";
 if (!hasuraCORSDomain) {
   throw Error("HASURA_GRAPHQL_CORS_DOMAIN must be defined in environment");
 }

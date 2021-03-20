@@ -50,6 +50,9 @@ export default function Layout({
         <title>
           {pageName} - {t("META.SITE_NAME")}
         </title>
+        {process.env.VERCEL_ENV && !process.env.VERCEL_ENV == "production" ? (
+          <meta name="robots" content="noindex" />
+        ) : null}
         <meta name="Description" content={t("META.DESCRIPTION")}></meta>
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@TSEjellyfish" />
