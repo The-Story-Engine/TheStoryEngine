@@ -30,13 +30,13 @@ export const getStaticProps = async ({ locale }) => ({
   },
 });
 
-const LaunchCreditTable = ({ joinDate, donations = [] }) => (
-  <div role="group" aria-labelledby="label-email">
+const LaunchCreditTable = ({ joinDate, donations = [], className = "" }) => (
+  <div role="group" aria-labelledby="label-credit-table" className={className}>
     <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-baseline">
       <div>
         <div
-          className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
-          id="label-email"
+          className="text-sm font-medium text-gray-900 sm:text-base sm:text-gray-700"
+          id="label-credit-table"
         >
           Workspace launch credit
         </div>
@@ -258,45 +258,50 @@ export default function WaitlistPage() {
               )}
             </div>
             <div className="flex flex-col items-center pt-8">
-              <h2
-                className="w-full font-semibold text-center text-h1"
-                id="waitlist"
-              >
-                Waitlist
-              </h2>
-              <div className="flex flex-col items-center pt-12 space-y-6">
-                {waitlistQuery.data ? (
-                  <>
-                    <div className="flex flex-col items-center space-y-3">
-                      <h2 className="text-story">
-                        <span className="font-mono">
-                          {waitlistQuery.data.email}
-                        </span>
-                      </h2>
-                      <Button onPress={waitlistLogout}>Logout</Button>
-                    </div>
-                    <ListCheckboxes
-                      title="Emails"
-                      checked={waitlistQuery.data.lists}
-                      isDisabled={updateListsMutation.isLoading}
-                      onChange={updateListsMutation.mutate}
-                    />
-                    <LaunchCreditTable
-                      joinDate={new Intl.DateTimeFormat("en-GB", {
-                        dateStyle: "long",
-                      }).format(new Date(waitlistQuery.data.created_at))}
-                      donations={waitlistQuery.data.donations}
-                    />
-                    <ButtonWarning
-                      onPress={handleDelete}
-                      isDisabled={deleteWaitlistMutation.isLoading}
-                    >
-                      Delete
-                    </ButtonWarning>
-                  </>
-                ) : (
-                  waitlist
-                )}
+              <div className="flex flex-col items-center self-stretch">
+                <h2
+                  className="w-full font-semibold text-center text-h1"
+                  id="waitlist"
+                >
+                  Waitlist
+                </h2>
+                <div className="flex flex-col items-center self-stretch pt-12 space-y-12">
+                  {waitlistQuery.data ? (
+                    <>
+                      <div className="flex flex-col items-center space-y-3">
+                        <h2 className="text-story">
+                          <span className="font-mono">
+                            {waitlistQuery.data.email}
+                          </span>
+                        </h2>
+                        <Button onPress={waitlistLogout}>Logout</Button>
+                      </div>
+                      <ListCheckboxes
+                        className="self-center w-full max-w-3xl"
+                        title="Emails"
+                        checked={waitlistQuery.data.lists}
+                        isDisabled={updateListsMutation.isLoading}
+                        onChange={updateListsMutation.mutate}
+                      />
+                      <LaunchCreditTable
+                        className="self-center w-full max-w-3xl"
+                        joinDate={new Intl.DateTimeFormat("en-GB", {
+                          dateStyle: "long",
+                        }).format(new Date(waitlistQuery.data.created_at))}
+                        donations={waitlistQuery.data.donations}
+                      />
+                      <ButtonWarning
+                        className="self-center"
+                        onPress={handleDelete}
+                        isDisabled={deleteWaitlistMutation.isLoading}
+                      >
+                        Delete
+                      </ButtonWarning>
+                    </>
+                  ) : (
+                    waitlist
+                  )}
+                </div>
               </div>
             </div>
             <div className="flex flex-col items-center pt-8 space-y-12">

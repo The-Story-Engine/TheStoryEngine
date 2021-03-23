@@ -1,7 +1,6 @@
 import InkJellyfish from "@components/InkJellyfish";
 import Button from "@components/Button";
 import Speech from "@components/Speech";
-import JellyfishSVG from "public/jellyfish.svg";
 import JellyfishAvatarSVG from "public/jellyfish-square.svg";
 import WriterSVG from "public/writer.svg";
 import { useChatMessages, useJellyfish } from "utils-client";

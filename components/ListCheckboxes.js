@@ -4,6 +4,7 @@ export default function ListCheckboxes({
   onChange,
   checked = [],
   isDisabled = false,
+  className = "",
 }) {
   lists = lists || [
     {
@@ -30,7 +31,7 @@ export default function ListCheckboxes({
   };
 
   return (
-    <div role="group" aria-labelledby="label-email">
+    <div role="group" aria-labelledby="label-email" className={className}>
       <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:pt-5 sm:items-baseline">
         <div>
           <div

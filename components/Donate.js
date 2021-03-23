@@ -265,7 +265,7 @@ export default function Donate() {
                 )
               : boldMid(t("SUPPORT.CREDIT_BEFORE", { returnObjects: true }))}
           </p>
-          <div className="flex flex-col mt-6 space-y-6 sm:space-y-5">
+          <div className="flex flex-col mt-6 space-y-6 sm:space-y-12">
             {waitlistQuery.data ? (
               paymentIntent ? (
                 <>
