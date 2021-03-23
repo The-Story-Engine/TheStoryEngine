@@ -8,7 +8,7 @@ import LinkButton from "@components/LinkButton";
 import WriterSVG from "public/writer.svg";
 import HomeSVG from "public/home.svg";
 import CommunitySVG from "public/community.svg";
-import JellyfishSVG from "public/jellyfish.svg";
+import JellyfishSVG from "public/jellyfish-square.svg";
 import ArrowSVG from "public/big-arrow.svg";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -189,7 +189,7 @@ export default function WaitlistPage() {
   ];
   const TimelineDots = ({ isDone }) => (
     <div
-      className="self-center py-2 space-y-4 opacity-60"
+      className="self-center py-6 space-y-4 opacity-60"
       aria-label={isDone ? "Completed progress" : "Future progress"}
     >
       <ArrowSVG
@@ -216,7 +216,7 @@ export default function WaitlistPage() {
                 ({ title, when, icon: Icon, description }, index) => (
                   <Fragment key={title}>
                     <div
-                      className="w-full max-w-xs space-y-4"
+                      className="relative w-full max-w-xs space-y-4"
                       role="group"
                       aria-labelledby={`roadmap-${index}-title`}
                       aria-describedby={`roadmap-${index}-description`}
@@ -234,22 +234,18 @@ export default function WaitlistPage() {
                               transform: "translate(-50%, -50%)",
                             }}
                           />
-                          <Icon
-                            className={`relative z-10 ${
-                              index === 0 ? "w-36" : "w-24"
-                            }`}
-                          />
+                          <Icon className={"relative z-10 w-28"} />
                         </div>
                       </div>
                       <div className="space-x-2">
                         <h3
-                          className="relative z-10 font-bold text-h3"
+                          className="relative z-10 font-bold text-h3 md:max-w-xs md:absolute md:left-[-8rem] md:top-0"
                           id={`roadmap-${index}-title`}
                         >
                           {title}
                         </h3>
                         <p
-                          className="relative z-10 font-light text-story"
+                          className="relative z-10 font-light text-story md:text-left md:max-w-[18rem] md:absolute md:right-[-14rem] md:bottom-0"
                           id={`roadmap-${index}-description`}
                         >
                           {description}
