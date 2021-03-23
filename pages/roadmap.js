@@ -188,17 +188,10 @@ export default function WaitlistPage() {
     },
   ];
   const TimelineDots = ({ isDone }) => (
-    <div className="self-center py-2 space-y-4 opacity-60">
-      <ArrowSVG
-        className={`w-6 h-6 transform -rotate-90 ${
-          isDone ? "text-malachite" : "text-dodger-blue"
-        }`}
-      />
-      <ArrowSVG
-        className={`w-6 h-6 transform -rotate-90 ${
-          isDone ? "text-malachite" : "text-dodger-blue"
-        }`}
-      />
+    <div
+      className="self-center py-2 space-y-4 opacity-60"
+      aria-label={isDone ? "Completed progress" : "Future progress"}
+    >
       <ArrowSVG
         className={`w-6 h-6 transform -rotate-90 ${
           isDone ? "text-malachite" : "text-dodger-blue"
@@ -217,12 +210,17 @@ export default function WaitlistPage() {
             <div className="flex flex-col items-center">
               <h2 className="w-full font-bold text-center text-h1">Roadmap</h2>
             </div>
-            <div className="flex flex-col items-stretch pt-6 space-y-6 text-center">
+            <div className="flex flex-col items-center w-full pt-6 space-y-6 text-center">
               <TimelineDots isDone={true} />
               {roadMap.map(
                 ({ title, when, icon: Icon, description }, index) => (
                   <Fragment key={title}>
-                    <div className="space-y-4">
+                    <div
+                      className="w-full max-w-xs space-y-4"
+                      role="group"
+                      aria-labelledby={`roadmap-${index}-title`}
+                      aria-describedby={`roadmap-${index}-description`}
+                    >
                       <h3 className="relative z-10 text-h1">{when}</h3>
                       <div className="flex items-center justify-center">
                         <div className="relative">
@@ -243,11 +241,17 @@ export default function WaitlistPage() {
                           />
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <h3 className="relative z-10 font-bold text-h3">
+                      <div className="space-x-2">
+                        <h3
+                          className="relative z-10 font-bold text-h3"
+                          id={`roadmap-${index}-title`}
+                        >
                           {title}
                         </h3>
-                        <p className="relative z-10 font-light text-story">
+                        <p
+                          className="relative z-10 font-light text-story"
+                          id={`roadmap-${index}-description`}
+                        >
                           {description}
                         </p>
                       </div>
