@@ -156,6 +156,12 @@ export default function WaitlistPage() {
       <div className="self-stretch">
         <Waitlist />
       </div>
+      {waitlistEmailQuery.data ? null : (
+        <p className="pt-4 text-story">
+          <span className="font-semibold">Already on the waitlist?</span> Submit
+          email address above to manage.
+        </p>
+      )}
     </div>
   );
   const SVGs = {
