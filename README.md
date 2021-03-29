@@ -42,6 +42,7 @@ After cloning the repository:
 ## Pages
 
 - `/` - Landing page
+- `/workspaces` - Detail on workspace plans
 - `/write` - writers can write a story here, if it's the first time they've arrived, a blank story is automatically created and it's ID saved in browser sessionStorage. If an existing story is found in sessionStorage, the browser connects to that story as the writer.
 
 ## API Routes
