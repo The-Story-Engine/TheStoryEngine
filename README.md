@@ -43,7 +43,7 @@ After cloning the repository:
 
 - `/` - Landing page
 - `/workspaces` - Detail on workspace plans
-- `/our-story` - TSE history lesson
+- `/our-story` - TSE history lesson.
 - `/roadmap` - TSE 2021 feature roadmap.
 - `/write` - writers can write a story here, if it's the first time they've arrived, a blank story is automatically created and it's ID saved in browser sessionStorage. If an existing story is found in sessionStorage, the browser connects to that story as the writer.
 
