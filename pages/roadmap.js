@@ -179,7 +179,7 @@ export default function WaitlistPage() {
       title: "Home Workspaces",
       icon: HomeSVG,
       description:
-        "A space for parents & guardians challenging writers to find inspiration.",
+        "A space for parents & guardians to challenge their young writers & find inspiration.",
     },
     {
       title: "Group Workspaces",
