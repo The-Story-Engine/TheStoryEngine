@@ -57,7 +57,7 @@ const FeatureCards = () => {
           <div className="flex flex-col">
             <p className="font-bold text-h1">{t("HOME.TITLE")}</p>
             <p>
-              £ <span className="font-bold text-h1">3+ </span>
+              £ <span className="font-bold text-h1">5+ </span>
               {t("PER_MONTH")}
             </p>
           </div>
