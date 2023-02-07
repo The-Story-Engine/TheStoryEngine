@@ -81,7 +81,6 @@ export default async function waitlist(req, res) {
     let emailResult;
 
     if (confirmedEmail) {
-      console.log(`email login to ${email} for ${emailId}`);
       emailResult = await sendTemplateEmail(
         "returning-user",
         email,
@@ -95,7 +94,6 @@ export default async function waitlist(req, res) {
         }
       );
     } else {
-      console.log(`email verify to ${email} for ${emailId}`);
       emailResult = await sendTemplateEmail(
         "email-verify",
         email,

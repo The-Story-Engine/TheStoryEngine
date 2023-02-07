@@ -105,7 +105,7 @@ export default function Waitlist() {
               createWaitlistMutation.isLoading ? "animate-pulse" : ""
             }`}
           >
-            {createWaitlistMutation.isLoading ? "Sending..." : "Join List"}
+            {createWaitlistMutation.isLoading ? "Sending..." : "Submit"}
           </Button>
           {waitlistErrorQuery.data ? (
             <Error message={waitlistErrorQuery.data} />

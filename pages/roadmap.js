@@ -8,7 +8,7 @@ import LinkButton from "@components/LinkButton";
 import WriterSVG from "public/writer.svg";
 import HomeSVG from "public/home.svg";
 import CommunitySVG from "public/community.svg";
-import JellyfishSVG from "public/jellyfish.svg";
+import JellyfishSVG from "public/jellyfish-square.svg";
 import ArrowSVG from "public/big-arrow.svg";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -30,13 +30,13 @@ export const getStaticProps = async ({ locale }) => ({
   },
 });
 
-const LaunchCreditTable = ({ joinDate, donations = [] }) => (
-  <div role="group" aria-labelledby="label-email">
+const LaunchCreditTable = ({ joinDate, donations = [], className = "" }) => (
+  <div role="group" aria-labelledby="label-credit-table" className={className}>
     <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-baseline">
       <div>
         <div
-          className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
-          id="label-email"
+          className="text-sm font-medium text-gray-900 sm:text-base sm:text-gray-700"
+          id="label-credit-table"
         >
           Workspace launch credit
         </div>
@@ -156,6 +156,12 @@ export default function WaitlistPage() {
       <div className="self-stretch">
         <Waitlist />
       </div>
+      {waitlistEmailQuery.data ? null : (
+        <p className="pt-4 text-story">
+          <span className="font-semibold">Already on the waitlist?</span> Submit
+          email address above to manage.
+        </p>
+      )}
     </div>
   );
   const SVGs = {
@@ -188,17 +194,10 @@ export default function WaitlistPage() {
     },
   ];
   const TimelineDots = ({ isDone }) => (
-    <div className="self-center py-2 space-y-4 opacity-60">
-      <ArrowSVG
-        className={`w-6 h-6 transform -rotate-90 ${
-          isDone ? "text-malachite" : "text-dodger-blue"
-        }`}
-      />
-      <ArrowSVG
-        className={`w-6 h-6 transform -rotate-90 ${
-          isDone ? "text-malachite" : "text-dodger-blue"
-        }`}
-      />
+    <div
+      className="self-center py-6 space-y-4 opacity-60"
+      aria-label={isDone ? "Completed progress" : "Future progress"}
+    >
       <ArrowSVG
         className={`w-6 h-6 transform -rotate-90 ${
           isDone ? "text-malachite" : "text-dodger-blue"
@@ -217,12 +216,17 @@ export default function WaitlistPage() {
             <div className="flex flex-col items-center">
               <h2 className="w-full font-bold text-center text-h1">Roadmap</h2>
             </div>
-            <div className="flex flex-col items-stretch pt-6 space-y-6 text-center">
+            <div className="flex flex-col items-center w-full pt-6 space-y-6 text-center">
               <TimelineDots isDone={true} />
               {roadMap.map(
                 ({ title, when, icon: Icon, description }, index) => (
                   <Fragment key={title}>
-                    <div className="space-y-4">
+                    <div
+                      className="relative w-full max-w-xs space-y-4"
+                      role="group"
+                      aria-labelledby={`roadmap-${index}-title`}
+                      aria-describedby={`roadmap-${index}-description`}
+                    >
                       <h3 className="relative z-10 text-h1">{when}</h3>
                       <div className="flex items-center justify-center">
                         <div className="relative">
@@ -236,18 +240,20 @@ export default function WaitlistPage() {
                               transform: "translate(-50%, -50%)",
                             }}
                           />
-                          <Icon
-                            className={`relative z-10 ${
-                              index === 0 ? "w-36" : "w-24"
-                            }`}
-                          />
+                          <Icon className={"relative z-10 w-28"} />
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <h3 className="relative z-10 font-bold text-h3">
+                      <div className="space-x-2">
+                        <h3
+                          className="relative z-10 font-bold text-h3 md:max-w-xs md:absolute md:left-[-8rem] md:top-0"
+                          id={`roadmap-${index}-title`}
+                        >
                           {title}
                         </h3>
-                        <p className="relative z-10 font-light text-story">
+                        <p
+                          className="relative z-10 font-light text-story md:text-left md:max-w-[18rem] md:absolute md:right-[-14rem] md:bottom-0"
+                          id={`roadmap-${index}-description`}
+                        >
                           {description}
                         </p>
                       </div>
@@ -257,54 +263,59 @@ export default function WaitlistPage() {
                 )
               )}
             </div>
-            {/* <div className="flex flex-col items-center pt-8">
-              <h2
-                className="w-full font-semibold text-center text-h1"
-                id="waitlist"
-              >
-                Waitlist
-              </h2>
-              <div className="flex flex-col items-center pt-12 space-y-6">
-                {waitlistQuery.data ? (
-                  <>
-                    <div className="flex flex-col items-center space-y-3">
-                      <h2 className="text-story">
-                        <span className="font-mono">
-                          {waitlistQuery.data.email}
-                        </span>
-                      </h2>
-                      <Button onPress={waitlistLogout}>Logout</Button>
-                    </div>
-                    <ListCheckboxes
-                      title="Emails"
-                      checked={waitlistQuery.data.lists}
-                      isDisabled={updateListsMutation.isLoading}
-                      onChange={updateListsMutation.mutate}
-                    />
-                    <LaunchCreditTable
-                      joinDate={new Intl.DateTimeFormat("en-GB", {
-                        dateStyle: "long",
-                      }).format(new Date(waitlistQuery.data.created_at))}
-                      donations={waitlistQuery.data.donations}
-                    />
-                    <ButtonWarning
-                      onPress={handleDelete}
-                      isDisabled={deleteWaitlistMutation.isLoading}
-                    >
-                      Delete
-                    </ButtonWarning>
-                  </>
-                ) : (
-                  waitlist
-                )}
+            <div className="flex flex-col items-center pt-8">
+              <div className="flex flex-col items-center self-stretch">
+                <h2
+                  className="w-full font-semibold text-center text-h1"
+                  id="waitlist"
+                >
+                  Waitlist
+                </h2>
+                <div className="flex flex-col items-center self-stretch pt-12 space-y-12">
+                  {waitlistQuery.data ? (
+                    <>
+                      <div className="flex flex-col items-center space-y-3">
+                        <h2 className="text-story">
+                          <span className="font-mono">
+                            {waitlistQuery.data.email}
+                          </span>
+                        </h2>
+                        <Button onPress={waitlistLogout}>Logout</Button>
+                      </div>
+                      <ListCheckboxes
+                        className="self-center w-full max-w-3xl"
+                        title="Emails"
+                        checked={waitlistQuery.data.lists}
+                        isDisabled={updateListsMutation.isLoading}
+                        onChange={updateListsMutation.mutate}
+                      />
+                      <LaunchCreditTable
+                        className="self-center w-full max-w-3xl"
+                        joinDate={new Intl.DateTimeFormat("en-GB", {
+                          dateStyle: "long",
+                        }).format(new Date(waitlistQuery.data.created_at))}
+                        donations={waitlistQuery.data.donations}
+                      />
+                      <ButtonWarning
+                        className="self-center"
+                        onPress={handleDelete}
+                        isDisabled={deleteWaitlistMutation.isLoading}
+                      >
+                        Delete
+                      </ButtonWarning>
+                    </>
+                  ) : (
+                    waitlist
+                  )}
+                </div>
               </div>
-            </div> */}
-            {/* <div className="flex flex-col items-center pt-8 space-y-12">
+            </div>
+            <div className="flex flex-col items-center pt-8 space-y-12">
               <h2 className="w-full font-semibold text-center text-h1">
                 Donate
               </h2>
               <Donate />
-            </div> */}
+            </div>
           </div>
         </div>
       }
